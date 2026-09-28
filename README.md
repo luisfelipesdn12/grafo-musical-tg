@@ -35,8 +35,8 @@ Estado atual: **109 vértices** e **349 arestas**, **conexo** (uma única compon
 | artista — gênero | o artista está associado ao gênero | `1 − afinidade` |
 | álbum — gênero | o álbum está associado ao gênero | `1 − afinidade` |
 
-Não há arestas entre vértices do mesmo tipo (grafo tripartido) nem entre artista e gênero/álbum de
-outro artista.
+Não há arestas entre vértices do mesmo tipo (grafo tripartido) nem entre um artista e um álbum de
+outro artista — a aresta de autoria liga cada álbum apenas ao seu próprio artista.
 
 **Afinidade:** para cada artista/álbum, calculada a partir dos votos de gênero (`genres[].count`)
 retornados pelo MusicBrainz — apenas os `top-k` gêneros mais votados (k = 5) entram como candidatos
@@ -154,6 +154,7 @@ o campo `coletado_em` de cada arquivo em `dados/brutos/*.json`.
 ## Relatório e vídeo
 
 - **Relatório:** [`relatorio/Relatorio_Projeto_TG_Parte2.docx`](relatorio/Relatorio_Projeto_TG_Parte2.docx)
+  ([PDF](relatorio/Relatorio_Projeto_TG_Parte2.pdf))
 - **Vídeo (YouTube):** será publicado no 2º bimestre.
 
 ## Próximas etapas

@@ -11,12 +11,16 @@ exibição e conexidade, simulando a entrada do usuário.
 
 Histórico de alterações:
   28/09/2026 - Luis Felipe - criação
+  28/09/2026 - Luis Felipe - insere o diretório do teste no sys.path
+    para que "python -m unittest" a partir da raiz também encontre
+    test_grafo_matriz
 """
 import sys, os, io, unittest, tempfile, shutil
 from contextlib import redirect_stdout
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 import app
 from arquivo_grafo import gravar, ler
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from test_grafo_matriz import grafo_exemplo
 
 

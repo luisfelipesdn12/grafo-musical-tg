@@ -11,10 +11,15 @@ de conteúdo para exibição no menu.
 
 Histórico de alterações:
   28/09/2026 - Luis Felipe - criação
+  28/09/2026 - Luis Felipe - usa "with open" para fechar o arquivo (evita
+    ResourceWarning) e insere o diretório do teste no sys.path para que
+    "python -m unittest" a partir da raiz também encontre
+    test_grafo_matriz
 """
 import sys, os, unittest, tempfile
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 from arquivo_grafo import ler, gravar, formatarConteudo
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from test_grafo_matriz import grafo_exemplo
 
 
@@ -34,7 +39,8 @@ class TestArquivo(unittest.TestCase):
 
     def test_formato_texto(self):
         gravar(grafo_exemplo(), self.caminho)
-        linhas = open(self.caminho, encoding="utf-8").read().splitlines()
+        with open(self.caminho, encoding="utf-8") as arq:
+            linhas = arq.read().splitlines()
         self.assertEqual(linhas[0:3], ["2", "5", '0 "[ART] A"'])
         self.assertEqual(linhas[7], "3")
         self.assertIn("0 1 0.00", linhas)
