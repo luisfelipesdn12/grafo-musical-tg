@@ -13,15 +13,15 @@
     <nodes>
       <node id="0" label="[ART] Frank Ocean">
         <viz:color r="209" g="73" b="91" a="1.0" />
-        <viz:size value="22.0" />
-        <viz:position x="-134.33064909210245" y="356.5023939057286" z="0.0" />
+        <viz:size value="34.0" />
+        <viz:position x="-140.8455538174936" y="379.134118636436" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ART" />
         </attvalues>
       </node>
       <node id="1" label="[ART] Tyler, The Creator">
         <viz:color r="209" g="73" b="91" a="1.0" />
-        <viz:size value="22.0" />
+        <viz:size value="34.0" />
         <viz:position x="-678.6387063479467" y="511.4645039630734" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ART" />
@@ -29,15 +29,15 @@
       </node>
       <node id="2" label="[ART] Daniel Caesar">
         <viz:color r="209" g="73" b="91" a="1.0" />
-        <viz:size value="22.0" />
-        <viz:position x="-278.6172985219913" y="464.1140220535469" z="0.0" />
+        <viz:size value="34.0" />
+        <viz:position x="-277.07288772527244" y="469.0057291369669" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ART" />
         </attvalues>
       </node>
       <node id="3" label="[ART] Omar Apollo">
         <viz:color r="209" g="73" b="91" a="1.0" />
-        <viz:size value="22.0" />
+        <viz:size value="34.0" />
         <viz:position x="-113.29566185331565" y="474.85859277166384" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ART" />
@@ -45,7 +45,7 @@
       </node>
       <node id="4" label="[ART] SZA">
         <viz:color r="209" g="73" b="91" a="1.0" />
-        <viz:size value="22.0" />
+        <viz:size value="34.0" />
         <viz:position x="-394.62528692497546" y="293.77857143402787" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ART" />
@@ -53,15 +53,15 @@
       </node>
       <node id="5" label="[ART] Steve Lacy">
         <viz:color r="209" g="73" b="91" a="1.0" />
-        <viz:size value="22.0" />
-        <viz:position x="-117.09957368110013" y="318.1473937494995" z="0.0" />
+        <viz:size value="34.0" />
+        <viz:position x="-107.05864830891709" y="295.71682416969657" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ART" />
         </attvalues>
       </node>
       <node id="6" label="[ART] Kendrick Lamar">
         <viz:color r="209" g="73" b="91" a="1.0" />
-        <viz:size value="22.0" />
+        <viz:size value="34.0" />
         <viz:position x="-802.5040352097326" y="464.97928457177403" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ART" />
@@ -69,7 +69,7 @@
       </node>
       <node id="7" label="[ART] Anderson .Paak">
         <viz:color r="209" g="73" b="91" a="1.0" />
-        <viz:size value="22.0" />
+        <viz:size value="34.0" />
         <viz:position x="-399.8652041841888" y="152.10875225632546" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ART" />
@@ -77,23 +77,23 @@
       </node>
       <node id="8" label="[ART] Caetano Veloso">
         <viz:color r="209" g="73" b="91" a="1.0" />
-        <viz:size value="22.0" />
-        <viz:position x="376.9506980834547" y="-254.40620288746186" z="0.0" />
+        <viz:size value="34.0" />
+        <viz:position x="356.52922801829965" y="-236.76511065568474" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ART" />
         </attvalues>
       </node>
       <node id="9" label="[ART] Gilberto Gil">
         <viz:color r="209" g="73" b="91" a="1.0" />
-        <viz:size value="22.0" />
-        <viz:position x="292.8204703515603" y="-307.4178127293291" z="0.0" />
+        <viz:size value="34.0" />
+        <viz:position x="287.9197077871341" y="-295.0122885585606" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ART" />
         </attvalues>
       </node>
       <node id="10" label="[ART] Chico Buarque">
         <viz:color r="209" g="73" b="91" a="1.0" />
-        <viz:size value="22.0" />
+        <viz:size value="34.0" />
         <viz:position x="365.1446323132057" y="-594.9041230550092" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ART" />
@@ -101,39 +101,39 @@
       </node>
       <node id="11" label="[ART] Gal Costa">
         <viz:color r="209" g="73" b="91" a="1.0" />
-        <viz:size value="22.0" />
-        <viz:position x="408.02826443245465" y="-269.30314106283623" z="0.0" />
+        <viz:size value="34.0" />
+        <viz:position x="434.08787983398247" y="-282.42313873984193" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ART" />
         </attvalues>
       </node>
       <node id="12" label="[ART] Milton Nascimento">
         <viz:color r="209" g="73" b="91" a="1.0" />
-        <viz:size value="22.0" />
-        <viz:position x="446.25336522364296" y="-515.8338643376196" z="0.0" />
+        <viz:size value="34.0" />
+        <viz:position x="442.30407091626785" y="-509.8813827414327" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ART" />
         </attvalues>
       </node>
       <node id="13" label="[ART] Jorge Ben Jor">
         <viz:color r="209" g="73" b="91" a="1.0" />
-        <viz:size value="22.0" />
-        <viz:position x="179.8573380678504" y="-582.3131104130794" z="0.0" />
+        <viz:size value="34.0" />
+        <viz:position x="162.71066089679476" y="-619.070270055666" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ART" />
         </attvalues>
       </node>
       <node id="14" label="[ART] Tim Maia">
         <viz:color r="209" g="73" b="91" a="1.0" />
-        <viz:size value="22.0" />
-        <viz:position x="28.04623935348179" y="-131.81114619874677" z="0.0" />
+        <viz:size value="34.0" />
+        <viz:position x="37.53285022460695" y="-111.00347167153248" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ART" />
         </attvalues>
       </node>
       <node id="15" label="[ART] Os Mutantes">
         <viz:color r="209" g="73" b="91" a="1.0" />
-        <viz:size value="22.0" />
+        <viz:size value="34.0" />
         <viz:position x="711.1243453202048" y="-101.48375349961188" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ART" />
@@ -141,7 +141,7 @@
       </node>
       <node id="16" label="[ALB] Blonde — Frank Ocean">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="-152.18596900471832" y="521.7486225549749" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -149,7 +149,7 @@
       </node>
       <node id="17" label="[ALB] channel ORANGE — Frank Ocean">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="-156.35816590268558" y="285.14648514865354" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -157,7 +157,7 @@
       </node>
       <node id="18" label="[ALB] DON’T TAP THE GLASS — Tyler, The Creator">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="-560.4197703817064" y="500.80071778100444" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -165,7 +165,7 @@
       </node>
       <node id="19" label="[ALB] IGOR — Tyler, The Creator">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="-566.4309721139998" y="555.8925982388754" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -173,7 +173,7 @@
       </node>
       <node id="20" label="[ALB] CHROMAKOPIA — Tyler, The Creator">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="-665.3726733971073" y="464.0760819499913" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -181,7 +181,7 @@
       </node>
       <node id="21" label="[ALB] Wolf — Tyler, The Creator">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="-670.2415503581001" y="572.98248142358" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -189,7 +189,7 @@
       </node>
       <node id="22" label="[ALB] Freudian — Daniel Caesar">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="-369.0327706381086" y="435.99783788369933" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -197,7 +197,7 @@
       </node>
       <node id="23" label="[ALB] NEVER ENOUGH — Daniel Caesar">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="-279.4764946430517" y="534.4851873275592" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -205,7 +205,7 @@
       </node>
       <node id="24" label="[ALB] Case Study 01 — Daniel Caesar">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="-174.54574709460977" y="456.1508565789959" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -213,7 +213,7 @@
       </node>
       <node id="25" label="[ALB] Son of Spergy — Daniel Caesar">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="-260.0213301776937" y="595.5589943544712" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -221,7 +221,7 @@
       </node>
       <node id="26" label="[ALB] God Said No — Omar Apollo">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="-79.48164215808261" y="371.05599215764295" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -229,7 +229,7 @@
       </node>
       <node id="27" label="[ALB] Ivory — Omar Apollo">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="-196.4845351897322" y="325.0025584753548" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -237,7 +237,7 @@
       </node>
       <node id="28" label="[ALB] SOS — SZA">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="-253.2546175724365" y="176.60972097814147" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -245,7 +245,7 @@
       </node>
       <node id="29" label="[ALB] Ctrl — SZA">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="-413.1705158273855" y="356.9696543539441" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -253,7 +253,7 @@
       </node>
       <node id="30" label="[ALB] Gemini Rights — Steve Lacy">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="-243.97602754699577" y="428.12635948177007" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -261,7 +261,7 @@
       </node>
       <node id="31" label="[ALB] Apollo XXI — Steve Lacy">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="-251.14105885571513" y="260.15501705106226" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -269,7 +269,7 @@
       </node>
       <node id="32" label="[ALB] To Pimp a Butterfly — Kendrick Lamar">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="-849.7075884999881" y="474.03256689714254" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -277,7 +277,7 @@
       </node>
       <node id="33" label="[ALB] DAMN. — Kendrick Lamar">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="-776.9000406381713" y="511.7342031938503" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -285,7 +285,7 @@
       </node>
       <node id="34" label="[ALB] Mr. Morale &amp; the Big Steppers — Kendrick Lamar">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="-742.1429404975527" y="415.980142394962" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -293,7 +293,7 @@
       </node>
       <node id="35" label="[ALB] good kid, m.A.A.d city — Kendrick Lamar">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="-812.4732160918" y="397.1778880950746" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -301,7 +301,7 @@
       </node>
       <node id="36" label="[ALB] Malibu — Anderson .Paak">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="-303.7470653174621" y="191.4465666270063" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -309,7 +309,7 @@
       </node>
       <node id="37" label="[ALB] Venice — Anderson .Paak">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="-523.931416983511" y="265.45658827763225" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -317,7 +317,7 @@
       </node>
       <node id="38" label="[ALB] Oxnard — Anderson .Paak">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="-364.6936272956754" y="167.49504345660898" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -325,7 +325,7 @@
       </node>
       <node id="39" label="[ALB] Ventura — Anderson .Paak">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="-369.2464688386886" y="97.57376206172117" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -333,7 +333,7 @@
       </node>
       <node id="40" label="[ALB] Fina estampa — Caetano Veloso">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="447.8779464559131" y="-374.6542566744979" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -341,7 +341,7 @@
       </node>
       <node id="41" label="[ALB] Araçá azul — Caetano Veloso">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="391.60650655784286" y="-397.46966974518074" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -349,7 +349,7 @@
       </node>
       <node id="42" label="[ALB] Domingo — Caetano Veloso">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="195.04518866838876" y="-178.09008038004873" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -357,7 +357,7 @@
       </node>
       <node id="43" label="[ALB] Caetano Veloso — Caetano Veloso">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="415.3244042388709" y="-302.6286047938999" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -365,7 +365,7 @@
       </node>
       <node id="44" label="[ALB] Raça humana — Gilberto Gil">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="166.1482291323103" y="-314.15272991514075" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -373,7 +373,7 @@
       </node>
       <node id="45" label="[ALB] Luar — Gilberto Gil">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="227.20827641060743" y="-442.4022782457025" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -381,7 +381,7 @@
       </node>
       <node id="46" label="[ALB] Parabolicamará — Gilberto Gil">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="154.4285911199395" y="-381.89184620386806" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -389,7 +389,7 @@
       </node>
       <node id="47" label="[ALB] Kaya N’gan Daya — Gilberto Gil">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="283.2307661832192" y="-119.98813444083301" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -397,7 +397,7 @@
       </node>
       <node id="48" label="[ALB] Chico Buarque — Chico Buarque">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="274.9086592340866" y="-566.7235679113609" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -405,7 +405,7 @@
       </node>
       <node id="49" label="[ALB] Per un pugno di samba — Chico Buarque">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="288.3278412007706" y="-527.2871308116792" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -413,7 +413,7 @@
       </node>
       <node id="50" label="[ALB] Construção — Chico Buarque">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="329.2496312937987" y="-587.6036728680214" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -421,7 +421,7 @@
       </node>
       <node id="51" label="[ALB] Chico Buarque de Mangueira 1998 — Chico Buarque">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="313.17188732598646" y="-651.6854257312358" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -429,7 +429,7 @@
       </node>
       <node id="52" label="[ALB] Domingo — Gal Costa">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="227.2309553424629" y="-170.28610418105978" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -437,7 +437,7 @@
       </node>
       <node id="53" label="[ALB] Gal Costa — Gal Costa">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="421.17143135199086" y="-195.05974065076956" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -445,7 +445,7 @@
       </node>
       <node id="54" label="[ALB] Gal — Gal Costa">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="341.44921378368235" y="-199.21086965000825" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -453,7 +453,7 @@
       </node>
       <node id="55" label="[ALB] Aquarela do Brasil — Gal Costa">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="324.54991047770545" y="-432.11575978990425" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -461,7 +461,7 @@
       </node>
       <node id="56" label="[ALB] Minas — Milton Nascimento">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="485.7032996730659" y="-418.6037780906448" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -469,7 +469,7 @@
       </node>
       <node id="57" label="[ALB] Milton — Milton Nascimento">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="360.23279851358734" y="-516.9231486674631" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -477,7 +477,7 @@
       </node>
       <node id="58" label="[ALB] Courage — Milton Nascimento">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="339.6127756768365" y="-533.1987037510338" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -485,7 +485,7 @@
       </node>
       <node id="59" label="[ALB] Clube da Esquina 2 — Milton Nascimento">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="391.7325281847673" y="-492.27112326262716" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -493,7 +493,7 @@
       </node>
       <node id="60" label="[ALB] Samba esquema novo — Jorge Ben Jor">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="130.70870916266472" y="-628.6385352312869" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -501,7 +501,7 @@
       </node>
       <node id="61" label="[ALB] Força bruta — Jorge Ben Jor">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="108.35280314499178" y="-513.3098297565431" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -509,7 +509,7 @@
       </node>
       <node id="62" label="[ALB] Dádiva — Jorge Ben Jor">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="128.29535689759373" y="-427.5930406861366" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -517,7 +517,7 @@
       </node>
       <node id="63" label="[ALB] O Bidú: Silêncio no Brooklin — Jorge Ben Jor">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="224.19271445400574" y="-614.0958539991358" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -525,7 +525,7 @@
       </node>
       <node id="64" label="[ALB] Tim Maia (1970) — Tim Maia">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="37.07963277289559" y="-202.10918678878363" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -533,7 +533,7 @@
       </node>
       <node id="65" label="[ALB] Tim Maia (1972) — Tim Maia">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="103.29733567739984" y="-219.04299422887252" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -541,7 +541,7 @@
       </node>
       <node id="66" label="[ALB] Tim Maia (1973) — Tim Maia">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="99.63673690574238" y="-170.13904156458938" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -549,7 +549,7 @@
       </node>
       <node id="67" label="[ALB] Tim Maia (1971) — Tim Maia">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="13.802734669435322" y="-256.4603257714884" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -557,7 +557,7 @@
       </node>
       <node id="68" label="[ALB] Os Mutantes — Os Mutantes">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="585.9054387916913" y="-165.24256548044016" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -565,7 +565,7 @@
       </node>
       <node id="69" label="[ALB] Mutantes e seus cometas no país do baurets — Os Mutantes">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="842.7262544840186" y="-100.52571021932259" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -573,7 +573,7 @@
       </node>
       <node id="70" label="[ALB] Mutantes — Os Mutantes">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="713.8554539501539" y="-186.1014321999995" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -581,7 +581,7 @@
       </node>
       <node id="71" label="[ALB] Tecnicolor — Os Mutantes">
         <viz:color r="0" g="121" b="140" a="1.0" />
-        <viz:size value="11.0" />
+        <viz:size value="17.0" />
         <viz:position x="534.3171837482652" y="-5.847422516900676" z="0.0" />
         <attvalues>
           <attvalue for="0" value="ALB" />
@@ -589,7 +589,7 @@
       </node>
       <node id="72" label="[GEN] alternative hip hop">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="-666.083045421574" y="187.95691958794228" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -597,15 +597,15 @@
       </node>
       <node id="73" label="[GEN] alternative r&amp;b">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
-        <viz:position x="-245.1561287248258" y="376.1146871741246" z="0.0" />
+        <viz:size value="25.0" />
+        <viz:position x="-230.61647426108885" y="372.71681057931687" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
         </attvalues>
       </node>
       <node id="74" label="[GEN] art pop">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="125.73983278465458" y="440.10804677798745" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -613,7 +613,7 @@
       </node>
       <node id="75" label="[GEN] avant-garde">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="343.66928980885393" y="44.78706539039286" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -621,7 +621,7 @@
       </node>
       <node id="76" label="[GEN] baroque pop">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="814.4503137398756" y="18.802042967058085" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -629,7 +629,7 @@
       </node>
       <node id="77" label="[GEN] bedroom pop">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="-96.11139808554887" y="573.6046107322275" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -637,31 +637,31 @@
       </node>
       <node id="78" label="[GEN] bossa nova">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
-        <viz:position x="239.63706238666984" y="-366.663847000518" z="0.0" />
+        <viz:size value="25.0" />
+        <viz:position x="194.9069112672633" y="-348.78698374328434" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
         </attvalues>
       </node>
       <node id="79" label="[GEN] conscious hip hop">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
-        <viz:position x="-926.6538028086968" y="447.6180475793172" z="0.0" />
+        <viz:size value="25.0" />
+        <viz:position x="-928.6328069546341" y="433.57654699130893" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
         </attvalues>
       </node>
       <node id="80" label="[GEN] contemporary r&amp;b">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
-        <viz:position x="-299.64260098372813" y="390.02018532932914" z="0.0" />
+        <viz:size value="25.0" />
+        <viz:position x="-319.2526868909761" y="388.3251996898123" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
         </attvalues>
       </node>
       <node id="81" label="[GEN] electronic">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="-610.8706513685021" y="362.31257047864307" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -669,7 +669,7 @@
       </node>
       <node id="82" label="[GEN] experimental">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="508.54011714996915" y="-282.0099017086909" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -677,15 +677,15 @@
       </node>
       <node id="83" label="[GEN] funk">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
-        <viz:position x="9.684010879182209" y="-172.08635922034455" z="0.0" />
+        <viz:size value="25.0" />
+        <viz:position x="0.19740000805700167" y="-192.89403374755878" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
         </attvalues>
       </node>
       <node id="84" label="[GEN] hardcore hip hop">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="-755.9597192750473" y="614.7688690208071" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -693,7 +693,7 @@
       </node>
       <node id="85" label="[GEN] hip hop">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="-547.2175062453897" y="364.543564210309" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -701,7 +701,7 @@
       </node>
       <node id="86" label="[GEN] indie pop">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="-32.16037169373769" y="467.75872929234674" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -709,15 +709,15 @@
       </node>
       <node id="87" label="[GEN] jazz">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
-        <viz:position x="231.6066330214667" y="-518.3265420294003" z="0.0" />
+        <viz:size value="25.0" />
+        <viz:position x="267.9585551400182" y="-500.76843616083124" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
         </attvalues>
       </node>
       <node id="88" label="[GEN] jazz rap">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="-900.4311039371006" y="602.9005648399313" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -725,15 +725,15 @@
       </node>
       <node id="89" label="[GEN] latin">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
-        <viz:position x="285.710922086431" y="-370.29614629275284" z="0.0" />
+        <viz:size value="25.0" />
+        <viz:position x="339.3305903072091" y="-368.9909867463522" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
         </attvalues>
       </node>
       <node id="90" label="[GEN] latin jazz">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="445.1127572585586" y="-701.8924676148108" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -741,15 +741,15 @@
       </node>
       <node id="91" label="[GEN] mpb">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
-        <viz:position x="269.730718451089" y="-380.4707877938735" z="0.0" />
+        <viz:size value="25.0" />
+        <viz:position x="259.8094097962764" y="-411.13813196558806" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
         </attvalues>
       </node>
       <node id="92" label="[GEN] neo soul">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="-374.1541780804732" y="555.849132186841" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -757,7 +757,7 @@
       </node>
       <node id="93" label="[GEN] pop">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="32.88808149475414" y="75.31882386117994" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -765,7 +765,7 @@
       </node>
       <node id="94" label="[GEN] pop rap">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="-769.8431024258912" y="776.4130028602483" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -773,7 +773,7 @@
       </node>
       <node id="95" label="[GEN] pop rock">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="423.3596788627022" y="-126.68897063138951" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -781,7 +781,7 @@
       </node>
       <node id="96" label="[GEN] progressive pop">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="1000.0" y="-150.96875151924743" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -789,7 +789,7 @@
       </node>
       <node id="97" label="[GEN] psychedelic pop">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="583.6711299106162" y="-218.41452738275146" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -797,7 +797,7 @@
       </node>
       <node id="98" label="[GEN] psychedelic rock">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="608.5534128031823" y="-120.91723118898773" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -805,7 +805,7 @@
       </node>
       <node id="99" label="[GEN] psychedelic soul">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="-185.12486240437227" y="751.1366234568815" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -813,7 +813,7 @@
       </node>
       <node id="100" label="[GEN] r&amp;b">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="-228.7000142449908" y="228.9604435106003" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -821,7 +821,7 @@
       </node>
       <node id="101" label="[GEN] rock">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="494.0273723221994" y="-130.82054226919703" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -829,15 +829,15 @@
       </node>
       <node id="102" label="[GEN] samba">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
-        <viz:position x="202.26807343695265" y="-545.2282611528018" z="0.0" />
+        <viz:size value="25.0" />
+        <viz:position x="183.3572372709517" y="-531.4705047362443" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
         </attvalues>
       </node>
       <node id="103" label="[GEN] samba soul">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="-37.994842206579285" y="-343.8296964573795" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -845,7 +845,7 @@
       </node>
       <node id="104" label="[GEN] samba-rock">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="184.75775080287744" y="-828.5338580531723" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -853,15 +853,15 @@
       </node>
       <node id="105" label="[GEN] singer-songwriter">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
-        <viz:position x="488.1117137208411" y="-578.9238823722425" z="0.0" />
+        <viz:size value="25.0" />
+        <viz:position x="492.06100802821624" y="-584.8763639684294" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
         </attvalues>
       </node>
       <node id="106" label="[GEN] soul">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="-126.52922744972567" y="-69.21043034070041" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -869,7 +869,7 @@
       </node>
       <node id="107" label="[GEN] tropicália">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
+        <viz:size value="25.0" />
         <viz:position x="673.971136130621" y="-231.12971672203795" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
@@ -877,8 +877,8 @@
       </node>
       <node id="108" label="[GEN] west coast hip hop">
         <viz:color r="237" g="174" b="73" a="1.0" />
-        <viz:size value="16.0" />
-        <viz:position x="-918.0513794855273" y="508.6542674369462" z="0.0" />
+        <viz:size value="25.0" />
+        <viz:position x="-916.0723753395899" y="522.6957680249545" z="0.0" />
         <attvalues>
           <attvalue for="0" value="GEN" />
         </attvalues>
