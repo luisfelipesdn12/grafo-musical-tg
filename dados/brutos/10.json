@@ -1,0 +1,414 @@
+{
+ "ordem": 10,
+ "nome": "Chico Buarque",
+ "cena": "mpb",
+ "mbid": "3a5d1cc7-627e-48ea-aba3-fdd20d782c33",
+ "genres": [
+  {
+   "name": "bossa nova",
+   "count": 1
+  },
+  {
+   "name": "latin",
+   "count": 1
+  },
+  {
+   "name": "mpb",
+   "count": 5
+  },
+  {
+   "name": "samba-canção",
+   "count": 1
+  },
+  {
+   "name": "singer-songwriter",
+   "count": 2
+  }
+ ],
+ "albuns": [
+  {
+   "title": "Chico Buarque",
+   "first-release-date": "1978",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 2
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    },
+    {
+     "name": "samba",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Almanaque",
+   "first-release-date": "1981",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Caravanas",
+   "first-release-date": "2017-08-25",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 2
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "O Sambista",
+   "first-release-date": "2000",
+   "genres": []
+  },
+  {
+   "title": "Chico Buarque",
+   "first-release-date": "1990",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "title": "Pedaço de mim",
+   "first-release-date": "2001",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Chico Buarque de Mangueira 1998",
+   "first-release-date": "1998",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 2
+    },
+    {
+     "name": "marchinha",
+     "count": 1
+    },
+    {
+     "name": "samba",
+     "count": 1
+    },
+    {
+     "name": "samba-enredo",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Sinal fechado",
+   "first-release-date": "1974",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 2
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Sonho de um carnaval",
+   "first-release-date": "2000",
+   "genres": []
+  },
+  {
+   "title": "Chico Buarque en español",
+   "first-release-date": "1982",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "samba",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Meus caros amigos",
+   "first-release-date": "1976-01-01",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Chico",
+   "first-release-date": "2011-08-02",
+   "genres": [
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Construção",
+   "first-release-date": "1971",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 3
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Paratodos",
+   "first-release-date": "1993",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Uma palavra",
+   "first-release-date": "1995",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Chico Buarque",
+   "first-release-date": "1984",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Chico Buarque de Hollanda, Nº 4",
+   "first-release-date": "1970",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Vida",
+   "first-release-date": "1980",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Album blanco para Silvio Rodriguez",
+   "first-release-date": "2025-10-31",
+   "genres": []
+  },
+  {
+   "title": "As cidades",
+   "first-release-date": "1998",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Chico Buarque de Hollanda, Volume 3",
+   "first-release-date": "1968",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Chico Buarque de Hollanda",
+   "first-release-date": "1966",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 2
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "samba",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Chico Buarque de Hollanda, Volume 2",
+   "first-release-date": "1967",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "samba",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Francisco",
+   "first-release-date": "1987",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Per un pugno di samba",
+   "first-release-date": "1970-09",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    },
+    {
+     "name": "samba",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Carioca",
+   "first-release-date": "2006-10-22",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 3
+    },
+    {
+     "name": "samba-canção",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Chico Buarque de Hollanda na Itália",
+   "first-release-date": "1997",
+   "genres": [
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    }
+   ]
+  }
+ ],
+ "coletado_em": "2026-09-28"
+}

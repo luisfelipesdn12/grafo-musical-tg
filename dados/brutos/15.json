@@ -1,0 +1,325 @@
+{
+ "ordem": 15,
+ "nome": "Os Mutantes",
+ "cena": "mpb",
+ "mbid": "a3212186-5da5-4e84-a935-6952b3e14921",
+ "genres": [
+  {
+   "name": "experimental rock",
+   "count": 2
+  },
+  {
+   "name": "pop rock",
+   "count": 1
+  },
+  {
+   "name": "progressive rock",
+   "count": 3
+  },
+  {
+   "name": "psychedelic pop",
+   "count": 2
+  },
+  {
+   "name": "psychedelic rock",
+   "count": 6
+  },
+  {
+   "name": "tropicália",
+   "count": 6
+  }
+ ],
+ "albuns": [
+  {
+   "title": "Tudo foi feito pelo sol",
+   "first-release-date": "1974",
+   "genres": [
+    {
+     "name": "progressive rock",
+     "count": 2
+    },
+    {
+     "name": "psychedelic rock",
+     "count": 1
+    },
+    {
+     "name": "rock",
+     "count": 1
+    },
+    {
+     "name": "symphonic prog",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Jardim elétrico",
+   "first-release-date": "1971",
+   "genres": [
+    {
+     "name": "psychedelic rock",
+     "count": 1
+    },
+    {
+     "name": "rock",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Tecnicolor",
+   "first-release-date": "1999",
+   "genres": [
+    {
+     "name": "baroque pop",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    },
+    {
+     "name": "psychedelic pop",
+     "count": 1
+    },
+    {
+     "name": "psychedelic rock",
+     "count": 2
+    },
+    {
+     "name": "rock",
+     "count": 1
+    },
+    {
+     "name": "samba",
+     "count": 1
+    },
+    {
+     "name": "tropicália",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "\"A\" e o \"Z\"",
+   "first-release-date": "1986",
+   "genres": [
+    {
+     "name": "progressive rock",
+     "count": 1
+    },
+    {
+     "name": "psychedelic rock",
+     "count": 1
+    },
+    {
+     "name": "rock",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Haih or amortecedor",
+   "first-release-date": "2009-09-04",
+   "genres": [
+    {
+     "name": "psychedelic rock",
+     "count": 1
+    },
+    {
+     "name": "rock",
+     "count": 1
+    },
+    {
+     "name": "samba-rock",
+     "count": 1
+    },
+    {
+     "name": "tropicália",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "A divina comédia ou ando meio desligado",
+   "first-release-date": "1970-03",
+   "genres": [
+    {
+     "name": "acid rock",
+     "count": 1
+    },
+    {
+     "name": "psychedelic pop",
+     "count": 1
+    },
+    {
+     "name": "psychedelic rock",
+     "count": 2
+    },
+    {
+     "name": "rock",
+     "count": 1
+    },
+    {
+     "name": "tropicália",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Zzyzx",
+   "first-release-date": "2020-01-24",
+   "genres": [
+    {
+     "name": "folk rock",
+     "count": 1
+    },
+    {
+     "name": "pop rock",
+     "count": 1
+    },
+    {
+     "name": "psychedelic pop",
+     "count": 1
+    },
+    {
+     "name": "psychedelic rock",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Mutantes",
+   "first-release-date": "1969-02",
+   "genres": [
+    {
+     "name": "baroque pop",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "progressive pop",
+     "count": 1
+    },
+    {
+     "name": "psychedelic pop",
+     "count": 1
+    },
+    {
+     "name": "psychedelic rock",
+     "count": 2
+    },
+    {
+     "name": "rock",
+     "count": 1
+    },
+    {
+     "name": "tropicália",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Os Mutantes",
+   "first-release-date": "1968-06",
+   "genres": [
+    {
+     "name": "avant-garde",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 2
+    },
+    {
+     "name": "progressive",
+     "count": 1
+    },
+    {
+     "name": "psychedelic",
+     "count": 1
+    },
+    {
+     "name": "psychedelic pop",
+     "count": 2
+    },
+    {
+     "name": "psychedelic rock",
+     "count": 4
+    },
+    {
+     "name": "tropicália",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Mutantes e seus cometas no país do baurets",
+   "first-release-date": "1972",
+   "genres": [
+    {
+     "name": "blues rock",
+     "count": 1
+    },
+    {
+     "name": "hard rock",
+     "count": 1
+    },
+    {
+     "name": "heavy psych",
+     "count": 1
+    },
+    {
+     "name": "progressive pop",
+     "count": 1
+    },
+    {
+     "name": "progressive rock",
+     "count": 1
+    },
+    {
+     "name": "psychedelic pop",
+     "count": 1
+    },
+    {
+     "name": "psychedelic rock",
+     "count": 2
+    },
+    {
+     "name": "rock",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Fool Metal Jack",
+   "first-release-date": "2013-04-30",
+   "genres": [
+    {
+     "name": "experimental rock",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "psychedelic rock",
+     "count": 1
+    },
+    {
+     "name": "rock",
+     "count": 1
+    }
+   ]
+  }
+ ],
+ "coletado_em": "2026-09-28"
+}

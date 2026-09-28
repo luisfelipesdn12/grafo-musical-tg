@@ -1,0 +1,558 @@
+{
+ "ordem": 8,
+ "nome": "Caetano Veloso",
+ "cena": "mpb",
+ "mbid": "f07dbc2f-317b-470f-bad4-5f1b0eb6faf1",
+ "genres": [
+  {
+   "name": "alternative rock",
+   "count": 1
+  },
+  {
+   "name": "art pop",
+   "count": 1
+  },
+  {
+   "name": "mpb",
+   "count": 10
+  },
+  {
+   "name": "singer-songwriter",
+   "count": 2
+  },
+  {
+   "name": "tropicália",
+   "count": 4
+  }
+ ],
+ "albuns": [
+  {
+   "title": "Caetano Veloso",
+   "first-release-date": "1986",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Domingo",
+   "first-release-date": "1967-06",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 2
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Cores, nomes",
+   "first-release-date": "1982",
+   "genres": [
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Muito",
+   "first-release-date": "1978",
+   "genres": [
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Jóia",
+   "first-release-date": "1975",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Outras palavras",
+   "first-release-date": "1981-03",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Eu não peço desculpa",
+   "first-release-date": "2002-08",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Muitos Carnavais",
+   "first-release-date": "1977",
+   "genres": [
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Tropicália 2",
+   "first-release-date": "1993",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    },
+    {
+     "name": "tropicália",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Caetano Veloso & Ivan Sacerdote",
+   "first-release-date": "2020-01-16",
+   "genres": []
+  },
+  {
+   "title": "Bicho",
+   "first-release-date": "1977",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Araçá azul",
+   "first-release-date": "1973",
+   "genres": [
+    {
+     "name": "avant-garde jazz",
+     "count": 1
+    },
+    {
+     "name": "bossa nova",
+     "count": 1
+    },
+    {
+     "name": "experimental",
+     "count": 1
+    },
+    {
+     "name": "free improvisation",
+     "count": 1
+    },
+    {
+     "name": "jazz",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "latin jazz",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "samba",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Meu Coco",
+   "first-release-date": "2021-10-21",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Caetano Veloso",
+   "first-release-date": "1969",
+   "genres": [
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "psychedelic pop",
+     "count": 1
+    },
+    {
+     "name": "psychedelic rock",
+     "count": 2
+    },
+    {
+     "name": "singer-songwriter",
+     "count": 1
+    },
+    {
+     "name": "tropicália",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Qualquer coisa",
+   "first-release-date": "1975",
+   "genres": []
+  },
+  {
+   "title": "Zii e zie",
+   "first-release-date": "2009-04-13",
+   "genres": []
+  },
+  {
+   "title": "Velô",
+   "first-release-date": "1984",
+   "genres": []
+  },
+  {
+   "title": "Livro",
+   "first-release-date": "1997",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    },
+    {
+     "name": "samba-reggae",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Brasil",
+   "first-release-date": "1981",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 1
+    },
+    {
+     "name": "jazz",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Cê",
+   "first-release-date": "2006-01-01",
+   "genres": []
+  },
+  {
+   "title": "Caetano",
+   "first-release-date": "1987",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "rock",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Caetano Veloso",
+   "first-release-date": "1968",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "pop rock",
+     "count": 1
+    },
+    {
+     "name": "psychedelic pop",
+     "count": 1
+    },
+    {
+     "name": "tropicália",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Estrangeiro",
+   "first-release-date": "1989-11-12",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 2
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Abraçaço",
+   "first-release-date": "2012",
+   "genres": []
+  },
+  {
+   "title": "Cinema Transcendental",
+   "first-release-date": "1979",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Fina estampa",
+   "first-release-date": "1994-01-01",
+   "genres": [
+    {
+     "name": "ballad",
+     "count": 1
+    },
+    {
+     "name": "bolero",
+     "count": 1
+    },
+    {
+     "name": "folk",
+     "count": 1
+    },
+    {
+     "name": "folk pop",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 3
+    },
+    {
+     "name": "latin ballad",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    },
+    {
+     "name": "pop",
+     "count": 1
+    },
+    {
+     "name": "rumba",
+     "count": 1
+    },
+    {
+     "name": "singer-songwriter",
+     "count": 1
+    },
+    {
+     "name": "tango",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Caetano Veloso",
+   "first-release-date": "1971",
+   "genres": [
+    {
+     "name": "contemporary folk",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    },
+    {
+     "name": "singer-songwriter",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Noites do Norte",
+   "first-release-date": "2000",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Uns",
+   "first-release-date": "1983",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Circuladô",
+   "first-release-date": "1991",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 2
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Amanhã",
+   "first-release-date": "1998",
+   "genres": []
+  },
+  {
+   "title": "Transa",
+   "first-release-date": "1972",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "A Foreign Sound",
+   "first-release-date": "2004",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 1
+    },
+    {
+     "name": "easy listening",
+     "count": 1
+    },
+    {
+     "name": "jazz",
+     "count": 1
+    }
+   ]
+  }
+ ],
+ "coletado_em": "2026-09-28"
+}

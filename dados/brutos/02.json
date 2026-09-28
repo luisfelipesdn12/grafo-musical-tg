@@ -1,0 +1,152 @@
+{
+ "ordem": 2,
+ "nome": "Daniel Caesar",
+ "cena": "rnb",
+ "mbid": "b46e298d-d3a5-4695-a03e-63e8c523b23e",
+ "genres": [
+  {
+   "name": "alternative r&b",
+   "count": 1
+  },
+  {
+   "name": "contemporary r&b",
+   "count": 2
+  },
+  {
+   "name": "r&b",
+   "count": 2
+  }
+ ],
+ "albuns": [
+  {
+   "title": "Case Study 01",
+   "first-release-date": "2019-06-28",
+   "genres": [
+    {
+     "name": "alternative r&b",
+     "count": 1
+    },
+    {
+     "name": "contemporary r&b",
+     "count": 2
+    },
+    {
+     "name": "neo soul",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    },
+    {
+     "name": "psychedelic soul",
+     "count": 1
+    },
+    {
+     "name": "r&b",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Pseudomutuality",
+   "first-release-date": "2021-01-01",
+   "genres": []
+  },
+  {
+   "title": "NEVER ENOUGH",
+   "first-release-date": "2022-06-01",
+   "genres": [
+    {
+     "name": "alternative r&b",
+     "count": 2
+    },
+    {
+     "name": "contemporary r&b",
+     "count": 3
+    },
+    {
+     "name": "neo soul",
+     "count": 1
+    },
+    {
+     "name": "psychedelic soul",
+     "count": 1
+    },
+    {
+     "name": "r&b",
+     "count": 1
+    },
+    {
+     "name": "smooth soul",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Son of Spergy",
+   "first-release-date": "2025-10-24",
+   "genres": [
+    {
+     "name": "bedroom pop",
+     "count": 1
+    },
+    {
+     "name": "contemporary r&b",
+     "count": 1
+    },
+    {
+     "name": "gospel",
+     "count": 1
+    },
+    {
+     "name": "indie folk",
+     "count": 1
+    },
+    {
+     "name": "neo soul",
+     "count": 1
+    },
+    {
+     "name": "psychedelic soul",
+     "count": 1
+    },
+    {
+     "name": "singer-songwriter",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Freudian",
+   "first-release-date": "2017-08-25",
+   "genres": [
+    {
+     "name": "alternative r&b",
+     "count": 1
+    },
+    {
+     "name": "contemporary r&b",
+     "count": 3
+    },
+    {
+     "name": "hip hop",
+     "count": 1
+    },
+    {
+     "name": "neo soul",
+     "count": 2
+    },
+    {
+     "name": "psychedelic soul",
+     "count": 1
+    },
+    {
+     "name": "r&b",
+     "count": 2
+    }
+   ]
+  }
+ ],
+ "coletado_em": "2026-09-28"
+}

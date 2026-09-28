@@ -1,0 +1,519 @@
+{
+ "ordem": 11,
+ "nome": "Gal Costa",
+ "cena": "mpb",
+ "mbid": "fc63a914-272d-4b95-9221-61adcce6f793",
+ "genres": [
+  {
+   "name": "bossa nova",
+   "count": 2
+  },
+  {
+   "name": "mpb",
+   "count": 5
+  },
+  {
+   "name": "psychedelic pop",
+   "count": 2
+  },
+  {
+   "name": "psychedelic rock",
+   "count": 1
+  },
+  {
+   "name": "tropicália",
+   "count": 2
+  }
+ ],
+ "albuns": [
+  {
+   "title": "Aquele frevo axé",
+   "first-release-date": "1998",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Fantasia",
+   "first-release-date": "1981-01-05",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Gal",
+   "first-release-date": "1992",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Mina d'água do meu canto",
+   "first-release-date": "1995",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Gal",
+   "first-release-date": "1969",
+   "genres": [
+    {
+     "name": "experimental",
+     "count": 1
+    },
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "psychedelic rock",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Domingo",
+   "first-release-date": "1967-06",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 2
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Nenhuma Dor",
+   "first-release-date": "2021-02-21",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Caras & bocas",
+   "first-release-date": "1977",
+   "genres": [
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Cantar",
+   "first-release-date": "1974-01-01",
+   "genres": [
+    {
+     "name": "mpb",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Gal Costa",
+   "first-release-date": "1969",
+   "genres": [
+    {
+     "name": "avant-garde",
+     "count": 1
+    },
+    {
+     "name": "experimental",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "psychedelic rock",
+     "count": 1
+    },
+    {
+     "name": "rock",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Recanto",
+   "first-release-date": "2011-12-09",
+   "genres": [
+    {
+     "name": "electronic",
+     "count": 1
+    },
+    {
+     "name": "experimental",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Baby Gal",
+   "first-release-date": "1983",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "A pele do futuro",
+   "first-release-date": "2018-09-28",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Índia",
+   "first-release-date": "1973",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Minha voz",
+   "first-release-date": "1982",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "samba",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Our Moments",
+   "first-release-date": "2007-01-30",
+   "genres": []
+  },
+  {
+   "title": "Gal bossa tropical",
+   "first-release-date": "2002",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Aquarela do Brasil",
+   "first-release-date": "1980",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "samba",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Estratosférica",
+   "first-release-date": "2015-05-26",
+   "genres": [
+    {
+     "name": "blues",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Gal tropical",
+   "first-release-date": "1979",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "samba",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "O sorriso do gato de Alice",
+   "first-release-date": "1993-09-30",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Água viva",
+   "first-release-date": "1978",
+   "genres": [
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Profana",
+   "first-release-date": "1984",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    },
+    {
+     "name": "rock",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Lua de mel como o diabo gosta",
+   "first-release-date": "1987-11-01",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Hoje",
+   "first-release-date": "2005",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Todas as coisas e eu",
+   "first-release-date": "2003",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Plural",
+   "first-release-date": "1990",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Gal canta Caymmi",
+   "first-release-date": "1976",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Bem bom",
+   "first-release-date": "1985",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Gal de tantos amores",
+   "first-release-date": "2001",
+   "genres": []
+  },
+  {
+   "title": "Legal",
+   "first-release-date": "1970-01-12",
+   "genres": [
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    }
+   ]
+  }
+ ],
+ "coletado_em": "2026-09-28"
+}

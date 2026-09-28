@@ -1,0 +1,518 @@
+{
+ "ordem": 14,
+ "nome": "Tim Maia",
+ "cena": "mpb",
+ "mbid": "446ac261-09ae-43f4-a7e1-2c753c0813ce",
+ "genres": [
+  {
+   "name": "bossa nova",
+   "count": 2
+  },
+  {
+   "name": "disco",
+   "count": 1
+  },
+  {
+   "name": "funk",
+   "count": 2
+  },
+  {
+   "name": "mpb",
+   "count": 2
+  },
+  {
+   "name": "r&b",
+   "count": 2
+  },
+  {
+   "name": "soul",
+   "count": 2
+  }
+ ],
+ "albuns": [
+  {
+   "title": "Coleção obras-primas",
+   "first-release-date": "1995",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Tim Maia",
+   "first-release-date": "1977",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Tim Maia Racional, Volume 3",
+   "first-release-date": "2008",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Tim Maia",
+   "first-release-date": "1973",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    },
+    {
+     "name": "soul",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Tim Maia",
+   "first-release-date": "1978",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "soul",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Tim Maia",
+   "first-release-date": "1976",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "samba soul",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Pro meu grande amor",
+   "first-release-date": "1997",
+   "genres": []
+  },
+  {
+   "title": "Reencontro",
+   "first-release-date": "1979",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Racional (Vol 1)",
+   "first-release-date": "1975-03-15",
+   "genres": []
+  },
+  {
+   "title": "Tim Maia",
+   "first-release-date": "1972",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    },
+    {
+     "name": "samba soul",
+     "count": 1
+    },
+    {
+     "name": "soul",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Velhos camaradas, Volume 2",
+   "first-release-date": "2001",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    },
+    {
+     "name": "soul",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Nova era glacial",
+   "first-release-date": "1995",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "What a Wonderful World",
+   "first-release-date": "1997",
+   "genres": [
+    {
+     "name": "ballad",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    },
+    {
+     "name": "soul",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Voltou clarear",
+   "first-release-date": "1994",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Tim Maia",
+   "first-release-date": "1986",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Nuvens",
+   "first-release-date": "1982",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "soul",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Velhos camaradas",
+   "first-release-date": "1998",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    },
+    {
+     "name": "soul",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Sufocante",
+   "first-release-date": "1984",
+   "genres": [
+    {
+     "name": "electronic",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    },
+    {
+     "name": "soul",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Dance bem",
+   "first-release-date": "1990",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "soul",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Amigo do rei",
+   "first-release-date": "1997",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Sorriso de criança",
+   "first-release-date": "1997",
+   "genres": []
+  },
+  {
+   "title": "Carinhos",
+   "first-release-date": "1988",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Tim Maia Racional, Volume 1",
+   "first-release-date": "1974",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "samba soul",
+     "count": 1
+    },
+    {
+     "name": "soul",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Tim Maia",
+   "first-release-date": "1985",
+   "genres": [
+    {
+     "name": "soul",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Racional (Vol 2)",
+   "first-release-date": "1976-03-15",
+   "genres": []
+  },
+  {
+   "title": "Tim Maia",
+   "first-release-date": "1971",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "samba soul",
+     "count": 1
+    },
+    {
+     "name": "soul",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Disco Club",
+   "first-release-date": "1978",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "O descobridor dos sete mares",
+   "first-release-date": "1983",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Tim Maia",
+   "first-release-date": "1970",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    },
+    {
+     "name": "samba soul",
+     "count": 1
+    },
+    {
+     "name": "soul",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Somos América",
+   "first-release-date": "1987",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Tim Maia",
+   "first-release-date": "1980",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Tim Maia interpreta clássicos da Bossa Nova",
+   "first-release-date": "1991",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Só você: Para ouvir e dançar",
+   "first-release-date": "1997",
+   "genres": []
+  },
+  {
+   "title": "Tim Maia Racional, Volume 2",
+   "first-release-date": "1976",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "samba soul",
+     "count": 1
+    }
+   ]
+  }
+ ],
+ "coletado_em": "2026-09-28"
+}

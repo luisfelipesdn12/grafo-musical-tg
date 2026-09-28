@@ -1,0 +1,128 @@
+{
+ "ordem": 5,
+ "nome": "Steve Lacy",
+ "cena": "rnb",
+ "mbid": "b29020d6-5dbf-4c99-b16f-c009f8a712ff",
+ "genres": [
+  {
+   "name": "alternative r&b",
+   "count": 4
+  },
+  {
+   "name": "avant-garde",
+   "count": 1
+  },
+  {
+   "name": "bedroom pop",
+   "count": 1
+  },
+  {
+   "name": "contemporary r&b",
+   "count": 3
+  },
+  {
+   "name": "dance",
+   "count": 1
+  },
+  {
+   "name": "disco",
+   "count": 1
+  },
+  {
+   "name": "free jazz",
+   "count": 1
+  },
+  {
+   "name": "future bass",
+   "count": 1
+  },
+  {
+   "name": "hard bop",
+   "count": 1
+  },
+  {
+   "name": "house",
+   "count": 1
+  },
+  {
+   "name": "jazz",
+   "count": 1
+  },
+  {
+   "name": "neo soul",
+   "count": 1
+  },
+  {
+   "name": "pop",
+   "count": 1
+  },
+  {
+   "name": "psychedelic soul",
+   "count": 1
+  },
+  {
+   "name": "r&b",
+   "count": 3
+  },
+  {
+   "name": "rock",
+   "count": 1
+  },
+  {
+   "name": "tech house",
+   "count": 1
+  },
+  {
+   "name": "trap",
+   "count": 1
+  }
+ ],
+ "albuns": [
+  {
+   "title": "Oh yeah?",
+   "first-release-date": "2026-07-17",
+   "genres": []
+  },
+  {
+   "title": "Gemini Rights",
+   "first-release-date": "2022-07-14",
+   "genres": [
+    {
+     "name": "alternative r&b",
+     "count": 1
+    },
+    {
+     "name": "neo soul",
+     "count": 2
+    },
+    {
+     "name": "r&b",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Apollo XXI",
+   "first-release-date": "2019-05-24",
+   "genres": [
+    {
+     "name": "contemporary r&b",
+     "count": 1
+    },
+    {
+     "name": "hip hop",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    },
+    {
+     "name": "r&b",
+     "count": 1
+    }
+   ]
+  }
+ ],
+ "coletado_em": "2026-09-28"
+}

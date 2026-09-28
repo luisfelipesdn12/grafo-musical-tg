@@ -1,0 +1,79 @@
+{
+ "ordem": 4,
+ "nome": "SZA",
+ "cena": "rnb",
+ "mbid": "272989c8-5535-492d-a25c-9f58803e027f",
+ "genres": [
+  {
+   "name": "alternative r&b",
+   "count": 1
+  },
+  {
+   "name": "contemporary r&b",
+   "count": 3
+  },
+  {
+   "name": "electronic",
+   "count": 2
+  },
+  {
+   "name": "hip hop soul",
+   "count": 1
+  },
+  {
+   "name": "neo soul",
+   "count": 1
+  },
+  {
+   "name": "pop",
+   "count": 1
+  },
+  {
+   "name": "r&b",
+   "count": 2
+  },
+  {
+   "name": "soul",
+   "count": 1
+  }
+ ],
+ "albuns": [
+  {
+   "title": "SOS",
+   "first-release-date": "2022-12-09",
+   "genres": [
+    {
+     "name": "contemporary r&b",
+     "count": 4
+    },
+    {
+     "name": "pop",
+     "count": 1
+    },
+    {
+     "name": "r&b",
+     "count": 3
+    },
+    {
+     "name": "soul",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Ctrl",
+   "first-release-date": "2017-06-09",
+   "genres": [
+    {
+     "name": "contemporary r&b",
+     "count": 2
+    },
+    {
+     "name": "r&b",
+     "count": 1
+    }
+   ]
+  }
+ ],
+ "coletado_em": "2026-09-28"
+}

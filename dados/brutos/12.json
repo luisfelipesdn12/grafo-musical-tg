@@ -1,0 +1,497 @@
+{
+ "ordem": 12,
+ "nome": "Milton Nascimento",
+ "cena": "mpb",
+ "mbid": "1bfa27e3-0376-4206-a772-4586e25a64f5",
+ "genres": [
+  {
+   "name": "contemporary folk",
+   "count": 1
+  },
+  {
+   "name": "latin",
+   "count": 1
+  },
+  {
+   "name": "mpb",
+   "count": 4
+  },
+  {
+   "name": "singer-songwriter",
+   "count": 1
+  },
+  {
+   "name": "sophisti-pop",
+   "count": 1
+  },
+  {
+   "name": "sunshine pop",
+   "count": 1
+  },
+  {
+   "name": "vocal jazz",
+   "count": 1
+  }
+ ],
+ "albuns": [
+  {
+   "title": "Sentinela",
+   "first-release-date": "1980",
+   "genres": [
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Minas",
+   "first-release-date": "1975",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    },
+    {
+     "name": "progressive folk",
+     "count": 1
+    },
+    {
+     "name": "rock",
+     "count": 1
+    },
+    {
+     "name": "singer-songwriter",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Milton + Esperanza",
+   "first-release-date": "2024-08-09",
+   "genres": [
+    {
+     "name": "contemporary jazz",
+     "count": 1
+    },
+    {
+     "name": "jazz",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Maria Maria / Ultimo trem",
+   "first-release-date": "2004",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Gil & Milton",
+   "first-release-date": "2000-01-01",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Crooner",
+   "first-release-date": "1999",
+   "genres": []
+  },
+  {
+   "title": "Pietá",
+   "first-release-date": "2002",
+   "genres": []
+  },
+  {
+   "title": "Courage",
+   "first-release-date": "1968-12",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 1
+    },
+    {
+     "name": "jazz",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "latin jazz",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "As gralhas",
+   "first-release-date": "2026-05-15",
+   "genres": []
+  },
+  {
+   "title": "Milton Nascimento & Belmondo",
+   "first-release-date": "2008-07",
+   "genres": [
+    {
+     "name": "jazz",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "...E a gente sonhando",
+   "first-release-date": "2010-09-11",
+   "genres": []
+  },
+  {
+   "title": "Txai",
+   "first-release-date": "1990",
+   "genres": [
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Nascimento",
+   "first-release-date": "1997-06-10",
+   "genres": [
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Milton",
+   "first-release-date": "1976",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 1
+    },
+    {
+     "name": "jazz",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "latin jazz",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "progressive folk",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Milton Nascimento",
+   "first-release-date": "1997",
+   "genres": []
+  },
+  {
+   "title": "Journey to Dawn",
+   "first-release-date": "1979",
+   "genres": [
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Milton Nascimento",
+   "first-release-date": "1969",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Amigo",
+   "first-release-date": "1994-09-22",
+   "genres": []
+  },
+  {
+   "title": "Milton",
+   "first-release-date": "1970",
+   "genres": [
+    {
+     "name": "jazz",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "rock",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Novas bossas",
+   "first-release-date": "2008-09-29",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Travessia",
+   "first-release-date": "1967",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Native Dancer",
+   "first-release-date": "1975",
+   "genres": [
+    {
+     "name": "jazz",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Impecável",
+   "first-release-date": "2000",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Milagre dos peixes",
+   "first-release-date": "1973",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "rock",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "A Barcas Dos Amantes",
+   "first-release-date": "",
+   "genres": []
+  },
+  {
+   "title": "Clube da Esquina",
+   "first-release-date": "1972",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    },
+    {
+     "name": "rock",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Clube da Esquina 2",
+   "first-release-date": "1978",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 2
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    },
+    {
+     "name": "samba",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Yauaretê",
+   "first-release-date": "1987",
+   "genres": []
+  },
+  {
+   "title": "Missa dos quilombos",
+   "first-release-date": "1982",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "samba",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Geraes",
+   "first-release-date": "1976",
+   "genres": [
+    {
+     "name": "jazz",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Caçador de mim",
+   "first-release-date": "1981",
+   "genres": [
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Miltons",
+   "first-release-date": "1988",
+   "genres": [
+    {
+     "name": "jazz",
+     "count": 2
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Angelus",
+   "first-release-date": "1993",
+   "genres": [
+    {
+     "name": "jazz",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Änïmä",
+   "first-release-date": "1982",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Encontros e despedidas",
+   "first-release-date": "1985",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  }
+ ],
+ "coletado_em": "2026-09-28"
+}

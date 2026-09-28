@@ -1,0 +1,200 @@
+{
+ "ordem": 7,
+ "nome": "Anderson .Paak",
+ "cena": "rnb",
+ "mbid": "d02dd67e-f655-4600-bc47-f789f59e7367",
+ "genres": [
+  {
+   "name": "alternative hip hop",
+   "count": 4
+  },
+  {
+   "name": "alternative r&b",
+   "count": 2
+  },
+  {
+   "name": "contemporary r&b",
+   "count": 1
+  },
+  {
+   "name": "funk",
+   "count": 1
+  },
+  {
+   "name": "hip hop",
+   "count": 3
+  },
+  {
+   "name": "neo soul",
+   "count": 1
+  },
+  {
+   "name": "r&b",
+   "count": 6
+  },
+  {
+   "name": "soul",
+   "count": 5
+  }
+ ],
+ "albuns": [
+  {
+   "title": "O.B.E. Volume 1",
+   "first-release-date": "2012-06-30",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "hip hop",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    },
+    {
+     "name": "soul",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Malibu",
+   "first-release-date": "2016-01-15",
+   "genres": [
+    {
+     "name": "alternative r&b",
+     "count": 3
+    },
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "hip hop",
+     "count": 3
+    },
+    {
+     "name": "pop",
+     "count": 1
+    },
+    {
+     "name": "r&b",
+     "count": 3
+    },
+    {
+     "name": "soul",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Venice",
+   "first-release-date": "2014-10-28",
+   "genres": [
+    {
+     "name": "contemporary r&b",
+     "count": 1
+    },
+    {
+     "name": "electro",
+     "count": 1
+    },
+    {
+     "name": "electronic",
+     "count": 1
+    },
+    {
+     "name": "hip hop",
+     "count": 2
+    },
+    {
+     "name": "house",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    },
+    {
+     "name": "r&b",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Ventura",
+   "first-release-date": "2019-04-11",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "hip hop",
+     "count": 3
+    },
+    {
+     "name": "r&b",
+     "count": 1
+    },
+    {
+     "name": "soul",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Heavy Is the Crown",
+   "first-release-date": "2026-10-23",
+   "genres": []
+  },
+  {
+   "title": "Oxnard",
+   "first-release-date": "2018-11-15",
+   "genres": [
+    {
+     "name": "alternative r&b",
+     "count": 1
+    },
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "hip hop",
+     "count": 3
+    },
+    {
+     "name": "r&b",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "LOVEJOY",
+   "first-release-date": "2012-10-31",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "hip hop",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    },
+    {
+     "name": "soul",
+     "count": 1
+    }
+   ]
+  }
+ ],
+ "coletado_em": "2026-09-28"
+}

@@ -1,0 +1,76 @@
+{
+ "ordem": 0,
+ "nome": "Frank Ocean",
+ "cena": "rnb",
+ "mbid": "e520459c-dff4-491d-a6e4-c97be35e0044",
+ "genres": [
+  {
+   "name": "alternative r&b",
+   "count": 2
+  },
+  {
+   "name": "contemporary r&b",
+   "count": 4
+  },
+  {
+   "name": "pop",
+   "count": 2
+  },
+  {
+   "name": "r&b",
+   "count": 2
+  }
+ ],
+ "albuns": [
+  {
+   "title": "Blonde",
+   "first-release-date": "2016-08-20",
+   "genres": [
+    {
+     "name": "alternative r&b",
+     "count": 2
+    },
+    {
+     "name": "art pop",
+     "count": 2
+    },
+    {
+     "name": "contemporary r&b",
+     "count": 1
+    },
+    {
+     "name": "neo soul",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "title": "Lonny Breaux, Pt. 2",
+   "first-release-date": "2015",
+   "genres": []
+  },
+  {
+   "title": "channel ORANGE",
+   "first-release-date": "2012-07-10",
+   "genres": [
+    {
+     "name": "alternative r&b",
+     "count": 2
+    },
+    {
+     "name": "contemporary r&b",
+     "count": 3
+    },
+    {
+     "name": "pop",
+     "count": 1
+    },
+    {
+     "name": "r&b",
+     "count": 1
+    }
+   ]
+  }
+ ],
+ "coletado_em": "2026-09-28"
+}

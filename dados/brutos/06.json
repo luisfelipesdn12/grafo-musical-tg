@@ -1,0 +1,282 @@
+{
+ "ordem": 6,
+ "nome": "Kendrick Lamar",
+ "cena": "rnb",
+ "mbid": "381086ea-f511-4aba-bdf9-71c753dc5077",
+ "genres": [
+  {
+   "name": "alternative hip hop",
+   "count": 2
+  },
+  {
+   "name": "conscious hip hop",
+   "count": 13
+  },
+  {
+   "name": "dance",
+   "count": 1
+  },
+  {
+   "name": "disco",
+   "count": 1
+  },
+  {
+   "name": "future bass",
+   "count": 1
+  },
+  {
+   "name": "gangsta rap",
+   "count": 1
+  },
+  {
+   "name": "hardcore hip hop",
+   "count": 6
+  },
+  {
+   "name": "hip hop",
+   "count": 17
+  },
+  {
+   "name": "house",
+   "count": 1
+  },
+  {
+   "name": "jazz",
+   "count": 1
+  },
+  {
+   "name": "jazz rap",
+   "count": 11
+  },
+  {
+   "name": "pop",
+   "count": 4
+  },
+  {
+   "name": "pop rap",
+   "count": 2
+  },
+  {
+   "name": "r&b",
+   "count": 1
+  },
+  {
+   "name": "trap",
+   "count": 2
+  },
+  {
+   "name": "west coast hip hop",
+   "count": 9
+  }
+ ],
+ "albuns": [
+  {
+   "title": "GNX",
+   "first-release-date": "2024-11-22",
+   "genres": [
+    {
+     "name": "conscious hip hop",
+     "count": 2
+    },
+    {
+     "name": "hip hop",
+     "count": 7
+    },
+    {
+     "name": "west coast hip hop",
+     "count": 5
+    }
+   ]
+  },
+  {
+   "title": "good kid, m.A.A.d city",
+   "first-release-date": "2012-10-21",
+   "genres": [
+    {
+     "name": "conscious hip hop",
+     "count": 5
+    },
+    {
+     "name": "gangsta rap",
+     "count": 1
+    },
+    {
+     "name": "hardcore hip hop",
+     "count": 1
+    },
+    {
+     "name": "hip hop",
+     "count": 8
+    },
+    {
+     "name": "pop rap",
+     "count": 1
+    },
+    {
+     "name": "west coast hip hop",
+     "count": 5
+    }
+   ]
+  },
+  {
+   "title": "Mr. Morale & the Big Steppers",
+   "first-release-date": "2022-05-13",
+   "genres": [
+    {
+     "name": "conscious hip hop",
+     "count": 5
+    },
+    {
+     "name": "contemporary r&b",
+     "count": 2
+    },
+    {
+     "name": "hip hop",
+     "count": 10
+    },
+    {
+     "name": "jazz rap",
+     "count": 1
+    },
+    {
+     "name": "neo soul",
+     "count": 1
+    },
+    {
+     "name": "political hip hop",
+     "count": 1
+    },
+    {
+     "name": "pop rap",
+     "count": 1
+    },
+    {
+     "name": "trap",
+     "count": 1
+    },
+    {
+     "name": "west coast hip hop",
+     "count": 4
+    }
+   ]
+  },
+  {
+   "title": "Dedicated",
+   "first-release-date": "2013",
+   "genres": []
+  },
+  {
+   "title": "DAMN.",
+   "first-release-date": "2017-04-14",
+   "genres": [
+    {
+     "name": "conscious hip hop",
+     "count": 6
+    },
+    {
+     "name": "contemporary r&b",
+     "count": 1
+    },
+    {
+     "name": "hip hop",
+     "count": 14
+    },
+    {
+     "name": "political hip hop",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 2
+    },
+    {
+     "name": "pop rap",
+     "count": 3
+    },
+    {
+     "name": "trap",
+     "count": 5
+    },
+    {
+     "name": "west coast hip hop",
+     "count": 7
+    }
+   ]
+  },
+  {
+   "title": "Compton Cowboys",
+   "first-release-date": "2023",
+   "genres": []
+  },
+  {
+   "title": "THE OVERGROUND HELL ROAD",
+   "first-release-date": "2016-03-16",
+   "genres": []
+  },
+  {
+   "title": "Section.80",
+   "first-release-date": "2011-07-02",
+   "genres": [
+    {
+     "name": "conscious hip hop",
+     "count": 4
+    },
+    {
+     "name": "hip hop",
+     "count": 7
+    },
+    {
+     "name": "jazz rap",
+     "count": 2
+    },
+    {
+     "name": "neo soul",
+     "count": 1
+    },
+    {
+     "name": "west coast hip hop",
+     "count": 4
+    }
+   ]
+  },
+  {
+   "title": "To Pimp a Butterfly",
+   "first-release-date": "2015-03-15",
+   "genres": [
+    {
+     "name": "conscious hip hop",
+     "count": 13
+    },
+    {
+     "name": "g-funk",
+     "count": 1
+    },
+    {
+     "name": "hip hop",
+     "count": 10
+    },
+    {
+     "name": "jazz rap",
+     "count": 10
+    },
+    {
+     "name": "neo soul",
+     "count": 3
+    },
+    {
+     "name": "political hip hop",
+     "count": 4
+    },
+    {
+     "name": "progressive",
+     "count": 1
+    },
+    {
+     "name": "west coast hip hop",
+     "count": 13
+    }
+   ]
+  }
+ ],
+ "coletado_em": "2026-09-28"
+}

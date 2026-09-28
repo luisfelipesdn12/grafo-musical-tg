@@ -1,0 +1,513 @@
+{
+ "ordem": 13,
+ "nome": "Jorge Ben Jor",
+ "cena": "mpb",
+ "mbid": "19499124-36d4-4ccc-b28d-04dde3d2076f",
+ "genres": [
+  {
+   "name": "bossa nova",
+   "count": 1
+  },
+  {
+   "name": "mpb",
+   "count": 3
+  },
+  {
+   "name": "samba",
+   "count": 1
+  },
+  {
+   "name": "samba-rock",
+   "count": 1
+  },
+  {
+   "name": "singer-songwriter",
+   "count": 1
+  }
+ ],
+ "albuns": [
+  {
+   "title": "Ben é samba bom",
+   "first-release-date": "1964",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 1
+    },
+    {
+     "name": "jazz",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Gil e Jorge",
+   "first-release-date": "1975",
+   "genres": [
+    {
+     "name": "jazz",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Recuerdos de Asunción 443",
+   "first-release-date": "2007",
+   "genres": []
+  },
+  {
+   "title": "Sonsual",
+   "first-release-date": "1984",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Reactivus Amor Est",
+   "first-release-date": "2004",
+   "genres": []
+  },
+  {
+   "title": "Samba esquema novo",
+   "first-release-date": "1963",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 2
+    },
+    {
+     "name": "jazz",
+     "count": 3
+    },
+    {
+     "name": "samba",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "A Banda do Zé Pretinho",
+   "first-release-date": "1978",
+   "genres": [
+    {
+     "name": "disco",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "samba",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Dádiva",
+   "first-release-date": "1983",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "jazz",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "samba",
+     "count": 1
+    },
+    {
+     "name": "samba-rock",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Tropical",
+   "first-release-date": "1976",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "samba",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Solta o Pavão",
+   "first-release-date": "1975",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "samba",
+     "count": 1
+    },
+    {
+     "name": "soul",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Brazilian Hits",
+   "first-release-date": "2000",
+   "genres": []
+  },
+  {
+   "title": "10 Anos Depois",
+   "first-release-date": "1973",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 1
+    },
+    {
+     "name": "jazz",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "rock",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Bem-vinda amizade",
+   "first-release-date": "1981",
+   "genres": [
+    {
+     "name": "disco",
+     "count": 1
+    },
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "jazz",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "O Bidú: Silêncio no Brooklin",
+   "first-release-date": "1967",
+   "genres": [
+    {
+     "name": "jazz",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "samba",
+     "count": 1
+    },
+    {
+     "name": "samba-rock",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Jorge Ben",
+   "first-release-date": "1969",
+   "genres": [
+    {
+     "name": "jazz",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "rock",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Ben Brasil",
+   "first-release-date": "1986",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "samba",
+     "count": 1
+    },
+    {
+     "name": "samba-rock",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Big Ben",
+   "first-release-date": "1965",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 1
+    },
+    {
+     "name": "jazz",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Sacundin Ben Samba",
+   "first-release-date": "1964",
+   "genres": [
+    {
+     "name": "samba",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Força bruta",
+   "first-release-date": "1970",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 3
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "samba",
+     "count": 1
+    },
+    {
+     "name": "samba soul",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Alô, alô, como vai?",
+   "first-release-date": "1980",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "A Tábua de Esmeralda",
+   "first-release-date": "1974",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "samba",
+     "count": 2
+    },
+    {
+     "name": "soul",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "África Brasil",
+   "first-release-date": "1976",
+   "genres": [
+    {
+     "name": "jazz",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Benjor",
+   "first-release-date": "1989",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "samba",
+     "count": 1
+    },
+    {
+     "name": "soul",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Negro é lindo",
+   "first-release-date": "1971",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "samba",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Jazz Potatoes",
+   "first-release-date": "1973",
+   "genres": []
+  },
+  {
+   "title": "Homosapiens",
+   "first-release-date": "1995",
+   "genres": [
+    {
+     "name": "samba-rock",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Ben",
+   "first-release-date": "1972",
+   "genres": [
+    {
+     "name": "samba",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "23",
+   "first-release-date": "1993-06-08",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Salve Simpatia",
+   "first-release-date": "1979",
+   "genres": [
+    {
+     "name": "disco",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  }
+ ],
+ "coletado_em": "2026-09-28"
+}

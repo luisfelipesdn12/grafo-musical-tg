@@ -1,0 +1,67 @@
+{
+ "ordem": 3,
+ "nome": "Omar Apollo",
+ "cena": "rnb",
+ "mbid": "0b966a38-5ad9-43c1-b86b-c07079523165",
+ "genres": [
+  {
+   "name": "alternative r&b",
+   "count": 1
+  },
+  {
+   "name": "bedroom pop",
+   "count": 1
+  }
+ ],
+ "albuns": [
+  {
+   "title": "Ivory",
+   "first-release-date": "2022-04-08",
+   "genres": [
+    {
+     "name": "alternative r&b",
+     "count": 1
+    },
+    {
+     "name": "hip hop",
+     "count": 1
+    },
+    {
+     "name": "indie pop",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "God Said No",
+   "first-release-date": "2024-06-24",
+   "genres": [
+    {
+     "name": "alternative r&b",
+     "count": 1
+    },
+    {
+     "name": "bedroom pop",
+     "count": 1
+    },
+    {
+     "name": "contemporary r&b",
+     "count": 1
+    },
+    {
+     "name": "indie pop",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    }
+   ]
+  }
+ ],
+ "coletado_em": "2026-09-28"
+}

@@ -1,0 +1,110 @@
+id,tipo,rotulo,grau
+0,ART,[ART] Frank Ocean,6
+1,ART,"[ART] Tyler, The Creator",8
+2,ART,[ART] Daniel Caesar,7
+3,ART,[ART] Omar Apollo,4
+4,ART,[ART] SZA,6
+5,ART,[ART] Steve Lacy,7
+6,ART,[ART] Kendrick Lamar,9
+7,ART,[ART] Anderson .Paak,9
+8,ART,[ART] Caetano Veloso,8
+9,ART,[ART] Gilberto Gil,9
+10,ART,[ART] Chico Buarque,8
+11,ART,[ART] Gal Costa,9
+12,ART,[ART] Milton Nascimento,7
+13,ART,[ART] Jorge Ben Jor,9
+14,ART,[ART] Tim Maia,6
+15,ART,[ART] Os Mutantes,7
+16,ALB,[ALB] Blonde — Frank Ocean,5
+17,ALB,[ALB] channel ORANGE — Frank Ocean,5
+18,ALB,"[ALB] DON’T TAP THE GLASS — Tyler, The Creator",4
+19,ALB,"[ALB] IGOR — Tyler, The Creator",6
+20,ALB,"[ALB] CHROMAKOPIA — Tyler, The Creator",6
+21,ALB,"[ALB] Wolf — Tyler, The Creator",5
+22,ALB,[ALB] Freudian — Daniel Caesar,6
+23,ALB,[ALB] NEVER ENOUGH — Daniel Caesar,6
+24,ALB,[ALB] Case Study 01 — Daniel Caesar,6
+25,ALB,[ALB] Son of Spergy — Daniel Caesar,4
+26,ALB,[ALB] God Said No — Omar Apollo,6
+27,ALB,[ALB] Ivory — Omar Apollo,5
+28,ALB,[ALB] SOS — SZA,5
+29,ALB,[ALB] Ctrl — SZA,3
+30,ALB,[ALB] Gemini Rights — Steve Lacy,4
+31,ALB,[ALB] Apollo XXI — Steve Lacy,5
+32,ALB,[ALB] To Pimp a Butterfly — Kendrick Lamar,5
+33,ALB,[ALB] DAMN. — Kendrick Lamar,5
+34,ALB,[ALB] Mr. Morale & the Big Steppers — Kendrick Lamar,6
+35,ALB,"[ALB] good kid, m.A.A.d city — Kendrick Lamar",5
+36,ALB,[ALB] Malibu — Anderson .Paak,6
+37,ALB,[ALB] Venice — Anderson .Paak,4
+38,ALB,[ALB] Oxnard — Anderson .Paak,5
+39,ALB,[ALB] Ventura — Anderson .Paak,5
+40,ALB,[ALB] Fina estampa — Caetano Veloso,3
+41,ALB,[ALB] Araçá azul — Caetano Veloso,4
+42,ALB,[ALB] Domingo — Caetano Veloso,5
+43,ALB,[ALB] Caetano Veloso — Caetano Veloso,6
+44,ALB,[ALB] Raça humana — Gilberto Gil,5
+45,ALB,[ALB] Luar — Gilberto Gil,5
+46,ALB,[ALB] Parabolicamará — Gilberto Gil,6
+47,ALB,[ALB] Kaya N’gan Daya — Gilberto Gil,5
+48,ALB,[ALB] Chico Buarque — Chico Buarque,4
+49,ALB,[ALB] Per un pugno di samba — Chico Buarque,5
+50,ALB,[ALB] Construção — Chico Buarque,3
+51,ALB,[ALB] Chico Buarque de Mangueira 1998 — Chico Buarque,3
+52,ALB,[ALB] Domingo — Gal Costa,5
+53,ALB,[ALB] Gal Costa — Gal Costa,6
+54,ALB,[ALB] Gal — Gal Costa,5
+55,ALB,[ALB] Aquarela do Brasil — Gal Costa,5
+56,ALB,[ALB] Minas — Milton Nascimento,5
+57,ALB,[ALB] Milton — Milton Nascimento,6
+58,ALB,[ALB] Courage — Milton Nascimento,6
+59,ALB,[ALB] Clube da Esquina 2 — Milton Nascimento,4
+60,ALB,[ALB] Samba esquema novo — Jorge Ben Jor,4
+61,ALB,[ALB] Força bruta — Jorge Ben Jor,5
+62,ALB,[ALB] Dádiva — Jorge Ben Jor,6
+63,ALB,[ALB] O Bidú: Silêncio no Brooklin — Jorge Ben Jor,6
+64,ALB,[ALB] Tim Maia — Tim Maia,0
+65,ALB,[ALB] Tim Maia — Tim Maia,0
+66,ALB,[ALB] Tim Maia — Tim Maia,0
+67,ALB,[ALB] Tim Maia — Tim Maia,7
+68,ALB,[ALB] Os Mutantes — Os Mutantes,6
+69,ALB,[ALB] Mutantes e seus cometas no país do baurets — Os Mutantes,3
+70,ALB,[ALB] Mutantes — Os Mutantes,6
+71,ALB,[ALB] Tecnicolor — Os Mutantes,6
+72,GEN,[GEN] alternative hip hop,3
+73,GEN,[GEN] alternative r&b,17
+74,GEN,[GEN] art pop,2
+75,GEN,[GEN] avant-garde,3
+76,GEN,[GEN] baroque pop,2
+77,GEN,[GEN] bedroom pop,4
+78,GEN,[GEN] bossa nova,16
+79,GEN,[GEN] conscious hip hop,6
+80,GEN,[GEN] contemporary r&b,17
+81,GEN,[GEN] electronic,3
+82,GEN,[GEN] experimental,3
+83,GEN,[GEN] funk,9
+84,GEN,[GEN] hardcore hip hop,6
+85,GEN,[GEN] hip hop,18
+86,GEN,[GEN] indie pop,2
+87,GEN,[GEN] jazz,8
+88,GEN,[GEN] jazz rap,4
+89,GEN,[GEN] latin,26
+90,GEN,[GEN] latin jazz,2
+91,GEN,[GEN] mpb,28
+92,GEN,[GEN] neo soul,9
+93,GEN,[GEN] pop,13
+94,GEN,[GEN] pop rap,2
+95,GEN,[GEN] pop rock,3
+96,GEN,[GEN] progressive pop,2
+97,GEN,[GEN] psychedelic pop,7
+98,GEN,[GEN] psychedelic rock,8
+99,GEN,[GEN] psychedelic soul,2
+100,GEN,[GEN] r&b,16
+101,GEN,[GEN] rock,3
+102,GEN,[GEN] samba,11
+103,GEN,[GEN] samba soul,2
+104,GEN,[GEN] samba-rock,2
+105,GEN,[GEN] singer-songwriter,6
+106,GEN,[GEN] soul,5
+107,GEN,[GEN] tropicália,4
+108,GEN,[GEN] west coast hip hop,6

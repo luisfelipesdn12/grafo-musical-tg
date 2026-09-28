@@ -1,0 +1,595 @@
+{
+ "ordem": 9,
+ "nome": "Gilberto Gil",
+ "cena": "mpb",
+ "mbid": "cf6b70f6-2616-481c-912c-0263cabfc974",
+ "genres": [
+  {
+   "name": "bossa nova",
+   "count": 2
+  },
+  {
+   "name": "mpb",
+   "count": 4
+  },
+  {
+   "name": "pop rock",
+   "count": 1
+  },
+  {
+   "name": "psychedelic pop",
+   "count": 1
+  },
+  {
+   "name": "singer-songwriter",
+   "count": 1
+  },
+  {
+   "name": "tropicália",
+   "count": 1
+  }
+ ],
+ "albuns": [
+  {
+   "title": "Satisfação - Raras & Inéditas",
+   "first-release-date": "1977-01-01",
+   "genres": []
+  },
+  {
+   "title": "Gil e Jorge",
+   "first-release-date": "1975",
+   "genres": [
+    {
+     "name": "jazz",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Kaya N’gan Daya",
+   "first-release-date": "2002",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    },
+    {
+     "name": "pop rock",
+     "count": 1
+    },
+    {
+     "name": "reggaeton",
+     "count": 1
+    },
+    {
+     "name": "rock",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Retirante",
+   "first-release-date": "",
+   "genres": []
+  },
+  {
+   "title": "Expresso 2222",
+   "first-release-date": "1972",
+   "genres": [
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "rock",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Gilberto Gil",
+   "first-release-date": "1971",
+   "genres": [
+    {
+     "name": "rock",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Soy loco por ti, América",
+   "first-release-date": "1987-10-25",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "O eterno Deus Mu dança",
+   "first-release-date": "1989",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Gil & Milton",
+   "first-release-date": "2000-01-01",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Dia Dorim Noite Neon",
+   "first-release-date": "1985",
+   "genres": [
+    {
+     "name": "blues",
+     "count": 1
+    },
+    {
+     "name": "bossa nova",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Refazenda",
+   "first-release-date": "1975",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "samba",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Quanta",
+   "first-release-date": "1997-08-19",
+   "genres": []
+  },
+  {
+   "title": "Tropicália 2",
+   "first-release-date": "1993",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 2
+    },
+    {
+     "name": "tropicália",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Fé na Festa",
+   "first-release-date": "2010-06-11",
+   "genres": []
+  },
+  {
+   "title": "The Other Side",
+   "first-release-date": "2014",
+   "genres": [
+    {
+     "name": "jazz",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Nightingale",
+   "first-release-date": "1978",
+   "genres": []
+  },
+  {
+   "title": "Este É O Gil Que Eu Gosto",
+   "first-release-date": "1995",
+   "genres": []
+  },
+  {
+   "title": "Cidade do Salvador, Vol. 1",
+   "first-release-date": "1973",
+   "genres": []
+  },
+  {
+   "title": "O Melhor de 2",
+   "first-release-date": "",
+   "genres": []
+  },
+  {
+   "title": "The South African Meeting of Viramundo",
+   "first-release-date": "2013-04-13",
+   "genres": [
+    {
+     "name": "tropicália",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Brasil",
+   "first-release-date": "1981",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 1
+    },
+    {
+     "name": "jazz",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Les incontournables du Jazz - Gilberto Gil",
+   "first-release-date": "1996-11-27",
+   "genres": []
+  },
+  {
+   "title": "Realce",
+   "first-release-date": "1979",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    },
+    {
+     "name": "rock",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Refavela",
+   "first-release-date": "1977",
+   "genres": [
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Aquarela Do Brasil - 16 Grandes Éxitos",
+   "first-release-date": "2003",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Gil Luminoso",
+   "first-release-date": "2006-07-01",
+   "genres": []
+  },
+  {
+   "title": "Gilberto Gil",
+   "first-release-date": "1969",
+   "genres": [
+    {
+     "name": "electronic",
+     "count": 1
+    },
+    {
+     "name": "experimental",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "rock",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Antologia do samba-choro",
+   "first-release-date": "1978",
+   "genres": []
+  },
+  {
+   "title": "OK OK OK",
+   "first-release-date": "2018-09-07",
+   "genres": []
+  },
+  {
+   "title": "Parabolicamará",
+   "first-release-date": "1991",
+   "genres": [
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "jazz",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "samba",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Gilbertos Samba",
+   "first-release-date": "2014-03-11",
+   "genres": []
+  },
+  {
+   "title": "Raça humana",
+   "first-release-date": "1984",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 1
+    },
+    {
+     "name": "funk",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 2
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "reggae",
+     "count": 1
+    },
+    {
+     "name": "soul",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Retirante (Vol. 1)",
+   "first-release-date": "",
+   "genres": []
+  },
+  {
+   "title": "The Eternal God of Change",
+   "first-release-date": "1989",
+   "genres": []
+  },
+  {
+   "title": "Luar",
+   "first-release-date": "1981-11-30",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 1
+    },
+    {
+     "name": "jazz",
+     "count": 1
+    },
+    {
+     "name": "jazz-funk",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "soul jazz",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Gold",
+   "first-release-date": "2002-05",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Cidade do Salvador",
+   "first-release-date": "2003",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Um Banda Um",
+   "first-release-date": "1982",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "pop",
+     "count": 1
+    },
+    {
+     "name": "reggae",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Extra",
+   "first-release-date": "1983",
+   "genres": [
+    {
+     "name": "jazz",
+     "count": 1
+    },
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Louvação",
+   "first-release-date": "1967",
+   "genres": [
+    {
+     "name": "bossa nova",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Vira Mundo",
+   "first-release-date": "2001",
+   "genres": []
+  },
+  {
+   "title": "Gilberto Gil",
+   "first-release-date": "1968",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    },
+    {
+     "name": "tropicália",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Banda larga cordel",
+   "first-release-date": "2008-06-17",
+   "genres": [
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Impecável",
+   "first-release-date": "2000",
+   "genres": [
+    {
+     "name": "latin",
+     "count": 1
+    },
+    {
+     "name": "mpb",
+     "count": 1
+    }
+   ]
+  }
+ ],
+ "coletado_em": "2026-09-28"
+}

@@ -1,0 +1,472 @@
+{
+ "ordem": 1,
+ "nome": "Tyler, The Creator",
+ "cena": "rnb",
+ "mbid": "f6beac20-5dfe-4d1f-ae02-0b0a740aafd6",
+ "genres": [
+  {
+   "name": "alternative hip hop",
+   "count": 1
+  },
+  {
+   "name": "dance",
+   "count": 1
+  },
+  {
+   "name": "hardcore hip hop",
+   "count": 4
+  },
+  {
+   "name": "hip hop",
+   "count": 7
+  },
+  {
+   "name": "horrorcore",
+   "count": 3
+  },
+  {
+   "name": "jazz rap",
+   "count": 1
+  },
+  {
+   "name": "neo soul",
+   "count": 1
+  },
+  {
+   "name": "pop",
+   "count": 1
+  },
+  {
+   "name": "pop rap",
+   "count": 1
+  },
+  {
+   "name": "r&b",
+   "count": 1
+  },
+  {
+   "name": "rock",
+   "count": 1
+  },
+  {
+   "name": "west coast hip hop",
+   "count": 2
+  }
+ ],
+ "albuns": [
+  {
+   "title": "DINОSAUR",
+   "first-release-date": "2009-03-01",
+   "genres": []
+  },
+  {
+   "title": "IGOR",
+   "first-release-date": "2019-05-17",
+   "genres": [
+    {
+     "name": "alternative r&b",
+     "count": 2
+    },
+    {
+     "name": "electronic",
+     "count": 3
+    },
+    {
+     "name": "experimental hip hop",
+     "count": 2
+    },
+    {
+     "name": "hip hop",
+     "count": 6
+    },
+    {
+     "name": "neo soul",
+     "count": 4
+    },
+    {
+     "name": "neo-psychedelia",
+     "count": 2
+    },
+    {
+     "name": "pop rap",
+     "count": 3
+    },
+    {
+     "name": "progressive soul",
+     "count": 2
+    },
+    {
+     "name": "psychedelic soul",
+     "count": 2
+    },
+    {
+     "name": "synth funk",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "Cherry Bomb",
+   "first-release-date": "2015-04-13",
+   "genres": [
+    {
+     "name": "alternative hip hop",
+     "count": 1
+    },
+    {
+     "name": "alternative r&b",
+     "count": 1
+    },
+    {
+     "name": "experimental hip hop",
+     "count": 1
+    },
+    {
+     "name": "hardcore hip hop",
+     "count": 2
+    },
+    {
+     "name": "hip hop",
+     "count": 4
+    },
+    {
+     "name": "industrial hip hop",
+     "count": 1
+    },
+    {
+     "name": "jazz rap",
+     "count": 1
+    },
+    {
+     "name": "neo soul",
+     "count": 2
+    },
+    {
+     "name": "rock",
+     "count": 1
+    },
+    {
+     "name": "soul",
+     "count": 1
+    },
+    {
+     "name": "underground hip hop",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Bastard",
+   "first-release-date": "2009-12-25",
+   "genres": [
+    {
+     "name": "abstract hip hop",
+     "count": 1
+    },
+    {
+     "name": "alternative hip hop",
+     "count": 2
+    },
+    {
+     "name": "cloud rap",
+     "count": 1
+    },
+    {
+     "name": "experimental hip hop",
+     "count": 1
+    },
+    {
+     "name": "hardcore hip hop",
+     "count": 1
+    },
+    {
+     "name": "hip hop",
+     "count": 1
+    },
+    {
+     "name": "horrorcore",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "title": "At Your Own Risk",
+   "first-release-date": "2007",
+   "genres": []
+  },
+  {
+   "title": "DON’T TAP THE GLASS",
+   "first-release-date": "2025-07-21",
+   "genres": [
+    {
+     "name": "contemporary r&b",
+     "count": 4
+    },
+    {
+     "name": "dance",
+     "count": 4
+    },
+    {
+     "name": "dance-pop",
+     "count": 3
+    },
+    {
+     "name": "electro",
+     "count": 2
+    },
+    {
+     "name": "hardcore hip hop",
+     "count": 3
+    },
+    {
+     "name": "hip hop",
+     "count": 5
+    },
+    {
+     "name": "hip house",
+     "count": 2
+    },
+    {
+     "name": "miami bass",
+     "count": 3
+    },
+    {
+     "name": "neo soul",
+     "count": 2
+    },
+    {
+     "name": "pop rap",
+     "count": 3
+    },
+    {
+     "name": "synth funk",
+     "count": 3
+    },
+    {
+     "name": "west coast hip hop",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "title": "HOUSE ON FIRE",
+   "first-release-date": "2025-02-01",
+   "genres": []
+  },
+  {
+   "title": "Goblin",
+   "first-release-date": "2011-05-10",
+   "genres": [
+    {
+     "name": "abstract hip hop",
+     "count": 2
+    },
+    {
+     "name": "alternative hip hop",
+     "count": 1
+    },
+    {
+     "name": "experimental hip hop",
+     "count": 2
+    },
+    {
+     "name": "hardcore hip hop",
+     "count": 3
+    },
+    {
+     "name": "hip hop",
+     "count": 5
+    },
+    {
+     "name": "horrorcore",
+     "count": 4
+    },
+    {
+     "name": "underground hip hop",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "Wolf",
+   "first-release-date": "2013-04-01",
+   "genres": [
+    {
+     "name": "alternative hip hop",
+     "count": 1
+    },
+    {
+     "name": "experimental hip hop",
+     "count": 2
+    },
+    {
+     "name": "hardcore hip hop",
+     "count": 3
+    },
+    {
+     "name": "hip hop",
+     "count": 5
+    },
+    {
+     "name": "horrorcore",
+     "count": 1
+    },
+    {
+     "name": "jazz rap",
+     "count": 3
+    },
+    {
+     "name": "neo soul",
+     "count": 2
+    },
+    {
+     "name": "pop rap",
+     "count": 1
+    },
+    {
+     "name": "underground hip hop",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "CHROMAKOPIA",
+   "first-release-date": "2024-10-28",
+   "genres": [
+    {
+     "name": "alternative hip hop",
+     "count": 1
+    },
+    {
+     "name": "conscious hip hop",
+     "count": 1
+    },
+    {
+     "name": "contemporary r&b",
+     "count": 1
+    },
+    {
+     "name": "experimental",
+     "count": 1
+    },
+    {
+     "name": "experimental hip hop",
+     "count": 1
+    },
+    {
+     "name": "hardcore hip hop",
+     "count": 2
+    },
+    {
+     "name": "hip hop",
+     "count": 6
+    },
+    {
+     "name": "jazz",
+     "count": 1
+    },
+    {
+     "name": "jazz rap",
+     "count": 1
+    },
+    {
+     "name": "neo soul",
+     "count": 2
+    },
+    {
+     "name": "neo-psychedelia",
+     "count": 1
+    },
+    {
+     "name": "progressive soul",
+     "count": 1
+    },
+    {
+     "name": "psychedelic",
+     "count": 1
+    },
+    {
+     "name": "r&b",
+     "count": 1
+    },
+    {
+     "name": "synth funk",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "title": "CALL ME IF YOU GET LOST",
+   "first-release-date": "2021-06-25",
+   "genres": [
+    {
+     "name": "hardcore hip hop",
+     "count": 1
+    },
+    {
+     "name": "hip hop",
+     "count": 5
+    },
+    {
+     "name": "jazz rap",
+     "count": 1
+    },
+    {
+     "name": "neo soul",
+     "count": 1
+    },
+    {
+     "name": "synth funk",
+     "count": 1
+    },
+    {
+     "name": "west coast hip hop",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "title": "Flower Boy",
+   "first-release-date": "2017-07-21",
+   "genres": [
+    {
+     "name": "alternative hip hop",
+     "count": 3
+    },
+    {
+     "name": "alternative r&b",
+     "count": 1
+    },
+    {
+     "name": "experimental hip hop",
+     "count": 1
+    },
+    {
+     "name": "hip hop",
+     "count": 5
+    },
+    {
+     "name": "jazz rap",
+     "count": 2
+    },
+    {
+     "name": "neo soul",
+     "count": 3
+    },
+    {
+     "name": "neo-psychedelia",
+     "count": 1
+    },
+    {
+     "name": "pop rap",
+     "count": 2
+    },
+    {
+     "name": "synth funk",
+     "count": 1
+    }
+   ]
+  }
+ ],
+ "coletado_em": "2026-09-28"
+}
