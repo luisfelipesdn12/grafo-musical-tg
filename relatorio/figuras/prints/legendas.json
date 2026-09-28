@@ -3,7 +3,7 @@
   "02_opcao_a_teste2.png": "Opção a) — teste 2: leitura de um arquivo inexistente é tratada com mensagem de erro.",
   "03_opcao_b_teste1.png": "Opção b) — teste 1: após inserir um gênero novo, o grafo é gravado no caminho padrão (Enter).",
   "04_opcao_b_teste2.png": "Opção b) — teste 2: gravação do grafo num caminho alternativo informado pelo usuário.",
-  "05_opcao_c_teste1.png": "Opção c) — teste 1: inserção de um novo vértice do tipo álbum.",
+  "05_opcao_c_teste1.png": "Opção c) — teste 1: inserção de um novo vértice do tipo álbum (\"Racional Vol. 3 — Tim Maia\").",
   "06_opcao_c_teste2.png": "Opção c) — teste 2: tipo de vértice inválido (\"9\") é recusado.",
   "07_opcao_d_teste1.png": "Opção d) — teste 1: aresta válida entre o novo gênero inserido e \"[ART] Frank Ocean\" (tipos diferentes).",
   "08_opcao_d_teste2.png": "Opção d) — teste 2: peso fora de [0,1] (\"2\") é rejeitado e, em seguida, a aresta entre \"[ART] Frank Ocean\" e \"[ART] Tyler, The Creator\" (mesmo tipo ART) é recusada pelo grafo tripartido.",

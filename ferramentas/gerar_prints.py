@@ -26,6 +26,11 @@ Histórico de alterações:
   28/09/2026 - Luis Felipe - recorta a matriz de adjacência (h, teste 2) a
     uma janela de 20x20 vértices, em vez de só truncar linhas, para caber
     legível numa imagem (a matriz completa tem 109 colunas)
+  28/09/2026 - Luis Felipe - c1 passa a inserir um álbum com nome
+    verificado como ausente do grafo em tempo de execução (evita cair no
+    caminho de "já existe o vértice"); adiciona verificar(), que confere
+    cada roteiro contra o(s) trecho(s) de saída esperado(s) e falha alto
+    se a legenda não bater com o que a aplicação realmente respondeu
 """
 import contextlib
 import copy
@@ -179,6 +184,21 @@ def renderizar_png(texto, caminho_png):
     img.save(caminho_png)
 
 
+def verificar(opcao, teste, texto, esperado):
+    """Confere que a saída BRUTA (antes de truncar/recortar) realmente
+    contém o(s) trecho(s) que a legenda promete - falha alto (levanta
+    erro e para a geração) se algo não bater, em vez de silenciosamente
+    publicar um print que mostra o resultado errado (ex.: c1 legendado
+    como "inserção com sucesso" mas mostrando "já existe o vértice")."""
+    trechos = [esperado] if isinstance(esperado, str) else list(esperado)
+    faltando = [t for t in trechos if t not in texto]
+    if faltando:
+        raise AssertionError(
+            f"Roteiro {opcao}{teste}: a saída não contém o(s) trecho(s) esperado(s) "
+            f"{faltando!r}.\n--- saída capturada ---\n{texto}"
+        )
+
+
 # ---------------------------------------------------------------- roteiros
 def copiar_grafo(base_tmp, nome):
     pasta = os.path.join(base_tmp, nome)
@@ -188,10 +208,26 @@ def copiar_grafo(base_tmp, nome):
     return destino
 
 
+def nome_ausente(g, tipo_prefixo, base):
+    """Garante um rótulo "[tipo_prefixo] <nome>" que ainda NÃO existe no
+    grafo - usado para roteiros de inserção (opção c), que precisam de um
+    nome livre para o teste realmente inserir o vértice (em vez de cair no
+    caminho de "já existe"). Se a base já existir, acrescenta um sufixo
+    numérico até achar um nome livre."""
+    candidato = base
+    sufixo = 2
+    while f"[{tipo_prefixo}] {candidato}" in g.rotulos:
+        candidato = f"{base} ({sufixo})"
+        sufixo += 1
+    return candidato
+
+
 def calcular_dados_reais():
     """Lê o grafo REAL (somente leitura - nunca é gravado) para calcular,
     em tempo de execução, os índices/valores usados nos roteiros."""
     g = ler(GRAFO_ORIGINAL)
+
+    nome_album_c1 = nome_ausente(g, "ALB", "Racional Vol. 3 — Tim Maia")
 
     idx_frank = g.rotulos.index("[ART] Frank Ocean")
     idx_art2 = next(i for i in range(g.n) if g.tipoVertice(i) == "ART" and i != idx_frank)
@@ -230,6 +266,7 @@ def calcular_dados_reais():
         "n": g.n,
         "m": g.m,
         "rotulos": g.rotulos,
+        "nome_album_c1": nome_album_c1,
         "idx_frank": idx_frank,
         "idx_art2": idx_art2,
         "idx_gen1": idx_gen1,
@@ -242,12 +279,18 @@ def calcular_dados_reais():
 
 
 def montar_roteiros(dados, base_tmp):
+    """Devolve a lista de roteiros: (opção, teste, respostas, legenda,
+    esperado). `esperado` é uma string ou lista de substrings que DEVEM
+    aparecer na saída bruta (antes de qualquer corte/recorte) - é a
+    garantia de que a imagem realmente mostra o que a legenda promete
+    (ex.: c1 tem que mostrar "inserido", não "já existe")."""
     r = dados["rotulos"]
+    nome_c1 = dados["nome_album_c1"]
     fi, ai = dados["idx_frank"], dados["idx_art2"]
     gi, ggrau = dados["idx_gen1"], dados["grau_gen1"]
     albf, genf = dados["idx_alb_f1"], dados["idx_gen_f1"]
     albi, vizi = dados["idx_album_i2"], dados["vizinhos_album_i2"]
-    n = dados["n"]
+    n, m = dados["n"], dados["m"]
 
     respostas_f_album = []
     for w in vizi:
@@ -256,65 +299,87 @@ def montar_roteiros(dados, base_tmp):
     return [
         ("a", 1, ["a", ""],
          f"Opção a) — teste 1: leitura do arquivo padrão dados/grafo.txt "
-         f"({dados['n']} vértices, {dados['m']} arestas)."),
+         f"({n} vértices, {m} arestas).",
+         f"Grafo lido: {n} vértices, {m} arestas."),
         ("a", 2, ["a", "inexistente.txt"],
-         "Opção a) — teste 2: leitura de um arquivo inexistente é tratada com mensagem de erro."),
+         "Opção a) — teste 2: leitura de um arquivo inexistente é tratada com mensagem de erro.",
+         "Não foi possível ler o arquivo:"),
 
         ("b", 1, ["a", "", "c", "3", "neo-soul teste", "b", ""],
          "Opção b) — teste 1: após inserir um gênero novo, o grafo é gravado no caminho padrão "
-         "(Enter)."),
+         "(Enter).",
+         [f"Vértice {n} inserido: [GEN] neo-soul teste", f"({n + 1} vértices, {m} arestas)."]),
         ("b", 2, ["a", "", "b", os.path.join(base_tmp, "b2", "copia_alvo.txt")],
-         "Opção b) — teste 2: gravação do grafo num caminho alternativo informado pelo usuário."),
+         "Opção b) — teste 2: gravação do grafo num caminho alternativo informado pelo usuário.",
+         ["Grafo gravado em", f"({n} vértices, {m} arestas)."]),
 
-        ("c", 1, ["a", "", "c", "1", "Clube da Esquina 2 — Milton Nascimento"],
-         "Opção c) — teste 1: inserção de um novo vértice do tipo álbum."),
+        ("c", 1, ["a", "", "c", "1", nome_c1],
+         f"Opção c) — teste 1: inserção de um novo vértice do tipo álbum (\"{nome_c1}\").",
+         f"Vértice {n} inserido: [ALB] {nome_c1}"),
         ("c", 2, ["a", "", "c", "9"],
-         "Opção c) — teste 2: tipo de vértice inválido (\"9\") é recusado."),
+         "Opção c) — teste 2: tipo de vértice inválido (\"9\") é recusado.",
+         "Tipo inválido. Operação cancelada."),
 
         ("d", 1, ["a", "", "c", "3", "gênero teste", "d", str(n), str(fi), "0.4"],
          f"Opção d) — teste 1: aresta válida entre o novo gênero inserido e "
-         f"\"{r[fi]}\" (tipos diferentes)."),
+         f"\"{r[fi]}\" (tipos diferentes).",
+         f"Aresta inserida: [GEN] gênero teste <-> {r[fi]} (peso 0.40)"),
         ("d", 2, ["a", "", "d", str(fi), str(ai), "2", "0.2"],
          f"Opção d) — teste 2: peso fora de [0,1] (\"2\") é rejeitado e, em seguida, a aresta "
-         f"entre \"{r[fi]}\" e \"{r[ai]}\" (mesmo tipo ART) é recusada pelo grafo tripartido."),
+         f"entre \"{r[fi]}\" e \"{r[ai]}\" (mesmo tipo ART) é recusada pelo grafo tripartido.",
+         ["O peso (custo de descoberta) deve estar entre 0 e 1.",
+          "Aresta não inserida: já existe, é um laço ou liga vértices do mesmo tipo"]),
 
         ("e", 1, ["a", "", "e", str(gi)],
          f"Opção e) — teste 1: remoção do vértice de gênero \"{r[gi]}\" e das "
-         f"{ggrau} aresta(s) incidente(s)."),
+         f"{ggrau} aresta(s) incidente(s).",
+         f"Removido {r[gi]} e {ggrau} aresta(s) incidente(s)."),
         ("e", 2, ["a", "", "e", "999", ""],
          "Opção e) — teste 2: índice fora do intervalo válido (\"999\") é rejeitado; Enter "
-         "vazio cancela a remoção."),
+         "vazio cancela a remoção.",
+         [f"Valor fora do intervalo [0, {n - 1}].", "Operação cancelada."]),
 
         ("f", 1, ["a", "", "f", str(albf), str(genf)],
-         f"Opção f) — teste 1: remoção da aresta existente entre \"{r[albf]}\" e \"{r[genf]}\"."),
+         f"Opção f) — teste 1: remoção da aresta existente entre \"{r[albf]}\" e \"{r[genf]}\".",
+         f"Aresta removida: {r[albf]} <-> {r[genf]}"),
         ("f", 2, ["a", "", "f", str(fi), str(ai)],
          f"Opção f) — teste 2: tentativa de remover uma aresta inexistente entre "
-         f"\"{r[fi]}\" e \"{r[ai]}\" (dois artistas nunca ficam ligados) é tratada."),
+         f"\"{r[fi]}\" e \"{r[ai]}\" (dois artistas nunca ficam ligados) é tratada.",
+         "Não existe aresta entre esses vértices."),
 
         ("g", 1, ["g", ""],
          "Opção g) — teste 1: exibição formatada do conteúdo do arquivo padrão "
-         "(saída truncada para caber na imagem)."),
+         "(saída truncada para caber na imagem).",
+         f"Vértices: {n}    Arestas: {m}"),
         ("g", 2, ["g", "inexistente.txt"],
-         "Opção g) — teste 2: leitura do conteúdo de um arquivo inexistente é tratada com erro."),
+         "Opção g) — teste 2: leitura do conteúdo de um arquivo inexistente é tratada com erro.",
+         "Não foi possível mostrar o arquivo:"),
 
         ("h", 1, ["a", "", "h", "1"],
-         "Opção h) — teste 1: grafo exibido como lista de adjacência (saída truncada)."),
+         "Opção h) — teste 1: grafo exibido como lista de adjacência (saída truncada).",
+         f"n = {n}   m = {m}   (tipo 2)"),
         ("h", 2, ["a", "", "h", "2"],
          f"Opção h) — teste 2: grafo exibido como matriz de adjacência (recorte de 20×20 "
-         f"vértices para caber na imagem; a matriz completa tem {n}×{n})."),
+         f"vértices para caber na imagem; a matriz completa tem {n}×{n}).",
+         [PROMPT_MATRIZ + "2", f"{n - 1:4d} "]),
         ("h", 3, ["h"],
-         "Opção h) — teste 3: exibir o grafo sem antes carregá-lo (opção a) é bloqueado."),
+         "Opção h) — teste 3: exibir o grafo sem antes carregá-lo (opção a) é bloqueado.",
+         "Nenhum grafo carregado. Use a opção a) primeiro."),
 
         ("i", 1, ["a", "", "i"],
-         f"Opção i) — teste 1: o grafo real é CONEXO (1 componente com os {n} vértices)."),
+         f"Opção i) — teste 1: o grafo real é CONEXO (1 componente com os {n} vértices).",
+         "O grafo é CONEXO (1 componente(s) conexa(s))."),
         ("i", 2, ["a", ""] + respostas_f_album + ["i"],
          f"Opção i) — teste 2: ao remover as {len(vizi)} aresta(s) do álbum \"{r[albi]}\", "
-         f"isolando-o, o grafo passa a ser DESCONEXO (o álbum vira uma componente à parte)."),
+         f"isolando-o, o grafo passa a ser DESCONEXO (o álbum vira uma componente à parte).",
+         ["O grafo é DESCONEXO (2 componente(s) conexa(s)).", f"1 vértice(s) - {r[albi]}"]),
 
         ("j", 1, ["j"],
-         "Opção j) — teste 1: a opção j encerra a aplicação imediatamente."),
+         "Opção j) — teste 1: a opção j encerra a aplicação imediatamente.",
+         "Encerrando a aplicação. Até logo!"),
         ("j", 2, ["x", "j"],
-         "Opção j) — teste 2: uma opção inválida (\"x\") é rejeitada antes de encerrar com j."),
+         "Opção j) — teste 2: uma opção inválida (\"x\") é rejeitada antes de encerrar com j.",
+         ["Opção inválida.", "Encerrando a aplicação. Até logo!"]),
     ]
 
 
@@ -327,11 +392,15 @@ def main():
         roteiros = montar_roteiros(dados, base_tmp)
 
         numero = 0
-        for opcao, teste, respostas, legenda in roteiros:
+        for opcao, teste, respostas, legenda, esperado in roteiros:
             numero += 1
             pasta_id = f"{opcao}{teste}"
             caminho_copia = copiar_grafo(base_tmp, pasta_id)
             texto = rodar_sessao(respostas, caminho_copia)
+            # audita a saída BRUTA (antes de truncar/recortar) contra o que
+            # a legenda promete, para nunca publicar um print que mostra
+            # um resultado diferente do anunciado.
+            verificar(opcao, teste, texto, esperado)
             # só g) e h) produzem saídas muito longas (dump do arquivo,
             # lista/matriz de adjacência); as demais opções já são curtas
             # e truncá-las poderia esconder justamente o resultado do
