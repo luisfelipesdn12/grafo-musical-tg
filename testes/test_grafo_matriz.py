@@ -1,3 +1,18 @@
+# -*- coding: utf-8 -*-
+"""
+Projeto de Teoria dos Grafos - Parte 2
+Descoberta Musical por Grafos: Álbuns, Artistas e Gêneros
+
+Integrante: Luis Felipe Santos do Nascimento - RA 10420572
+
+Síntese: testes unitários da classe GrafoMatrizPonderado - validação de
+inserção, remoção, validações de entrada, simetria, e operações de
+conexidade via busca em largura.
+
+Histórico de alterações:
+  28/09/2026 - Luis Felipe - criação
+"""
+
 import sys, os, unittest
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 from grafo_matriz import GrafoMatrizPonderado
