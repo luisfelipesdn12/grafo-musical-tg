@@ -115,7 +115,11 @@ def desenhar(g, G, pos):
     # visível), para evitar sobreposição também entre artista e gênero próximos
     nos_com_texto = [v for v in G.nodes if G.nodes[v]["tipo"] in ("ART", "GEN")]
     pos_texto = dict(zip(nos_com_texto, posicoes_rotulo(nos_com_texto, pos, LIMIAR_COLISAO)))
-    for tipo in ("GEN", "ART", "ALB"):
+    # ordem de desenho: ALB primeiro (fica no fundo), GEN e ART por cima, para que
+    # nenhum marcador sem rótulo (álbum) sobreponha o texto de artista/gênero;
+    # legendrank mantém a ordem original da legenda (Gênero, Artista, Álbum)
+    legendrank = {"GEN": 1, "ART": 2, "ALB": 3}
+    for tipo in ("ALB", "GEN", "ART"):
         nos = [v for v in G.nodes if G.nodes[v]["tipo"] == tipo]
         rotulos = [g.rotulos[v].split("] ", 1)[-1] for v in nos]
         textposition = ([pos_texto[v] for v in nos] if tipo != "ALB" else "top center")
@@ -123,17 +127,19 @@ def desenhar(g, G, pos):
             x=[pos[v][0] for v in nos], y=[pos[v][1] for v in nos],
             mode="markers+text" if tipo != "ALB" else "markers",
             name=NOMES[tipo], text=rotulos, textposition=textposition,
-            textfont=dict(size=9),
+            textfont=dict(size=9), legendrank=legendrank[tipo],
             hovertext=[f"{NOMES[tipo]}: {g.rotulos[v].split('] ', 1)[-1]}<br>grau {g.grau(v)}"
                        for v in nos],
-            hoverinfo="text",
+            hoverinfo="text", cliponaxis=False,
             marker=dict(size=TAMANHOS[tipo], color=CORES[tipo],
                         line=dict(width=1, color="white"))))
     fig.update_layout(
         title=f"Grafo tripartido álbum–artista–gênero ({g.n} vértices, {g.m} arestas) — dados: MusicBrainz",
         showlegend=True, plot_bgcolor="white", width=1400, height=1000,
+        # cliponaxis=False (acima) evita que rótulos nas bordas sejam cortados pelo
+        # eixo; a margem generosa dá espaço para o texto que sobra além dos dados
         xaxis=dict(visible=False), yaxis=dict(visible=False),
-        margin=dict(l=10, r=10, t=50, b=10))
+        margin=dict(l=70, r=70, t=60, b=70))
     return fig
 
 
@@ -155,10 +161,21 @@ def main():
     pos = nx.spring_layout(G, weight="weight", seed=42, k=0.35, iterations=200)
     saida = os.path.join(RAIZ, "visualizacao")
     fig = desenhar(g, G, pos)
-    fig.write_html(os.path.join(saida, "grafo_interativo.html"), include_plotlyjs="cdn")
-    fig.write_image(os.path.join(saida, "grafo.png"), scale=2)
+    # GEXF e HTML primeiro: não dependem do kaleido (engine de imagem estática) e
+    # devem ser gerados mesmo que a exportação do PNG falhe (ver bloco abaixo).
     exportar_gexf(G, pos, os.path.join(saida, "grafo.gexf"))
-    print("Gerados: grafo_interativo.html, grafo.png, grafo.gexf")
+    fig.write_html(os.path.join(saida, "grafo_interativo.html"), include_plotlyjs="cdn")
+    gerados = ["grafo.gexf", "grafo_interativo.html"]
+    try:
+        fig.write_image(os.path.join(saida, "grafo.png"), scale=2)
+        gerados.append("grafo.png")
+    except Exception as erro:  # noqa: BLE001 - kaleido pode falhar por motivos de ambiente
+        print("Aviso: falha ao gerar grafo.png via kaleido:", erro)
+        print("O kaleido 0.2.1 não aceita espaços no caminho do ambiente virtual; "
+              "crie o .venv em um caminho sem espaços ou gere o PNG pelo botão de "
+              "câmera (ícone de máquina fotográfica) no canto superior do HTML "
+              "interativo (grafo_interativo.html).")
+    print("Gerados:", ", ".join(gerados))
 
 
 if __name__ == "__main__":
