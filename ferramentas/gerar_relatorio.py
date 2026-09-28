@@ -24,6 +24,7 @@ Histórico de alterações:
   28/09/2026 - Luis Felipe - criação
 """
 import glob
+import inspect
 import io
 import json
 import os
@@ -45,13 +46,15 @@ RAIZ = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), 
 sys.path.insert(0, os.path.join(RAIZ, "src"))
 sys.path.insert(0, os.path.join(RAIZ, "coleta"))
 from arquivo_grafo import ler  # noqa: E402
-from montar_grafo import afinidades, carregar_brutos, escolher_albuns, rotular_albuns  # noqa: E402
+from montar_grafo import (afinidades, carregar_brutos, construir, escolher_albuns,  # noqa: E402
+                          rotular_albuns)
 
 TEMPLATE = os.path.join(RAIZ, "..", "parte 2 projeto", "projetoTG_parte2_templateRelatorio.docx")
 SAIDA = os.path.join(RAIZ, "relatorio", "Relatorio_Projeto_TG_Parte2.docx")
 PASTA_PRINTS = os.path.join(RAIZ, "relatorio", "figuras", "prints")
 FIG_GEPHI = os.path.join(RAIZ, "relatorio", "figuras", "gephi.png")
 FIG_PLOTLY = os.path.join(RAIZ, "visualizacao", "grafo.png")
+FIG_ESQUEMA = os.path.join(RAIZ, "relatorio", "figuras", "esquema.png")
 GITHUB = "https://github.com/luisfelipesdn12/grafo-musical-tg"
 
 TITULO = "Descoberta Musical por Grafos: modelagem tripartida de álbuns, artistas e gêneros"
@@ -75,6 +78,30 @@ def lista_pt(itens):
     """'a, b e c'."""
     itens = list(itens)
     return itens[0] if len(itens) == 1 else ", ".join(itens[:-1]) + " e " + itens[-1]
+
+
+def milhar(n):
+    """Inteiro com separador de milhar brasileiro (5.886)."""
+    return f"{n:,}".replace(",", ".")
+
+
+PLURAL_TIPO = {"ART": "artistas", "ALB": "álbuns", "GEN": "gêneros"}
+
+
+def frase_tim(e):
+    """Frase sobre o artista Tim Maia, calculada a partir dos votos brutos."""
+    linhas = e["ex_artista"][1]
+    top = [ln for ln in linhas if ln[5] != "fora do top-5 (descartada)"]
+    votos = {ln[1] for ln in top}
+    if len(votos) == 1:
+        v = votos.pop()
+        extenso = {2: "dois", 3: "três", 4: "quatro", 5: "cinco"}.get(len(top), str(len(top)))
+        return (f"os {extenso} gêneros mais votados do artista Tim Maia "
+                f"({lista_pt([ln[0] for ln in top])}) empatam com {v} "
+                f"voto{'s' if v > 1 else ''} cada e, por isso, todas as suas arestas de gênero "
+                "recebem custo 0,00")
+    return ("com o artista Tim Maia, os gêneros recebem custos "
+            + ", ".join(f"{ln[0]} {fmt(ln[4])}" for ln in top if ln[4] is not None))
 
 
 def bfs_dist(g, origem):
@@ -119,7 +146,7 @@ def calcular_estatisticas():
         gs = [g.grau(v) for v in vs]
         vmax = max(vs, key=lambda v: (g.grau(v), -v))
         graus[t] = {"media": sum(gs) / len(gs), "max": max(gs), "min": min(gs),
-                    "vmax": g.rotulos[vmax]}
+                    "vmax": g.rotulos[vmax], "nmax": gs.count(max(gs))}
     e["graus"] = graus
     e["grau_medio"] = 2 * g.m / g.n
     e["densidade"] = 2 * g.m / (g.n * (g.n - 1))
@@ -152,6 +179,22 @@ def calcular_estatisticas():
     pontes = [x for x in info_gen if x["rnb"] and x["mpb"]]
     pontes.sort(key=lambda x: (-min(x["rnb"], x["mpb"]), -x["grau"], x["nome"]))
     e["generos_ponte"] = pontes
+    # pontes "diretas": gênero com ARTISTAS vizinhos das duas cenas
+    diretas, arts_diretas = [], {}
+    for x in pontes:
+        arts = [w for w, _ in g.vizinhos(x["v"]) if tipo[w] == "ART"]
+        if {cena[w] for w in arts} >= {"rnb", "mpb"}:
+            diretas.append(x["nome"])
+            arts_diretas[x["nome"]] = (x["nome"] + ": "
+                                       + ", ".join(g.rotulos[w][6:] for w in sorted(
+                                           arts, key=lambda w: (cena[w], g.rotulos[w]))))
+    e["pontes_diretas"] = diretas
+    e["pontes_diretas_art"] = arts_diretas
+    fortes = [x["nome"] for x in pontes if x["nome"] not in diretas and min(x["rnb"], x["mpb"]) >= 3]
+    e["pontes_resumo"] = diretas + sorted(fortes)
+    params = inspect.signature(construir).parameters
+    e["limites"] = {"max_albuns": params["max_albuns"].default,
+                    "max_generos": params["max_generos"].default}
     e["generos_exclusivos"] = {c: sum(1 for x in info_gen if x[c] and not x[{"rnb": "mpb", "mpb": "rnb"}[c]])
                                for c in ("rnb", "mpb")}
 
@@ -296,6 +339,43 @@ def historico_git():
         return [linha.split("|", 2) for linha in saida.stdout.splitlines() if linha]
     except (OSError, subprocess.CalledProcessError):
         return []
+
+
+def gerar_esquema(caminho, pt, pr):
+    """Desenha (matplotlib) o esquema ART–ALB–GEN com a semântica e o peso de
+    cada tipo de aresta e as quantidades reais do grafo."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    cores = {"ART": "#d1495b", "ALB": "#00798c", "GEN": "#edae49"}
+    pos = {"ART": (0.0, 0.0), "ALB": (1.0, 1.35), "GEN": (2.0, 0.0)}
+    nomes = {"ART": f"Artista [ART]\n{pt['ART']} vértices",
+             "ALB": f"Álbum [ALB]\n{pt['ALB']} vértices",
+             "GEN": f"Gênero [GEN]\n{pt['GEN']} vértices"}
+    arestas = [("ALB", "ART", f"autoria\npeso = 0,00\n({pr['ALB-ART']} arestas)", (-0.62, 0.0)),
+               ("ALB", "GEN", f"classificação pela\ncomunidade\npeso = 1 − a\n({pr['ALB-GEN']} arestas)",
+                (0.62, 0.0)),
+               ("ART", "GEN", f"artista transita pelo gênero\npeso = 1 − a  ({pr['ART-GEN']} arestas)",
+                (0.0, -0.28))]
+    fig, ax = plt.subplots(figsize=(7.5, 4.4), dpi=200)
+    for a, b, texto, (dx, dy) in arestas:
+        (x1, y1), (x2, y2) = pos[a], pos[b]
+        ax.plot([x1, x2], [y1, y2], color="#555555", lw=2.2, zorder=1)
+        ax.text((x1 + x2) / 2 + dx * 0.55, (y1 + y2) / 2 + dy, texto, ha="center", va="center",
+                fontsize=9, color="#222222")
+    for t, (x, y) in pos.items():
+        ax.scatter([x], [y], s=4200, color=cores[t], zorder=2, edgecolors="white", linewidths=2)
+        ax.text(x, y - 0.42 if t != "ALB" else y + 0.40, nomes[t], ha="center", va="center",
+                fontsize=10, fontweight="bold", color="#222222")
+    ax.text(1.0, -0.78, "a = votos do gênero na entidade / votos do gênero mais votado da entidade",
+            ha="center", fontsize=8.5, style="italic", color="#444444")
+    ax.set_xlim(-0.75, 2.75)
+    ax.set_ylim(-0.95, 1.95)
+    ax.axis("off")
+    fig.tight_layout()
+    os.makedirs(os.path.dirname(caminho), exist_ok=True)
+    fig.savefig(caminho, facecolor="white")
+    plt.close(fig)
 
 
 # =====================================================================
@@ -601,7 +681,7 @@ def escrever(doc, e):
         "(leitura e gravação de arquivo, inserção e remoção de vértices e arestas, exibição e "
         f"conexidade) e validado por {e['testes_total']} testes automatizados. A análise mostra "
         f"um grafo {'conexo' if conexo else 'desconexo'}, de densidade {fmt(e['densidade'], 3)}, "
-        f"em que gêneros como {', '.join(x['nome'] for x in e['generos_ponte'][:3])} funcionam "
+        f"em que gêneros como {lista_pt(e['pontes_resumo'])} funcionam "
         "como pontes entre as duas cenas musicais. A próxima etapa aplicará o algoritmo de "
         "Dijkstra para encontrar a trilha de descoberta de menor custo entre dois álbuns.")
     R.par("**Palavras-chave:** teoria dos grafos; grafo tripartido; matriz de adjacência; "
@@ -653,7 +733,13 @@ def escrever(doc, e):
             "testar a aplicação e analisar a estrutura do grafo (graus, densidade, conexidade e "
             "gêneros que ligam as cenas)."):
         R.item(texto)
-    R.h2("1.4 Atendimento ao parecer da Parte 1")
+    R.h2("1.4 Definição do problema")
+    R.par(
+        "Dado um grafo tripartido G = (V, E, w), com V = ART ∪ ALB ∪ GEN e w(e) = 1 − afinidade, "
+        "o problema central é, dados dois álbuns s e t, encontrar o caminho s–t de menor custo "
+        "total (trilha de descoberta). Nesta etapa, constrói-se, valida-se e analisa-se G; o "
+        "algoritmo de caminho mínimo é implementado na próxima.")
+    R.h2("1.5 Atendimento ao parecer da Parte 1")
     R.par(
         "A proposta da Parte 1 recebeu nota 8,0, com a recomendação de reduzir o escopo, retirar "
         f"os usuários e trabalhar \"exclusivamente com álbuns, artistas e gêneros\". A Tabela {R.ntab + 1} "
@@ -665,6 +751,9 @@ def escrever(doc, e):
           "Escopo reduzido a um problema central: modelar a rede álbum–artista–gênero e, na "
           "próxima etapa, encontrar a trilha de descoberta de menor custo (Dijkstra).",
           "Seções 1.3 e 7"],
+         ["Objetivo: reduzir a um protótipo centrado em uma função principal",
+          "Função principal única: trilha de descoberta de menor custo entre dois álbuns.",
+          "Seções 1.3, 1.4 e 7"],
          ["Evitar coleta de usuários (procedimentos éticos)",
           "Usuários retirados do modelo; apenas metadados públicos de álbuns, artistas e "
           "gêneros do MusicBrainz.", "Seções 4 e 5.1"],
@@ -727,7 +816,7 @@ def escrever(doc, e):
         "Por fim, o problema do **caminho mínimo** busca o caminho de menor custo entre dois "
         "vértices. O algoritmo de Dijkstra o resolve quando todos os pesos são não negativos "
         "(CORMEN et al., 2001). Esse requisito orientou a definição do peso deste projeto como "
-        "custo em [0, 1], e não como similaridade: quanto menor o peso, mais próximas estão as "
+        "custo em [0; 1), e não como similaridade: quanto menor o peso, mais próximas estão as "
         "entidades, e um caminho de custo baixo corresponde a uma sequência de passos de "
         "descoberta \"naturais\".")
 
@@ -737,24 +826,34 @@ def escrever(doc, e):
         "Grafos bipartidos e multipartidos são a base de vários sistemas de recomendação em larga "
         "escala. O **GraphJet**, do Twitter, mantém em memória um grafo bipartido de interações "
         "entre usuários e tweets e gera recomendações em tempo real por meio de passeios "
-        "aleatórios nesse grafo (SHARMA et al., 2016). O **Pixie**, do Pinterest, também usa "
-        "passeios aleatórios com reinício sobre um grafo bipartido de pins e quadros para "
-        "recomendar conteúdo a centenas de milhões de usuários (EKSOMBATCHAI et al., 2018). Já o "
-        "**PinSage** combina essa estrutura com redes neurais convolucionais em grafos, "
+        "aleatórios nesse grafo; os autores mostraram que o grafo inteiro cabe na memória de um "
+        "único servidor e que o sistema atende, em produção, às recomendações do Twitter em "
+        "tempo real (SHARMA et al., 2016). O **Pixie**, do Pinterest, também usa passeios "
+        "aleatórios com reinício sobre um grafo bipartido de pins e quadros para recomendar "
+        "conteúdo a centenas de milhões de usuários em tempo real e, em produção, aumentou o "
+        "engajamento dos usuários em relação ao sistema anterior (EKSOMBATCHAI et al., 2018). Já "
+        "o **PinSage** combina essa estrutura com redes neurais convolucionais em grafos, "
         "aprendendo representações dos itens a partir da vizinhança amostrada por passeios "
-        "aleatórios (YING et al., 2018).")
+        "aleatórios; em avaliações offline e testes A/B no Pinterest, suas recomendações "
+        "superaram os métodos de referência (YING et al., 2018).")
     R.par(
         "No estudo da estrutura de grandes redes, Ugander et al. (2011) analisaram o grafo "
         "social do Facebook – distribuição de graus, distâncias e conexidade – e mostraram que "
         "quase todos os usuários ativos pertencem a uma única componente gigante. Blondel et al. "
         "(2008) propuseram o método de Louvain, que detecta comunidades maximizando a "
-        "modularidade e é aplicável a redes com milhões de vértices. Shi et al. (2017) revisam a "
-        "análise de redes de informação heterogêneas, nas quais vértices e arestas de tipos "
-        "diferentes – como autor, obra e tema – são tratados de forma distinta, exatamente o "
-        "caso do grafo álbum–artista–gênero deste projeto.")
+        "modularidade, obtendo partições de alta modularidade em redes com milhões de vértices "
+        "em poucos minutos. Shi et al. (2017) revisam a análise de redes de informação "
+        "heterogêneas, nas quais vértices e arestas de tipos diferentes – como autor, obra e "
+        "tema – são tratados de forma distinta; o levantamento sistematiza conceitos como o de "
+        "meta-caminho (sequência de tipos de vértice e de aresta), organiza as tarefas de "
+        "mineração – similaridade, agrupamento, classificação e recomendação, entre outras – e "
+        "aponta direções de pesquisa. É exatamente o caso do grafo álbum–artista–gênero deste "
+        "projeto, em que, por exemplo, álbum–gênero–álbum é um meta-caminho.")
     R.par(
         "No domínio musical, Van den Oord, Dieleman e Schrauwen (2013) recomendam músicas a "
-        "partir do conteúdo de áudio para contornar a falta de histórico de uso; o presente "
+        "partir do conteúdo de áudio para contornar a falta de histórico de uso, e mostraram que "
+        "representações aprendidas do áudio permitem recomendar músicas novas ou pouco ouvidas, "
+        "para as quais não há histórico; o presente "
         "projeto persegue o mesmo objetivo – recomendar sem dados de usuário – usando, em vez do "
         "áudio, a estrutura de metadados. A fonte de dados é o MusicBrainz, enciclopédia musical "
         "aberta e colaborativa mantida pela MetaBrainz Foundation, que expõe artistas, grupos de "
@@ -810,7 +909,7 @@ def escrever(doc, e):
         "lista oficial de gêneros do MusicBrainz, cada uma com o número de votos recebidos. "
         f"Ao todo foram obtidos {total_est} álbuns de estúdio, dos quais {total_cg} têm ao menos "
         f"um gênero votado; após a filtragem, {total_sel} álbuns entraram no grafo. "
-        + (f"Os artistas {', '.join(menos4)} têm menos de quatro álbuns com gênero votado e, por "
+        + (f"Os artistas {lista_pt(menos4)} têm menos de quatro álbuns com gênero votado e, por "
            "isso, contribuem com menos álbuns. " if menos4 else "")
         + f"A Tabela {R.ntab + 1} resume a coleta por artista.")
     R.tabela(
@@ -841,13 +940,17 @@ def escrever(doc, e):
          ["Total", "", "", "", e["n"]]],
         larguras=[1.6, 1.8, 6.0, 4.4, 2.2])
     R.par(
-        f"Há três tipos de aresta, um para cada par de partes (Tabela {R.ntab + 1}). O peso de toda aresta é "
-        "um **custo de descoberta**: peso = 1 − a, arredondado a duas casas, em que a ∈ (0, 1] é "
+        f"Há três tipos de aresta, um para cada par de partes (Figura {R.nfig + 1} e Tabela {R.ntab + 1}). O peso de toda aresta é "
+        "um **custo de descoberta**: peso = 1 − a, arredondado a duas casas, em que a ∈ (0; 1] é "
         "a **afinidade** entre as duas entidades. Para as arestas de gênero, a afinidade é "
         "relativa ao gênero mais votado da própria entidade: a(e, g) = votos(e, g) / "
         "max votos(e, g′), considerando apenas os cinco gêneros mais votados da entidade e "
         "desempatando por ordem alfabética.")
     cz, ct = e["gen_custo_zero"]
+    gerar_esquema(FIG_ESQUEMA, pt, pr)
+    R.figura(FIG_ESQUEMA, "Esquema do modelo: três tipos de vértice e três tipos de aresta, "
+             "com a semântica e o peso de cada uma (não há arestas dentro do mesmo tipo)",
+             largura_max=14, altura_max=9)
     R.tabela(
         "Tipos de aresta, semântica e peso",
         ["Relação", "Semântica", "Afinidade a", "Peso (custo)", "Quantidade"],
@@ -878,9 +981,8 @@ def escrever(doc, e):
         f"{fmt(ex[0][4] or 0)} (é a classificação mais forte do álbum), enquanto a ligação com "
         f"{ex[-1][0]} custa {fmt(ex[-1][4]) if ex[-1][4] is not None else '—'}. A aresta de "
         "autoria Blonde – Frank Ocean tem custo 0,00, a ligação mais forte possível. O mesmo "
-        "cálculo vale para artistas: com o artista Tim Maia, todos os gêneros votados têm o "
-        "mesmo número de votos e, por isso, todas as suas arestas de gênero recebem custo 0,00 – "
-        "um efeito da escassez de votos discutido na Seção 5.5.")
+        "cálculo vale para artistas: "
+        + frase_tim(e) + " – um efeito da escassez de votos discutido na Seção 5.5.")
     R.par("**Justificativas de modelagem.**", recuo=False, depois=3)
     for texto in (
             "**Não orientado:** as relações de autoria e de classificação são simétricas – se o "
@@ -919,7 +1021,8 @@ def escrever(doc, e):
          ["removeV(v)", "Remove a linha e a coluna de v e todas as arestas incidentes; os "
           "vértices seguintes têm o índice decrementado."],
          ["insereA(v, w, peso)", "Grava o peso em adj[v][w] e adj[w][v]; recusa laço, aresta "
-          "repetida, índice inválido, peso fora de [0, 1] e aresta entre vértices do mesmo tipo."],
+          "repetida, índice inválido, peso fora de [0; 1] e aresta entre vértices do mesmo tipo "
+          "(na entrada, a aplicação aceita qualquer peso em [0; 1])."],
          ["removeA(v, w)", "Volta adj[v][w] e adj[w][v] para None."],
          ["vizinhos(v), grau(v), tipoVertice(v)", "Consultas: vizinhos com peso, grau e tipo "
           "(pelo prefixo do rótulo)."],
@@ -948,7 +1051,8 @@ def escrever(doc, e):
          ["f", "Remover aresta", "removeA"],
          ["g", "Mostrar conteúdo do arquivo", "arquivo_grafo.formatarConteudo"],
          ["h", "Mostrar grafo (lista ou matriz)", "textoLista / textoMatriz"],
-         ["i", "Apresentar a conexidade (componentes)", "componentes (BFS)"],
+         ["i", "Apresentar a conexidade (componentes); grafo reduzido não se aplica: grafo não "
+          "orientado", "componentes (BFS)"],
          ["j", "Encerrar a aplicação", "—"]],
         larguras=[1.5, 7.5, 6.0])
     R.par(
@@ -972,23 +1076,28 @@ def escrever(doc, e):
         larguras=[4.5, 11.5])
     hist = e["historico"]
     if hist:
-        R.par("**Histórico de evolução.** O desenvolvimento foi registrado em commits "
-              f"incrementais, listados na Tabela {R.ntab + 1} (o commit deste relatório é o último).")
+        R.par("**Histórico de evolução.** O projeto evoluiu da proposta da Parte 1 (plataforma "
+              "social com usuários, recomendação e comunidades) para o grafo tripartido atual "
+              f"após o parecer do professor; a Tabela {R.ntab + 1} registra a implementação desta "
+              "etapa, em commits incrementais (lista extraída do git log no momento da geração "
+              "deste relatório).")
         R.tabela("Histórico de commits do repositório", ["Data", "Commit", "Descrição"],
-                 [list(h) for h in hist] + [["28/09/2026", "—", "Relatório da Parte 2"]],
-                 larguras=[2.5, 2.0, 11.5])
+                 [list(h) for h in hist], larguras=[2.5, 2.0, 11.5])
 
     R.h2("5.4 Visualização do grafo")
     R.par(
         "O grafo foi desenhado com a biblioteca Plotly a partir do próprio grafo.txt, lido com a "
         "classe da aplicação; a disposição dos vértices usa o algoritmo de molas (spring layout) "
         "do NetworkX com semente fixa. A cor indica o tipo do vértice e a espessura da aresta, a "
-        "afinidade (Figura 1). O mesmo grafo, com as mesmas posições e cores, foi exportado em "
+        f"afinidade (Figura {R.nfig + 1}). O mesmo grafo, com as mesmas posições e cores, foi exportado em "
         "formato GEXF e aberto no Gephi, uma das ferramentas indicadas pela disciplina "
-        "(Figura 2). Uma versão interativa, com o nome e o grau de cada vértice ao passar o "
-        "mouse, está em visualizacao/grafo_interativo.html.")
+        f"(Figura {R.nfig + 2}). Para manter a figura legível, só recebem rótulo os artistas e gêneros com "
+        "grau maior ou igual a 5; na versão interativa (visualizacao/grafo_interativo.html), o "
+        "nome e o grau de todos os vértices aparecem ao passar o mouse.")
     R.figura(FIG_PLOTLY, f"Grafo tripartido álbum–artista–gênero ({e['n']} vértices, "
-             f"{e['m']} arestas): artistas em vermelho, álbuns em azul e gêneros em amarelo",
+             f"{e['m']} arestas): artistas em vermelho, álbuns em azul e gêneros em amarelo; "
+             "rótulos apenas para artistas e gêneros com grau ≥ 5 (os demais aparecem ao passar "
+             "o mouse na versão interativa)",
              fonte="Fonte: autoria própria, dados do MusicBrainz.", altura_max=15, largura_max=16)
     if os.path.exists(FIG_GEPHI):
         R.figura(FIG_GEPHI, "Grafo no Gephi (arquivo visualizacao/grafo.gexf)",
@@ -1015,20 +1124,31 @@ def escrever(doc, e):
                                    f"álbum–gênero, {pr['ART-GEN']} artista–gênero)"],
          ["Grau médio (2m/n)", fmt(e["grau_medio"])],
          ["Densidade 2m/(n(n − 1))", fmt(e["densidade"], 4)],
-         ["Máximo de arestas possível no grafo tripartido", f"{e['m_max_tri']} "
+         ["Máximo de arestas possível no grafo tripartido", f"{milhar(e['m_max_tri'])} "
           f"(ocupação de {fmt(100 * e['densidade_tri'], 1)}%)"],
          ["Componentes conexas", f"{len(comp)} – grafo {'CONEXO' if conexo else 'DESCONEXO'}"],
-         ["Diâmetro (em número de arestas)", f"{e['diametro']} (entre {e['par_diametro'][0]} "
+         ["Diâmetro (em número de arestas)", f"{e['diametro']} (por exemplo, entre {e['par_diametro'][0]} "
                                              f"e {e['par_diametro'][1]})"],
          ["Distância média entre pares (arestas)", fmt(e["dist_media"])],
          ["Arestas de gênero com custo 0,00", f"{cz} de {ct}"]],
         larguras=[6.5, 9.5])
     R.tabela(
         "Grau dos vértices por tipo",
-        ["Tipo", "Quantidade", "Grau médio", "Grau mínimo", "Grau máximo", "Vértice de grau máximo"],
+        ["Tipo", "Quantidade", "Grau médio", "Grau mínimo", "Grau máximo",
+         "Vértices de grau máximo"],
         [[NOMES_TIPO[t], pt[t], fmt(e["graus"][t]["media"]), e["graus"][t]["min"],
-          e["graus"][t]["max"], e["graus"][t]["vmax"]] for t in ("ART", "ALB", "GEN")],
+          e["graus"][t]["max"],
+          f"{e['graus'][t]['nmax']} {PLURAL_TIPO[t] if e['graus'][t]['nmax'] > 1 else NOMES_TIPO[t].lower()} "
+          f"(ex.: {e['graus'][t]['vmax'][6:]})"] for t in ("ART", "ALB", "GEN")],
         larguras=[1.6, 2.3, 1.9, 1.9, 1.9, 6.4])
+    lim = e["limites"]
+    R.par(
+        f"Os graus máximos de artistas ({e['graus']['ART']['max']}) e de álbuns "
+        f"({e['graus']['ALB']['max']}) são limites impostos pelos filtros da construção "
+        f"({lim['max_albuns']} álbuns e {lim['max_generos']} gêneros por entidade: um artista "
+        f"tem no máximo {lim['max_albuns'] + lim['max_generos']} vizinhos e um álbum, "
+        f"1 + {lim['max_generos']} = {1 + lim['max_generos']}); só o grau dos gêneros é "
+        "informativo, pois mede quantas entidades a comunidade associou a cada gênero.")
     R.tabela(
         "Os cinco gêneros de maior grau",
         ["Gênero", "Grau", "Ligações com R&B/hip-hop", "Ligações com MPB"],
@@ -1040,7 +1160,7 @@ def escrever(doc, e):
            "álbum é possível chegar a qualquer outro, o que é pré-requisito para a trilha de "
            "descoberta da próxima etapa. " if conexo else ". ")
         + f"Com densidade {fmt(e['densidade'], 4)}, é esparso: das "
-        f"{e['n'] * (e['n'] - 1) // 2} ligações possíveis entre pares de vértices, só "
+        f"{milhar(e['n'] * (e['n'] - 1) // 2)} ligações possíveis entre pares de vértices, só "
         f"{e['m']} existem – mesmo considerando apenas os pares permitidos pela tripartição, "
         f"a ocupação é de {fmt(100 * e['densidade_tri'], 1)}%. O diâmetro de {e['diametro']} "
         f"arestas e a distância média de {fmt(e['dist_media'])} arestas indicam que as duas "
@@ -1059,6 +1179,16 @@ def escrever(doc, e):
         ["Gênero", "Grau", "Vizinhos R&B/hip-hop", "Vizinhos MPB"],
         [[x["nome"], x["grau"], x["rnb"], x["mpb"]] for x in e["generos_ponte"]],
         larguras=[5.0, 2.0, 4.5, 4.5])
+    diretos = e["pontes_diretas"]
+    outros = [x["nome"] for x in e["generos_ponte"] if x["nome"] not in diretos]
+    R.par(
+        f"{'Apenas ' if len(diretos) < len(e['generos_ponte']) else ''}"
+        f"{lista_pt(diretos) if diretos else 'nenhum gênero'} "
+        f"{'ligam' if len(diretos) != 1 else 'liga'} diretamente artistas das duas cenas "
+        f"({'; '.join(e['pontes_diretas_art'][g] for g in diretos)})"
+        + (f"; nos demais – {lista_pt(outros)} –, ao menos um dos lados da ponte é formado "
+           "apenas por álbuns, isto é, esses gêneros fazem a ponte por meio de álbuns." if outros
+           else ".") )
     R.par(
         "Para identificar os artistas que sustentam essas pontes, somou-se a afinidade (1 − peso) "
         f"das arestas que ligam o artista e seus álbuns a gêneros-ponte. A Tabela {R.ntab + 1} mostra os "
@@ -1173,16 +1303,25 @@ def escrever(doc, e):
         nome = os.path.basename(caminho)
         return legendas.get(nome, nome).rstrip(".")
 
-    def alta(caminho):
-        w, h = Image.open(caminho).size
-        return h / w >= 1.0
+    # captura "larga" = linhas de terminal longas (largura em pixels >= 1,25 x a
+    # largura mediana das capturas): vai na largura total do texto (16 cm) para o
+    # texto continuar legível; pares de capturas estreitas ficam lado a lado
+    larguras_px = {c: Image.open(c).size[0] for c in prints}
+    ordenadas = sorted(larguras_px.values()) or [1]
+    mediana = ordenadas[len(ordenadas) // 2]
+
+    def larga(caminho):
+        return larguras_px[caminho] >= 1.25 * mediana
 
     for _, lista in grupos:
-        if len(lista) == 2 and all(alta(c) for c in lista):
+        if len(lista) == 2 and not any(larga(c) for c in lista):
             R.figuras_lado_a_lado([(c, titulo_de(c)) for c in lista])
         else:
             for caminho in lista:
-                R.figura(caminho, titulo_de(caminho), altura_max=9.8, largura_max=15.5)
+                if larga(caminho):
+                    R.figura(caminho, titulo_de(caminho), altura_max=20, largura_max=16)
+                else:
+                    R.figura(caminho, titulo_de(caminho), altura_max=20, largura_max=16)
 
     # ---------------------------------------------------------- 6 ODS
     R.h1("6 Objetivos de Desenvolvimento Sustentável")
@@ -1212,7 +1351,7 @@ def escrever(doc, e):
         "dados um álbum de partida e um álbum de chegada, o algoritmo de Dijkstra, implementado "
         "sobre a mesma matriz de adjacência, encontrará o caminho de menor custo total, "
         "mostrando os artistas e gêneros intermediários e o custo de cada passo. Como os pesos "
-        "estão em [0, 1], o requisito de pesos não negativos é satisfeito. Estão previstos "
+        "estão em [0; 1), o requisito de pesos não negativos é satisfeito. Estão previstos "
         "ainda: nova opção no menu para a trilha, comparação entre o caminho de menor custo e o "
         "de menor número de arestas, e a ampliação do conjunto de artistas semente para testar "
         "a robustez dos gêneros-ponte encontrados. Usuários, detecção de comunidades e "
@@ -1221,7 +1360,7 @@ def escrever(doc, e):
     # ---------------------------------------------------------- 8 referências
     R.h1("Referências")
     refs = [
-        "BLONDEL, V. D.; GUILLAUME, J.-L.; LAMBIOTTE, R.; LEFEBVRE, E. Fast unfolding of "
+        "BLONDEL, V. D. et al. Fast unfolding of "
         "communities in large networks. **Journal of Statistical Mechanics: Theory and "
         "Experiment**, v. 2008, n. 10, p. P10008, 2008. DOI: 10.1088/1742-5468/2008/10/P10008.",
         "BONDY, J. A.; MURTY, U. S. R. **Graph theory**. New York: Springer, 2010.",
@@ -1229,7 +1368,7 @@ def escrever(doc, e):
         "Pessoais (LGPD). **Diário Oficial da União**, Brasília, DF, 2018. Disponível em: "
         "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm. Acesso em: "
         "28 set. 2026.",
-        "CORMEN, T. H.; LEISERSON, C. E.; RIVEST, R. L.; STEIN, C. **Introduction to "
+        "CORMEN, T. H. et al. **Introduction to "
         "algorithms**. 2. ed. Cambridge, MA: MIT Press, 2001.",
         "DATTA, H.; KNOX, G.; BRONNENBERG, B. J. Changing their tune: how consumers' adoption "
         "of online streaming affects music consumption and discovery. **Marketing Science**, "
@@ -1248,24 +1387,24 @@ def escrever(doc, e):
         "p. 2065-2073, 2014. DOI: 10.1016/j.eswa.2013.09.005.",
         "MUSICBRAINZ. **MusicBrainz API**. [S. l.]: MetaBrainz Foundation, [2026]. Disponível em: "
         "https://musicbrainz.org/doc/MusicBrainz_API. Acesso em: 28 set. 2026.",
-        "SHARMA, A.; JIANG, J.; BOMMANNAVAR, P.; LARSON, B.; LIN, J. GraphJet: real-time "
+        "SHARMA, A. et al. GraphJet: real-time "
         "content recommendations at Twitter. **Proceedings of the VLDB Endowment**, v. 9, "
         "n. 13, p. 1281-1292, 2016. DOI: 10.14778/3007263.3007267.",
-        "SHI, C.; LI, Y.; ZHANG, J.; SUN, Y.; YU, P. S. A survey of heterogeneous information "
+        "SHI, C. et al. A survey of heterogeneous information "
         "network analysis. **IEEE Transactions on Knowledge and Data Engineering**, v. 29, "
         "n. 1, p. 17-37, 2017. DOI: 10.1109/TKDE.2016.2598561.",
         "SZWARCFITER, J. L. **Grafos e algoritmos computacionais**. 2. ed. Rio de Janeiro: "
         "Campus, 1988.",
-        "UGANDER, J.; KARRER, B.; BACKSTROM, L.; MARLOW, C. **The anatomy of the Facebook "
+        "UGANDER, J. et al. **The anatomy of the Facebook "
         "social graph**. arXiv:1111.4503, 2011. Disponível em: https://arxiv.org/abs/1111.4503. "
         "Acesso em: 28 set. 2026.",
         "VAN DEN OORD, A.; DIELEMAN, S.; SCHRAUWEN, B. Deep content-based music "
         "recommendation. In: ADVANCES IN NEURAL INFORMATION PROCESSING SYSTEMS, 26., 2013. "
-        "**Proceedings** [...]. 2013. p. 2643-2651.",
-        "YING, R.; HE, R.; CHEN, K.; EKSOMBATCHAI, P.; HAMILTON, W. L.; LESKOVEC, J. Graph "
+        "**Proceedings** [...]. [S. l.]: Curran Associates, 2013. p. 2643-2651.",
+        "YING, R. et al. Graph "
         "convolutional neural networks for web-scale recommender systems. In: ACM SIGKDD "
         "INTERNATIONAL CONFERENCE ON KNOWLEDGE DISCOVERY AND DATA MINING, 24., 2018, London. "
-        "**Proceedings** [...]. New York: ACM, 2018. DOI: 10.1145/3219819.3219890.",
+        "**Proceedings** [...]. New York: ACM, 2018. p. 974-983. DOI: 10.1145/3219819.3219890.",
     ]
     for ref in refs:
         p = R.par(ref, recuo=False, alinhamento=WD_ALIGN_PARAGRAPH.LEFT, depois=8)
@@ -1289,6 +1428,9 @@ def main():
     e["testes_por_arquivo"], e["testes_total"], e["testes_ok"] = rodar_testes()
     e["historico"] = historico_git()
     doc = preparar_template()
+    doc.core_properties.author = NOME
+    doc.core_properties.title = TITULO
+    doc.core_properties.last_modified_by = NOME
     R = escrever(doc, e)
     os.makedirs(os.path.dirname(SAIDA), exist_ok=True)
     doc.save(SAIDA)
