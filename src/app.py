@@ -11,11 +11,12 @@ adjacência, tipo 2) lido de dados/grafo.txt.
 
 Histórico de alterações:
   28/09/2026 - Luis Felipe - criação
+  28/09/2026 - Luis Felipe - trata EOFError no laço principal, corrige
+    captura de exceções em op_b e valida a opção do submenu de op_h
 """
 import os
 
 from arquivo_grafo import formatarConteudo, gravar, ler
-from grafo_matriz import GrafoMatrizPonderado
 
 TITULO = "DESCOBERTA MUSICAL POR GRAFOS — Álbuns, Artistas e Gêneros"
 CAMINHO_PADRAO = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "dados", "grafo.txt")
@@ -87,7 +88,7 @@ class Aplicacao:
         try:
             gravar(self.grafo, caminho)
             print(f"Grafo gravado em {caminho} ({self.grafo.n} vértices, {self.grafo.m} arestas).")
-        except OSError as erro:
+        except (OSError, ValueError) as erro:
             print(f"Não foi possível gravar: {erro}")
 
     def op_c(self):
@@ -147,6 +148,9 @@ class Aplicacao:
 
     def op_h(self):
         forma = self.perguntar("Mostrar como 1 = lista de adjacência, 2 = matriz de adjacência: ")
+        if forma not in ("1", "2"):
+            print("Opção inválida.")
+            return
         print(self.grafo.textoMatriz() if forma == "2" else self.grafo.textoLista())
 
     def op_i(self):
@@ -171,18 +175,22 @@ class Aplicacao:
     def executar(self):
         precisa_grafo = set("bcdefhi")
         while True:
-            self.menu()
-            opcao = self.perguntar("Opção: ").lower()
-            if opcao == "j":
+            try:
+                self.menu()
+                opcao = self.perguntar("Opção: ").lower()
+                if opcao == "j":
+                    print("Encerrando a aplicação. Até logo!")
+                    return
+                if opcao not in dict(OPCOES):
+                    print("Opção inválida.")
+                    continue
+                if opcao in precisa_grafo and self.grafo is None:
+                    print("Nenhum grafo carregado. Use a opção a) primeiro.")
+                    continue
+                getattr(self, f"op_{opcao}")()
+            except EOFError:
                 print("Encerrando a aplicação. Até logo!")
                 return
-            if opcao not in dict(OPCOES):
-                print("Opção inválida.")
-                continue
-            if opcao in precisa_grafo and self.grafo is None:
-                print("Nenhum grafo carregado. Use a opção a) primeiro.")
-                continue
-            getattr(self, f"op_{opcao}")()
 
 
 def executar(entrada=input, caminho_padrao=CAMINHO_PADRAO):

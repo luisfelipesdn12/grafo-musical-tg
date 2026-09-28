@@ -64,6 +64,22 @@ class TestApp(unittest.TestCase):
         saida = rodar(["a", "", "e", "99", "", "j"], self.caminho)
         self.assertIn("fora do intervalo", saida)
 
+    def test_eof_encerra_sem_erro(self):
+        # entrada esgota (sem "j") e levanta EOFError, simulando Ctrl+D:
+        # a aplicação deve encerrar como na opção j, sem propagar a exceção.
+        respostas = iter(["a", ""])
+
+        def entrada(_=""):
+            try:
+                return next(respostas)
+            except StopIteration:
+                raise EOFError("EOF when reading a line")
+
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            app.executar(entrada=entrada, caminho_padrao=self.caminho)
+        self.assertIn("Encerrando a aplicação. Até logo!", buf.getvalue())
+
 
 if __name__ == "__main__":
     unittest.main()
