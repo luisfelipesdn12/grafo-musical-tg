@@ -23,6 +23,9 @@ Uso:  python3 ferramentas/gerar_prints.py
 
 Histórico de alterações:
   28/09/2026 - Luis Felipe - criação
+  28/09/2026 - Luis Felipe - recorta a matriz de adjacência (h, teste 2) a
+    uma janela de 20x20 vértices, em vez de só truncar linhas, para caber
+    legível numa imagem (a matriz completa tem 109 colunas)
 """
 import contextlib
 import copy
@@ -100,6 +103,32 @@ def rodar_sessao(respostas, caminho_grafo):
     with contextlib.redirect_stdout(buffer):
         executar(entrada=fazer_entrada(respostas), caminho_padrao=caminho_grafo)
     return buffer.getvalue()
+
+
+PROMPT_MATRIZ = "Mostrar como 1 = lista de adjacência, 2 = matriz de adjacência: "
+PREFIXO_MATRIZ = 5          # "     " no cabeçalho / "NNNN " em cada linha de dados
+LARGURA_COLUNA_MATRIZ = 5   # cada coluna (cabeçalho ou célula) ocupa 5 caracteres
+
+
+def recortar_matriz(texto, n, max_colunas=20, max_linhas=20):
+    """Recorta especificamente a saída da opção h) 2 (matriz de adjacência
+    completa, 109x109) para uma janela legível de max_linhas x max_colunas
+    vértices, preservando os comandos ecoados no início e o menu/despedida
+    no final - sem isso a imagem fica larga demais (milhares de pixels) e
+    ilegível quando embutida no relatório."""
+    linhas = texto.rstrip("\n").split("\n")
+    inicio = next(i for i, l in enumerate(linhas) if l.startswith(PROMPT_MATRIZ))
+    cabecalho = linhas[inicio + 1]
+    linhas_dados = linhas[inicio + 2: inicio + 2 + n]
+    cauda = linhas[inicio + 2 + n:]
+
+    largura_corte = PREFIXO_MATRIZ + max_colunas * LARGURA_COLUNA_MATRIZ
+    bloco = [cabecalho[:largura_corte]]
+    bloco += [linha[:largura_corte] for linha in linhas_dados[:max_linhas]]
+    bloco.append(f"... (recorte: {max_linhas} de {n} vértices exibidos; "
+                 "a opção h mostra a matriz completa) ...")
+
+    return "\n".join(linhas[:inicio + 1] + bloco + cauda)
 
 
 def truncar(texto, max_linhas=MAX_LINHAS):
@@ -271,7 +300,8 @@ def montar_roteiros(dados, base_tmp):
         ("h", 1, ["a", "", "h", "1"],
          "Opção h) — teste 1: grafo exibido como lista de adjacência (saída truncada)."),
         ("h", 2, ["a", "", "h", "2"],
-         "Opção h) — teste 2: grafo exibido como matriz de adjacência (saída truncada)."),
+         f"Opção h) — teste 2: grafo exibido como matriz de adjacência (recorte de 20×20 "
+         f"vértices para caber na imagem; a matriz completa tem {n}×{n})."),
         ("h", 3, ["h"],
          "Opção h) — teste 3: exibir o grafo sem antes carregá-lo (opção a) é bloqueado."),
 
@@ -306,7 +336,12 @@ def main():
             # lista/matriz de adjacência); as demais opções já são curtas
             # e truncá-las poderia esconder justamente o resultado do
             # teste (ex.: o resultado de "i" em roteiros com vários passos).
-            if opcao in ("g", "h"):
+            # h) 2 (matriz) recebe um recorte específico de colunas, e não
+            # só de linhas, porque a matriz completa (109 colunas) fica
+            # larga demais para uma imagem legível.
+            if opcao == "h" and teste == 2:
+                texto = recortar_matriz(texto, dados["n"])
+            elif opcao in ("g", "h"):
                 texto = truncar(texto)
 
             nome_arquivo = f"{numero:02d}_opcao_{opcao}_teste{teste}.png"
@@ -317,7 +352,7 @@ def main():
 
         caminho_json = os.path.join(DESTINO, "legendas.json")
         with open(caminho_json, "w", encoding="utf-8") as arq:
-            json.dump(legendas, arq, ensure_ascii=False, indent=2)
+            arq.write(json.dumps(legendas, ensure_ascii=False, indent=2) + "\n")
         print(f"\n{len(roteiros)} imagens geradas em {DESTINO}")
         print(f"Legendas salvas em {caminho_json}")
     finally:

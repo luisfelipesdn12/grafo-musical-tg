@@ -14,7 +14,7 @@
   "13_opcao_g_teste1.png": "Opção g) — teste 1: exibição formatada do conteúdo do arquivo padrão (saída truncada para caber na imagem).",
   "14_opcao_g_teste2.png": "Opção g) — teste 2: leitura do conteúdo de um arquivo inexistente é tratada com erro.",
   "15_opcao_h_teste1.png": "Opção h) — teste 1: grafo exibido como lista de adjacência (saída truncada).",
-  "16_opcao_h_teste2.png": "Opção h) — teste 2: grafo exibido como matriz de adjacência (saída truncada).",
+  "16_opcao_h_teste2.png": "Opção h) — teste 2: grafo exibido como matriz de adjacência (recorte de 20×20 vértices para caber na imagem; a matriz completa tem 109×109).",
   "17_opcao_h_teste3.png": "Opção h) — teste 3: exibir o grafo sem antes carregá-lo (opção a) é bloqueado.",
   "18_opcao_i_teste1.png": "Opção i) — teste 1: o grafo real é CONEXO (1 componente com os 109 vértices).",
   "19_opcao_i_teste2.png": "Opção i) — teste 2: ao remover as 3 aresta(s) do álbum \"[ALB] Ctrl — SZA\", isolando-o, o grafo passa a ser DESCONEXO (o álbum vira uma componente à parte).",
