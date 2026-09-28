@@ -31,6 +31,11 @@ Histórico de alterações:
     caminho de "já existe o vértice"); adiciona verificar(), que confere
     cada roteiro contra o(s) trecho(s) de saída esperado(s) e falha alto
     se a legenda não bater com o que a aplicação realmente respondeu
+  28/09/2026 - Luis Felipe - renderiza tudo em escala 2x (fonte e imagem
+    maiores) para ficar nítido a 16 cm no relatório; quebra linhas muito
+    longas (ex.: mensagem de erro de d2); recorte da matriz (h2) passa a
+    mostrar álbuns x gêneros com pesos reais em vez de uma janela quase
+    toda vazia; legendas com plural correto ("3 arestas incidentes")
 """
 import contextlib
 import copy
@@ -40,6 +45,7 @@ import os
 import shutil
 import sys
 import tempfile
+import textwrap
 
 try:
     from PIL import Image, ImageDraw, ImageFont
@@ -58,15 +64,21 @@ GRAFO_ORIGINAL = os.path.join(RAIZ, "dados", "grafo.txt")
 DESTINO = os.path.join(RAIZ, "relatorio", "figuras", "prints")
 
 # ---------------------------------------------------------------- aparência
+ESCALA = 2  # tudo em dobro (fonte e dimensões) para ficar nítido a 16 cm no .docx
 FUNDO = (30, 30, 30)            # #1e1e1e
 BARRA_TITULO = (55, 55, 58)
 COR_TEXTO = (222, 226, 232)
 COR_DESTAQUE = (126, 200, 255)
 COR_TITULO_JANELA = (214, 214, 219)
-MARGEM = 16
-TAM_FONTE = 15
-ALTURA_BARRA = 34
+MARGEM = 16 * ESCALA
+TAM_FONTE = 15 * ESCALA
+TAM_FONTE_TITULO = 13 * ESCALA
+ALTURA_BARRA = 34 * ESCALA
 MAX_LINHAS = 60
+LARGURA_MAX_LINHA = 110     # acima disso, quebra a linha (soft wrap) ao renderizar; folga
+                             # suficiente para não quebrar as linhas de 105 caracteres do
+                             # recorte da matriz (h2), só as mensagens de erro bem longas (d2)
+RECUO_QUEBRA = "    "
 TITULO_JANELA = "python src/app.py"
 
 CAMINHOS_FONTE = [
@@ -111,29 +123,32 @@ def rodar_sessao(respostas, caminho_grafo):
 
 
 PROMPT_MATRIZ = "Mostrar como 1 = lista de adjacência, 2 = matriz de adjacência: "
-PREFIXO_MATRIZ = 5          # "     " no cabeçalho / "NNNN " em cada linha de dados
-LARGURA_COLUNA_MATRIZ = 5   # cada coluna (cabeçalho ou célula) ocupa 5 caracteres
 
 
-def recortar_matriz(texto, n, max_colunas=20, max_linhas=20):
-    """Recorta especificamente a saída da opção h) 2 (matriz de adjacência
-    completa, 109x109) para uma janela legível de max_linhas x max_colunas
-    vértices, preservando os comandos ecoados no início e o menu/despedida
-    no final - sem isso a imagem fica larga demais (milhares de pixels) e
-    ilegível quando embutida no relatório."""
+def formatar_recorte_matriz(g, linhas_idx, colunas_idx):
+    """Formata manualmente um recorte da matriz de adjacência (mesmas
+    larguras de coluna de GrafoMatrizPonderado.textoMatriz(): 5 caracteres
+    por célula/cabeçalho), mas só para os índices de linha/coluna dados -
+    que não precisam ser contíguos."""
+    cabecalho = "     " + "".join(f"{j:>5d}" for j in colunas_idx)
+    linhas_txt = [cabecalho]
+    for i in linhas_idx:
+        celulas = "".join("    ." if g.adj[i][j] is None else f"{g.adj[i][j]:5.2f}"
+                           for j in colunas_idx)
+        linhas_txt.append(f"{i:4d} {celulas}")
+    return linhas_txt
+
+
+def recortar_matriz(texto, n, recorte_linhas, nota):
+    """Substitui a matriz de adjacência completa (109x109) que aparece na
+    saída da opção h) 2 por um recorte pré-calculado (`recorte_linhas`,
+    já formatado por `formatar_recorte_matriz`), preservando os comandos
+    ecoados no início e o menu/despedida no final - sem isso a imagem
+    fica larga/alta demais (milhares de pixels) e ilegível no relatório."""
     linhas = texto.rstrip("\n").split("\n")
     inicio = next(i for i, l in enumerate(linhas) if l.startswith(PROMPT_MATRIZ))
-    cabecalho = linhas[inicio + 1]
-    linhas_dados = linhas[inicio + 2: inicio + 2 + n]
-    cauda = linhas[inicio + 2 + n:]
-
-    largura_corte = PREFIXO_MATRIZ + max_colunas * LARGURA_COLUNA_MATRIZ
-    bloco = [cabecalho[:largura_corte]]
-    bloco += [linha[:largura_corte] for linha in linhas_dados[:max_linhas]]
-    bloco.append(f"... (recorte: {max_linhas} de {n} vértices exibidos; "
-                 "a opção h mostra a matriz completa) ...")
-
-    return "\n".join(linhas[:inicio + 1] + bloco + cauda)
+    cauda = linhas[inicio + 2 + n:]  # depois do cabeçalho + n linhas de dados originais
+    return "\n".join(linhas[:inicio + 1] + list(recorte_linhas) + [nota] + cauda)
 
 
 def truncar(texto, max_linhas=MAX_LINHAS):
@@ -150,15 +165,31 @@ def truncar(texto, max_linhas=MAX_LINHAS):
     return "\n".join(linhas[:cabeca] + meio + linhas[-cauda:])
 
 
+def quebrar_linhas(linhas, largura=LARGURA_MAX_LINHA, recuo=RECUO_QUEBRA):
+    """Soft wrap: quebra linhas mais longas que `largura` caracteres, com
+    recuo nas linhas de continuação, para que mensagens longas (ex.: o
+    aviso de aresta recusada em d2) não deixem a imagem larga demais nem
+    fiquem cortadas."""
+    resultado = []
+    for linha in linhas:
+        if len(linha) <= largura:
+            resultado.append(linha)
+            continue
+        partes = textwrap.wrap(linha, width=largura, subsequent_indent=recuo,
+                                break_long_words=False, break_on_hyphens=False)
+        resultado.extend(partes or [linha])
+    return resultado
+
+
 # ---------------------------------------------------------------- renderização
 def renderizar_png(texto, caminho_png):
     fonte = carregar_fonte(TAM_FONTE)
-    fonte_titulo = carregar_fonte(13)
-    linhas = texto.rstrip("\n").split("\n")
+    fonte_titulo = carregar_fonte(TAM_FONTE_TITULO)
+    linhas = quebrar_linhas(texto.rstrip("\n").split("\n"))
 
     caixa = fonte.getbbox("M")
     largura_char = caixa[2] - caixa[0]
-    altura_linha = TAM_FONTE + 7
+    altura_linha = TAM_FONTE + 7 * ESCALA
 
     colunas = max((len(l) for l in linhas), default=1)
     largura = MARGEM * 2 + max(colunas, 50) * largura_char
@@ -171,8 +202,10 @@ def renderizar_png(texto, caminho_png):
     # barra de título falsa, com os três "semáforos" de uma janela de terminal
     desenho.rectangle([0, 0, largura, ALTURA_BARRA], fill=BARRA_TITULO)
     for i, cor in enumerate([(237, 106, 94), (245, 191, 79), (97, 194, 84)]):
-        cx = 18 + i * 20
-        desenho.ellipse([cx - 6, ALTURA_BARRA // 2 - 6, cx + 6, ALTURA_BARRA // 2 + 6], fill=cor)
+        cx = (18 + i * 20) * ESCALA
+        raio = 6 * ESCALA
+        desenho.ellipse([cx - raio, ALTURA_BARRA // 2 - raio, cx + raio, ALTURA_BARRA // 2 + raio],
+                         fill=cor)
     desenho.text((largura / 2, ALTURA_BARRA / 2), TITULO_JANELA, font=fonte_titulo,
                   fill=COR_TITULO_JANELA, anchor="mm")
 
@@ -206,6 +239,10 @@ def copiar_grafo(base_tmp, nome):
     destino = os.path.join(pasta, "grafo.txt")
     shutil.copy(GRAFO_ORIGINAL, destino)
     return destino
+
+
+def plural(qtd, singular, no_plural):
+    return singular if qtd == 1 else no_plural
 
 
 def nome_ausente(g, tipo_prefixo, base):
@@ -262,6 +299,25 @@ def calcular_dados_reais():
                             "roteiro i2 precisa ser revisto.")
     vizinhos_album_i2 = [w for w, _ in g.vizinhos(idx_album_i2)]
 
+    # recorte da matriz (h, teste 2): uma janela de 20 álbuns (linhas) x os
+    # 20 gêneros (colunas) com mais arestas preenchidas entre essas linhas -
+    # uma janela por índice crescente (0..19 x 0..19) cai quase toda em
+    # células vazias, pois os primeiros vértices são artistas/álbuns entre
+    # si (sem aresta, por serem do mesmo tipo ou não relacionados).
+    albuns = [i for i in range(g.n) if g.tipoVertice(i) == "ALB"]
+    generos = [i for i in range(g.n) if g.tipoVertice(i) == "GEN"]
+    linhas_h2 = albuns[:20]
+    contagem_gen = {j: sum(1 for i in linhas_h2 if g.adj[i][j] is not None) for j in generos}
+    colunas_h2 = sorted(sorted(generos, key=lambda j: (-contagem_gen[j], j))[:20])
+    celulas_preenchidas_h2 = sum(contagem_gen[j] for j in colunas_h2)
+    if celulas_preenchidas_h2 == 0:
+        raise RuntimeError("Recorte álbuns x gêneros da matriz (h2) não encontrou nenhuma "
+                            "aresta - roteiro precisa ser revisto.")
+    recorte_matriz_h2 = formatar_recorte_matriz(g, linhas_h2, colunas_h2)
+    nota_matriz_h2 = (f"... (recorte: linhas = {len(linhas_h2)} álbuns, "
+                       f"colunas = {len(colunas_h2)} gêneros de {g.n} vértices; "
+                       "a opção h mostra a matriz completa) ...")
+
     return {
         "n": g.n,
         "m": g.m,
@@ -275,6 +331,10 @@ def calcular_dados_reais():
         "idx_gen_f1": idx_gen_f1,
         "idx_album_i2": idx_album_i2,
         "vizinhos_album_i2": vizinhos_album_i2,
+        "linhas_h2": linhas_h2,
+        "colunas_h2": colunas_h2,
+        "recorte_matriz_h2": recorte_matriz_h2,
+        "nota_matriz_h2": nota_matriz_h2,
     }
 
 
@@ -291,6 +351,7 @@ def montar_roteiros(dados, base_tmp):
     albf, genf = dados["idx_alb_f1"], dados["idx_gen_f1"]
     albi, vizi = dados["idx_album_i2"], dados["vizinhos_album_i2"]
     n, m = dados["n"], dados["m"]
+    nlin_h2, ncol_h2 = len(dados["linhas_h2"]), len(dados["colunas_h2"])
 
     respostas_f_album = []
     for w in vizi:
@@ -332,7 +393,7 @@ def montar_roteiros(dados, base_tmp):
 
         ("e", 1, ["a", "", "e", str(gi)],
          f"Opção e) — teste 1: remoção do vértice de gênero \"{r[gi]}\" e das "
-         f"{ggrau} aresta(s) incidente(s).",
+         f"{ggrau} {plural(ggrau, 'aresta incidente', 'arestas incidentes')}.",
          f"Removido {r[gi]} e {ggrau} aresta(s) incidente(s)."),
         ("e", 2, ["a", "", "e", "999", ""],
          "Opção e) — teste 2: índice fora do intervalo válido (\"999\") é rejeitado; Enter "
@@ -344,7 +405,8 @@ def montar_roteiros(dados, base_tmp):
          f"Aresta removida: {r[albf]} <-> {r[genf]}"),
         ("f", 2, ["a", "", "f", str(fi), str(ai)],
          f"Opção f) — teste 2: tentativa de remover uma aresta inexistente entre "
-         f"\"{r[fi]}\" e \"{r[ai]}\" (dois artistas nunca ficam ligados) é tratada.",
+         f"\"{r[fi]}\" e \"{r[ai]}\" (dois artistas nunca ficam ligados) é recusada com "
+         f"mensagem de aresta inexistente.",
          "Não existe aresta entre esses vértices."),
 
         ("g", 1, ["g", ""],
@@ -359,8 +421,9 @@ def montar_roteiros(dados, base_tmp):
          "Opção h) — teste 1: grafo exibido como lista de adjacência (saída truncada).",
          f"n = {n}   m = {m}   (tipo 2)"),
         ("h", 2, ["a", "", "h", "2"],
-         f"Opção h) — teste 2: grafo exibido como matriz de adjacência (recorte de 20×20 "
-         f"vértices para caber na imagem; a matriz completa tem {n}×{n}).",
+         f"Opção h) — teste 2: grafo exibido como matriz de adjacência (recorte com as "
+         f"primeiras {nlin_h2} linhas de álbuns e as {ncol_h2} colunas de gênero com mais "
+         f"pesos preenchidos entre elas; a matriz completa tem {n}×{n}).",
          [PROMPT_MATRIZ + "2", f"{n - 1:4d} "]),
         ("h", 3, ["h"],
          "Opção h) — teste 3: exibir o grafo sem antes carregá-lo (opção a) é bloqueado.",
@@ -370,8 +433,9 @@ def montar_roteiros(dados, base_tmp):
          f"Opção i) — teste 1: o grafo real é CONEXO (1 componente com os {n} vértices).",
          "O grafo é CONEXO (1 componente(s) conexa(s))."),
         ("i", 2, ["a", ""] + respostas_f_album + ["i"],
-         f"Opção i) — teste 2: ao remover as {len(vizi)} aresta(s) do álbum \"{r[albi]}\", "
-         f"isolando-o, o grafo passa a ser DESCONEXO (o álbum vira uma componente à parte).",
+         f"Opção i) — teste 2: ao remover as {len(vizi)} {plural(len(vizi), 'aresta', 'arestas')} "
+         f"do álbum \"{r[albi]}\", isolando-o, o grafo passa a ser DESCONEXO (o álbum vira uma "
+         f"componente à parte).",
          ["O grafo é DESCONEXO (2 componente(s) conexa(s)).", f"1 vértice(s) - {r[albi]}"]),
 
         ("j", 1, ["j"],
@@ -409,7 +473,8 @@ def main():
             # só de linhas, porque a matriz completa (109 colunas) fica
             # larga demais para uma imagem legível.
             if opcao == "h" and teste == 2:
-                texto = recortar_matriz(texto, dados["n"])
+                texto = recortar_matriz(texto, dados["n"], dados["recorte_matriz_h2"],
+                                         dados["nota_matriz_h2"])
             elif opcao in ("g", "h"):
                 texto = truncar(texto)
 
