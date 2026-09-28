@@ -51,6 +51,28 @@ class TestMontar(unittest.TestCase):
             for w, _ in g.vizinhos(v):
                 self.assertNotEqual(g.tipoVertice(v), g.tipoVertice(w))
 
+    def test_titulos_duplicados_mesmo_artista(self):
+        # caso real: os 4 álbuns autointitulados "Tim Maia" (1970-73) não
+        # podem virar o mesmo rótulo/vértice (regressão do fix round 1)
+        artistas = [
+            {"nome": "Tim Maia", "genres": gen(soul=3),
+             "albuns": [{"title": "Tim Maia", "first-release-date": "1970",
+                         "genres": gen(soul=2)},
+                        {"title": "Tim Maia", "first-release-date": "1973",
+                         "genres": gen(soul=1)}]},
+        ]
+        g = construir(artistas)
+        self.assertIn("[ALB] Tim Maia (1970) — Tim Maia", g.rotulos)
+        self.assertIn("[ALB] Tim Maia (1973) — Tim Maia", g.rotulos)
+        self.assertEqual(len(set(g.rotulos)), g.n)  # rótulos únicos
+        art = g.rotulos.index("[ART] Tim Maia")
+        a1970 = g.rotulos.index("[ALB] Tim Maia (1970) — Tim Maia")
+        a1973 = g.rotulos.index("[ALB] Tim Maia (1973) — Tim Maia")
+        self.assertEqual(g.peso(art, a1970), 0.0)
+        self.assertEqual(g.peso(art, a1973), 0.0)
+        for v in range(g.n):
+            self.assertGreater(g.grau(v), 0)  # nenhum vértice fantasma isolado
+
 
 class TestGrafoReal(unittest.TestCase):
     def test_minimos(self):

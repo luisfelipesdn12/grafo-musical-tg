@@ -64,10 +64,10 @@
 61 "[ALB] Força bruta — Jorge Ben Jor"
 62 "[ALB] Dádiva — Jorge Ben Jor"
 63 "[ALB] O Bidú: Silêncio no Brooklin — Jorge Ben Jor"
-64 "[ALB] Tim Maia — Tim Maia"
-65 "[ALB] Tim Maia — Tim Maia"
-66 "[ALB] Tim Maia — Tim Maia"
-67 "[ALB] Tim Maia — Tim Maia"
+64 "[ALB] Tim Maia (1970) — Tim Maia"
+65 "[ALB] Tim Maia (1972) — Tim Maia"
+66 "[ALB] Tim Maia (1973) — Tim Maia"
+67 "[ALB] Tim Maia (1971) — Tim Maia"
 68 "[ALB] Os Mutantes — Os Mutantes"
 69 "[ALB] Mutantes e seus cometas no país do baurets — Os Mutantes"
 70 "[ALB] Mutantes — Os Mutantes"
@@ -109,7 +109,7 @@
 106 "[GEN] soul"
 107 "[GEN] tropicália"
 108 "[GEN] west coast hip hop"
-333
+349
 0 16 0.00
 0 17 0.00
 0 73 0.50
@@ -216,6 +216,9 @@
 13 102 0.67
 13 104 0.67
 13 105 0.67
+14 64 0.00
+14 65 0.00
+14 66 0.00
 14 67 0.00
 14 78 0.00
 14 83 0.00
@@ -420,11 +423,24 @@
 63 91 0.00
 63 102 0.00
 63 104 0.00
+64 89 0.50
+64 91 0.50
+64 93 0.50
+64 103 0.50
+64 106 0.00
+65 83 0.00
+65 89 0.00
+65 91 0.00
+65 93 0.00
+65 103 0.00
+66 83 0.00
+66 89 0.00
+66 91 0.00
+66 93 0.00
+66 106 0.00
 67 83 0.00
-67 89 0.50
-67 91 0.50
-67 93 0.50
-67 103 0.50
+67 89 0.00
+67 103 0.00
 67 106 0.00
 68 75 0.75
 68 89 0.50

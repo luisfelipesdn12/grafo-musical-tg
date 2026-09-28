@@ -13,7 +13,7 @@ id,tipo,rotulo,grau
 11,ART,[ART] Gal Costa,9
 12,ART,[ART] Milton Nascimento,7
 13,ART,[ART] Jorge Ben Jor,9
-14,ART,[ART] Tim Maia,6
+14,ART,[ART] Tim Maia,9
 15,ART,[ART] Os Mutantes,7
 16,ALB,[ALB] Blonde — Frank Ocean,5
 17,ALB,[ALB] channel ORANGE — Frank Ocean,5
@@ -63,10 +63,10 @@ id,tipo,rotulo,grau
 61,ALB,[ALB] Força bruta — Jorge Ben Jor,5
 62,ALB,[ALB] Dádiva — Jorge Ben Jor,6
 63,ALB,[ALB] O Bidú: Silêncio no Brooklin — Jorge Ben Jor,6
-64,ALB,[ALB] Tim Maia — Tim Maia,0
-65,ALB,[ALB] Tim Maia — Tim Maia,0
-66,ALB,[ALB] Tim Maia — Tim Maia,0
-67,ALB,[ALB] Tim Maia — Tim Maia,7
+64,ALB,[ALB] Tim Maia (1970) — Tim Maia,6
+65,ALB,[ALB] Tim Maia (1972) — Tim Maia,6
+66,ALB,[ALB] Tim Maia (1973) — Tim Maia,6
+67,ALB,[ALB] Tim Maia (1971) — Tim Maia,5
 68,ALB,[ALB] Os Mutantes — Os Mutantes,6
 69,ALB,[ALB] Mutantes e seus cometas no país do baurets — Os Mutantes,3
 70,ALB,[ALB] Mutantes — Os Mutantes,6
@@ -82,17 +82,17 @@ id,tipo,rotulo,grau
 80,GEN,[GEN] contemporary r&b,17
 81,GEN,[GEN] electronic,3
 82,GEN,[GEN] experimental,3
-83,GEN,[GEN] funk,9
+83,GEN,[GEN] funk,11
 84,GEN,[GEN] hardcore hip hop,6
 85,GEN,[GEN] hip hop,18
 86,GEN,[GEN] indie pop,2
 87,GEN,[GEN] jazz,8
 88,GEN,[GEN] jazz rap,4
-89,GEN,[GEN] latin,26
+89,GEN,[GEN] latin,29
 90,GEN,[GEN] latin jazz,2
-91,GEN,[GEN] mpb,28
+91,GEN,[GEN] mpb,30
 92,GEN,[GEN] neo soul,9
-93,GEN,[GEN] pop,13
+93,GEN,[GEN] pop,15
 94,GEN,[GEN] pop rap,2
 95,GEN,[GEN] pop rock,3
 96,GEN,[GEN] progressive pop,2
@@ -102,9 +102,9 @@ id,tipo,rotulo,grau
 100,GEN,[GEN] r&b,16
 101,GEN,[GEN] rock,3
 102,GEN,[GEN] samba,11
-103,GEN,[GEN] samba soul,2
+103,GEN,[GEN] samba soul,4
 104,GEN,[GEN] samba-rock,2
 105,GEN,[GEN] singer-songwriter,6
-106,GEN,[GEN] soul,5
+106,GEN,[GEN] soul,7
 107,GEN,[GEN] tropicália,4
 108,GEN,[GEN] west coast hip hop,6

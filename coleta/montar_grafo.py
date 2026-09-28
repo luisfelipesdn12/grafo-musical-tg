@@ -12,6 +12,9 @@ Peso da aresta = custo de descoberta = 1 - afinidade.
 
 Histórico de alterações:
   28/09/2026 - Luis Felipe - criação
+  28/09/2026 - Luis Felipe - corrige colisão de rótulo quando o mesmo
+    artista tem álbuns de mesmo título (ex.: os 4 "Tim Maia" 1970-73);
+    acrescenta rotular_albuns() para desambiguar com o ano
 """
 import csv
 import glob
@@ -46,6 +49,39 @@ def escolher_albuns(albuns, max_albuns):
     return com_genero[:max_albuns]
 
 
+def rotular_albuns(selecionados, nome_artista):
+    """Rótulo "[ALB] <título> — <artista>" para cada álbum selecionado;
+    quando dois álbuns do mesmo artista têm o mesmo título (ex.: os quatro
+    discos autointitulados "Tim Maia" de 1970-73), acrescenta o ano de
+    lançamento a TODOS os álbuns daquele grupo: "<título> (<AAAA>) —
+    <artista>". Se o ano faltar ou ainda colidir, usa um número
+    sequencial "(2)", "(3)"... no lugar do ano."""
+    artista = limpar(nome_artista)
+    bases = [f"{limpar(a['title'])} — {artista}" for a in selecionados]
+    contagem_base = {}
+    for base in bases:
+        contagem_base[base] = contagem_base.get(base, 0) + 1
+
+    rotulos, usados, proximo_seq = [], set(), {}
+    for alb, base in zip(selecionados, bases):
+        if contagem_base[base] == 1:
+            rotulo = f"[ALB] {base}"
+        else:
+            titulo = limpar(alb["title"])
+            ano = (alb.get("first-release-date") or "")[:4]
+            rotulo = f"[ALB] {titulo} ({ano}) — {artista}" if ano.isdigit() else None
+            if rotulo is None or rotulo in usados:
+                n = proximo_seq.get(base, 2)
+                rotulo = f"[ALB] {titulo} ({n}) — {artista}"
+                while rotulo in usados:
+                    n += 1
+                    rotulo = f"[ALB] {titulo} ({n}) — {artista}"
+                proximo_seq[base] = n + 1
+        usados.add(rotulo)
+        rotulos.append(rotulo)
+    return rotulos
+
+
 def construir(artistas, max_albuns=4, max_generos=5):
     ligacoes = []  # (rotulo_origem, nome_genero, afinidade)
     rot_art, rot_alb, autoria = [], [], []
@@ -54,8 +90,8 @@ def construir(artistas, max_albuns=4, max_generos=5):
         rot_art.append(ra)
         for nome, af in afinidades(art["genres"], max_generos):
             ligacoes.append((ra, nome, af))
-        for alb in escolher_albuns(art["albuns"], max_albuns):
-            rb = f"[ALB] {limpar(alb['title'])} — {limpar(art['nome'])}"
+        selecionados = escolher_albuns(art["albuns"], max_albuns)
+        for alb, rb in zip(selecionados, rotular_albuns(selecionados, art["nome"])):
             rot_alb.append(rb)
             autoria.append((ra, rb))
             for nome, af in afinidades(alb["genres"], max_generos):
