@@ -13,13 +13,18 @@ Histórico de alterações:
   28/09/2026 - Luis Felipe - criação
   28/09/2026 - Luis Felipe - trata EOFError no laço principal, corrige
     captura de exceções em op_b e valida a opção do submenu de op_h
+  28/09/2026 - Luis Felipe - normaliza CAMINHO_PADRAO (remove "src/.."
+    do caminho exibido) e arredonda o peso lido em ler_real para 2 casas
+    decimais, alinhando memória e arquivo
 """
 import os
 
 from arquivo_grafo import formatarConteudo, gravar, ler
 
 TITULO = "DESCOBERTA MUSICAL POR GRAFOS — Álbuns, Artistas e Gêneros"
-CAMINHO_PADRAO = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "dados", "grafo.txt")
+CAMINHO_PADRAO = os.path.normpath(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "dados", "grafo.txt")
+)
 OPCOES = [
     ("a", "Ler dados do arquivo grafo.txt"), ("b", "Gravar dados no arquivo grafo.txt"),
     ("c", "Inserir vértice"), ("d", "Inserir aresta"), ("e", "Remover vértice"),
@@ -54,7 +59,7 @@ class Aplicacao:
                 print("  Entrada inválida: digite um número inteiro.")
 
     def ler_real(self, texto):
-        """Lê peso real em [0, 1]; Enter vazio cancela (None)."""
+        """Lê peso real em [0, 1] (2 casas decimais); Enter vazio cancela (None)."""
         while True:
             valor = self.perguntar(texto).replace(",", ".")
             if valor == "":
@@ -62,7 +67,7 @@ class Aplicacao:
             try:
                 numero = float(valor)
                 if 0.0 <= numero <= 1.0:
-                    return numero
+                    return round(numero, 2)
                 print("  O peso (custo de descoberta) deve estar entre 0 e 1.")
             except ValueError:
                 print("  Entrada inválida: digite um número real (ex.: 0.35).")
@@ -109,7 +114,9 @@ class Aplicacao:
     def op_d(self):
         v = self.ler_vertice("Vértice v: ")
         w = None if v is None else self.ler_vertice("Vértice w: ")
-        peso = None if w is None else self.ler_real("Peso (custo de descoberta, 0 a 1): ")
+        peso = None if w is None else self.ler_real(
+            "Peso (custo de descoberta, 0 a 1, 2 casas decimais): "
+        )
         if peso is None:
             print("Operação cancelada.")
             return
