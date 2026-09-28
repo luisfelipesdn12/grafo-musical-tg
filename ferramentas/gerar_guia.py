@@ -19,6 +19,10 @@ Uso:  .venv/bin/python ferramentas/gerar_guia.py
 
 Histórico de alterações:
   28/09/2026 - Luis Felipe - criação
+  28/09/2026 - Luis Felipe - corrige a fala do bloco "Coleta": o critério
+    real de vértice-gênero é aparecer em pelo menos 2 entidades (artista
+    ou álbum) dentre os 5 gêneros mais votados de cada uma, não "pelo
+    menos 2 votos"
 """
 import os
 import sys
@@ -215,8 +219,9 @@ def gerar():
                 "1:45–2:15",
                 "Coleta",
                 "• “Os dados vêm da API pública do MusicBrainz: 16 artistas-semente (8 de "
-                "R&B/hip-hop, 8 de MPB), até 4 álbuns ‘Album’ por artista, gêneros com pelo menos "
-                "2 votos.”\n"
+                "R&B/hip-hop, 8 de MPB), até 4 álbuns ‘Album’ por artista, pegando os 5 gêneros "
+                "mais votados de cada artista e álbum; um gênero só vira vértice se aparecer em "
+                "pelo menos 2 dessas entidades.”\n"
                 "• “Não coletamos nenhum dado de usuário - só metadados abertos, respondendo "
                 "direto à crítica ética do parecer.”",
                 f"Um JSON de dados/brutos/ ou as estatísticas n={n}, m={m}",
