@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-Projeto de Teoria dos Grafos - Parte 2
+Projeto de Teoria dos Grafos - Parte 3
 Descoberta Musical por Grafos: Álbuns, Artistas e Gêneros
 
 Integrante: Luis Felipe Santos do Nascimento - RA 10420572
 
 Síntese: gerador automático dos "printscreens" de teste da aplicação de
 console (src/app.py), exigidos no relatório (ao menos 2 testes por opção
-do menu a-j). Cada roteiro simula uma sessão de terminal fornecendo, no
+do menu a-q). Cada roteiro simula uma sessão de terminal fornecendo, no
 lugar do input() real, uma lista de respostas pré-definidas; o wrapper de
 entrada ecoa "prompt + resposta" (como um terminal real) e a saída
 completa é capturada e renderizada como PNG (fundo escuro, fonte
@@ -36,6 +36,9 @@ Histórico de alterações:
     longas (ex.: mensagem de erro de d2); recorte da matriz (h2) passa a
     mostrar álbuns x gêneros com pesos reais em vez de uma janela quase
     toda vazia; legendas com plural correto ("3 arestas incidentes")
+  19/11/2026 - Luis Felipe - Parte 3: roteiros das opções j-p (Dijkstra,
+    recomendação e características do grafo); encerrar passa a ser q; o
+    menu repetido entre comandos é condensado em uma linha no print
 """
 import contextlib
 import copy
@@ -149,6 +152,29 @@ def recortar_matriz(texto, n, recorte_linhas, nota):
     inicio = next(i for i, l in enumerate(linhas) if l.startswith(PROMPT_MATRIZ))
     cauda = linhas[inicio + 2 + n:]  # depois do cabeçalho + n linhas de dados originais
     return "\n".join(linhas[:inicio + 1] + list(recorte_linhas) + [nota] + cauda)
+
+
+def condensar_menus(texto):
+    """Mantém o primeiro menu completo e troca cada repetição seguinte
+    (17 linhas idênticas) por uma linha "[menu a-q exibido novamente]",
+    para que o resultado de cada opção apareça legível no print."""
+    linhas = texto.split("\n")
+    saida, vistos, i = [], 0, 0
+    while i < len(linhas):
+        if linhas[i].startswith("=" * 10) and i + 2 < len(linhas) and linhas[i + 2].startswith("=" * 10):
+            fim = i + 3
+            while fim < len(linhas) and linhas[fim].startswith("  ") and ") " in linhas[fim][:6]:
+                fim += 1
+            vistos += 1
+            if vistos == 1:
+                saida.extend(linhas[i:fim])
+            else:
+                saida.append("[menu a-q exibido novamente]")
+            i = fim
+            continue
+        saida.append(linhas[i])
+        i += 1
+    return "\n".join(saida)
 
 
 def truncar(texto, max_linhas=MAX_LINHAS):
@@ -438,11 +464,77 @@ def montar_roteiros(dados, base_tmp):
          f"componente à parte).",
          ["O grafo é DESCONEXO (2 componente(s) conexa(s)).", f"1 vértice(s) - {r[albi]}"]),
 
-        ("j", 1, ["j"],
-         "Opção j) — teste 1: a opção j encerra a aplicação imediatamente.",
+        ("j", 1, ["a", "", "j", "Blonde", "42"],
+         "Opção j) — teste 1: trilha de descoberta de menor custo (Dijkstra) entre \"Blonde\" "
+         "(Frank Ocean, buscado pelo nome) e \"Domingo\" (Caetano Veloso, índice 42), com o "
+         "custo de cada passo e o acumulado.",
+         ["Trilha de descoberta de menor custo", "[ALB] Domingo — Caetano Veloso"]),
+        ("j", 2, ["a", "", "c", "3", "gênero isolado", "j", "0", str(n), "j", "Domingo", "",
+                  "j", "999", ""],
+         "Opção j) — teste 2: um vértice isolado recém-inserido não é alcançável (sem caminho); "
+         "nome ambíguo (\"Domingo\") lista as opções; índice inválido é rejeitado; Enter cancela.",
+         ["Não existe caminho entre esses vértices", "2 vértices encontrados", "Índice inválido",
+          "Operação cancelada."]),
+
+        ("k", 1, ["a", "", "k", "Blonde", "5"],
+         "Opção k) — teste 1: os 5 álbuns de outros artistas mais próximos de \"Blonde\" "
+         "(Frank Ocean) pelo custo de descoberta, com os vértices intermediários.",
+         ["Álbuns de outros artistas mais próximos de [ALB] Blonde — Frank Ocean", "  5. "]),
+        ("k", 2, ["a", "", "k", str(fi), "Transa", "Fina estampa", "20", "3"],
+         f"Opção k) — teste 2: o índice de um artista ({fi}) é recusado (a opção exige um "
+         "álbum); nome inexistente é rejeitado; quantidade fora de 1 a 10 é recusada e a "
+         "recomendação de 3 álbuns é feita para \"Fina estampa\" (Caetano Veloso).",
+         ["deve ser um vértice [ALB]", "Nenhum vértice encontrado", "Valor fora do intervalo [1, 10].",
+          "  3. "]),
+
+        ("l", 1, ["a", "", "l"],
+         "Opção l) — teste 1: graus dos vértices do grafo real (soma = 2m, mínimo, máximo e "
+         "média por tipo e distribuição).",
+         f"Soma dos graus = {2 * m} = 2 x m = 2 x {m}"),
+        ("l", 2, ["a", "", "c", "3", "gênero isolado", "l"],
+         "Opção l) — teste 2: após inserir um gênero sem arestas, a opção l passa a acusar "
+         "1 vértice isolado (grau 0).",
+         "vértices isolados: 1"),
+
+        ("m", 1, ["a", "", "m"],
+         "Opção m) — teste 1: coloração por classe com rerotulação por grau: 3 cores, coloração "
+         "válida e triângulo que prova que o número cromático é 3.",
+         ["Cores usadas: 3", "Número cromático = 3"]),
+        ("m", 2, ["m"],
+         "Opção m) — teste 2: coloração sem grafo carregado é bloqueada.",
+         "Nenhum grafo carregado. Use a opção a) primeiro."),
+
+        ("n", 1, ["a", "", "n"],
+         "Opção n) — teste 1: o grafo real não é euleriano nem semieuleriano (52 vértices de "
+         "grau ímpar).",
+         "NÃO EULERIANO"),
+        ("n", 2, ["a", "", "c", "3", "gênero isolado", "n"],
+         "Opção n) — teste 2: com um vértice isolado, o grafo fica desconexo e a análise de Euler "
+         "o indica.",
+         "não euleriano (grafo desconexo)"),
+
+        ("o", 1, ["a", "", "o"],
+         "Opção o) — teste 1: Dirac e Ore não são satisfeitas e a parte dos álbuns (56 > 55 "
+         "vértices independentes) impede ciclo e caminho hamiltonianos.",
+         "NÃO HAMILTONIANO: não admite ciclo nem caminho hamiltoniano"),
+        ("o", 2, ["o"],
+         "Opção o) — teste 2: análise hamiltoniana sem grafo carregado é bloqueada.",
+         "Nenhum grafo carregado. Use a opção a) primeiro."),
+
+        ("p", 1, ["a", "", "p"],
+         "Opção p) — teste 1: o grafo não é bipartido (triângulo artista–álbum–gênero), é "
+         "tripartido e não é planar (m = 349 > 3n − 6 = 321).",
+         ["Bipartido: NÃO", "NÃO PLANAR (m > 3n - 6)"]),
+        ("p", 2, ["a", "", "e", "0", "p"],
+         f"Opção p) — teste 2: mesmo após remover o vértice \"{r[fi]}\", o grafo continua não "
+         "bipartido e não planar.",
+         ["Bipartido: NÃO", "NÃO PLANAR"]),
+
+        ("q", 1, ["q"],
+         "Opção q) — teste 1: a opção q encerra a aplicação imediatamente.",
          "Encerrando a aplicação. Até logo!"),
-        ("j", 2, ["x", "j"],
-         "Opção j) — teste 2: uma opção inválida (\"x\") é rejeitada antes de encerrar com j.",
+        ("q", 2, ["x", "q"],
+         "Opção q) — teste 2: uma opção inválida (\"x\") é rejeitada antes de encerrar com q.",
          ["Opção inválida.", "Encerrando a aplicação. Até logo!"]),
     ]
 
@@ -472,6 +564,7 @@ def main():
             # h) 2 (matriz) recebe um recorte específico de colunas, e não
             # só de linhas, porque a matriz completa (109 colunas) fica
             # larga demais para uma imagem legível.
+            texto = condensar_menus(texto)
             if opcao == "h" and teste == 2:
                 texto = recortar_matriz(texto, dados["n"], dados["recorte_matriz_h2"],
                                          dados["nota_matriz_h2"])

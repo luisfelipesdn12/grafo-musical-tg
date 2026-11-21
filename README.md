@@ -19,6 +19,10 @@ e os dados totalmente verificáveis a partir de uma API aberta.
 Grafo **não orientado, com peso nas arestas** (tipo 2), tripartido entre três tipos de vértice.
 Estado atual: **109 vértices** e **349 arestas**, **conexo** (uma única componente).
 
+Na Parte 3 (versão final), o problema é **resolvido com o algoritmo de Dijkstra** (trilha de
+descoberta de menor custo e recomendação de álbuns) e cinco técnicas da disciplina revelam
+características do grafo (graus, coloração, Euler, Hamilton, bipartição/planaridade).
+
 ### Vértices
 
 | Prefixo do rótulo | Significado | Quantidade |
@@ -31,9 +35,9 @@ Estado atual: **109 vértices** e **349 arestas**, **conexo** (uma única compon
 
 | Ligação | Semântica | Peso |
 |---|---|---|
-| artista — álbum | autoria: o álbum é do artista | `0.00` (custo mínimo — o vínculo é direto) |
-| artista — gênero | o artista está associado ao gênero | `1 − afinidade` |
-| álbum — gênero | o álbum está associado ao gênero | `1 − afinidade` |
+| artista — álbum | autoria: o álbum é do artista | `0.10` (custo mínimo de um passo) |
+| artista — gênero | o artista está associado ao gênero | `0.10 + 0.90 × (1 − afinidade)` |
+| álbum — gênero | o álbum está associado ao gênero | `0.10 + 0.90 × (1 − afinidade)` |
 
 Não há arestas entre vértices do mesmo tipo (grafo tripartido) nem entre um artista e um álbum de
 outro artista — a aresta de autoria liga cada álbum apenas ao seu próprio artista.
@@ -50,8 +54,12 @@ afinidade(g) = votos(g) / votos(gênero mais votado)      # em [0, 1]
 **Peso da aresta (custo de descoberta):**
 
 ```
-peso = 1 − afinidade
+peso = 0.10 + 0.90 × (1 − afinidade)     # em [0.10, 1.00]
 ```
+
+Na Parte 2 o peso era `1 − afinidade` e a autoria custava 0; como o gênero mais votado de cada
+entidade tem afinidade 1, todos os álbuns ficavam ligados por caminhos de custo zero. Com o custo
+mínimo de 0,10 por passo, nenhuma trilha entre álbuns diferentes custa menos de 0,20.
 
 Quanto maior a afinidade (gênero mais consensual para aquele artista/álbum), menor o custo de
 "descobrir" aquele gênero a partir dele — pensando em um algoritmo de caminho mínimo (ex.:
@@ -74,12 +82,12 @@ source .venv/bin/activate       # Linux/macOS
 pip install -r requirements.txt
 ```
 
-**Aplicação de console** (menu a-j sobre `dados/grafo.txt`):
+**Aplicação de console** (menu a-q sobre `dados/grafo.txt`):
 ```bash
 python3 src/app.py
 ```
 
-**Testes automatizados** (22 testes unitários/integração, `unittest`):
+**Testes automatizados** (38 testes unitários/integração, `unittest`):
 ```bash
 python3 -m unittest discover -s testes -v
 ```
@@ -120,7 +128,28 @@ python3 ferramentas/gerar_prints.py
 | g | Mostrar conteúdo do arquivo |
 | h | Mostrar grafo (lista ou matriz de adjacência) |
 | i | Apresentar a conexidade do grafo |
-| j | Encerrar a aplicação |
+| j | Trilha de descoberta de menor custo entre dois vértices (Dijkstra) |
+| k | Recomendar álbuns próximos de um álbum (Dijkstra) |
+| l | Característica: graus dos vértices |
+| m | Característica: coloração de vértices (coloração por classe) |
+| n | Característica: grafo euleriano / percurso euleriano |
+| o | Característica: grafo hamiltoniano / caminho hamiltoniano |
+| p | Característica: bipartição e planaridade |
+| q | Encerrar a aplicação |
+
+Nas opções j e k, o vértice pode ser informado pelo índice ou por parte do nome.
+
+### Resultados da Parte 3
+
+| Técnica | Resultado |
+|---|---|
+| Dijkstra (j) | Blonde (Frank Ocean) → Domingo (Caetano Veloso): 5 passos, custo 0,50 |
+| Recomendação (k) | 5 álbuns de outros artistas mais próximos de um álbum, com a trilha de cada um |
+| Graus (l) | soma = 698 = 2m; 52 vértices de grau ímpar; maior grau: gênero mpb (30) |
+| Coloração (m) | 3 cores; há triângulo, logo χ(G) = 3 |
+| Euler (n) | não admite ciclo nem percurso euleriano |
+| Hamilton (o) | 56 álbuns independentes > (n+1)/2 = 55: não admite ciclo nem caminho hamiltoniano |
+| Bipartição/planaridade (p) | não bipartido (triângulo); m = 349 > 3n − 6 = 321: não planar |
 
 ## Estrutura do repositório
 
@@ -128,7 +157,8 @@ python3 ferramentas/gerar_prints.py
 |---|---|
 | `src/grafo_matriz.py` | Classe `GrafoMatrizPonderado` — grafo não orientado com peso na aresta (tipo 2), matriz de adjacência |
 | `src/arquivo_grafo.py` | Leitura/gravação de `dados/grafo.txt` no formato do enunciado e formatação para exibição |
-| `src/app.py` | Aplicação de console com o menu a-j |
+| `src/algoritmos.py` | Dijkstra, recomendação e técnicas de investigação (graus, coloração, Euler, Hamilton, bipartição, planaridade) |
+| `src/app.py` | Aplicação de console com o menu a-q |
 | `coleta/coletar_musicbrainz.py` | Coleta na API pública do MusicBrainz (artistas, álbuns, gêneros votados) |
 | `coleta/montar_grafo.py` | Monta o grafo tripartido a partir dos dados brutos e grava `dados/` |
 | `coleta/artistas_semente.txt` | Lista dos 16 artistas semente da coleta |
@@ -138,10 +168,9 @@ python3 ferramentas/gerar_prints.py
 | `testes/` | Testes automatizados (`unittest`) de `src/` e `coleta/montar_grafo.py` |
 | `visualizacao/visualizar.py` | Gera o HTML interativo (Plotly), o PNG e o GEXF (Gephi) do grafo |
 | `visualizacao/grafo.png`, `grafo_interativo.html`, `grafo.gexf` | Saídas da visualização |
-| `ferramentas/gerar_prints.py` | Gera as capturas de tela do menu a-j usadas no relatório |
-| `ferramentas/gerar_relatorio.py` | Gera `relatorio/Relatorio_Projeto_TG_Parte2.docx` |
-| `ferramentas/gerar_guia.py` | Gera `relatorio/Guia_Apresentacao.docx`, guia de apoio para a apresentação |
-| `relatorio/` | Relatório, guia de apresentação e figuras usadas neles |
+| `ferramentas/gerar_prints.py` | Gera as capturas de tela do menu a-q usadas no relatório |
+| `ferramentas/gerar_relatorio.py` | Gera `relatorio/Relatorio_Projeto_TG_Parte3.docx` (relatório final) |
+| `relatorio/` | Relatórios (Parte 2 e final) e figuras usadas neles |
 
 ## Fonte dos dados
 
@@ -153,16 +182,17 @@ o campo `coletado_em` de cada arquivo em `dados/brutos/*.json`.
 
 ## Relatório e vídeo
 
-- **Relatório:** [`relatorio/Relatorio_Projeto_TG_Parte2.docx`](relatorio/Relatorio_Projeto_TG_Parte2.docx)
+- **Relatório final (Parte 3):** [`relatorio/Relatorio_Projeto_TG_Parte3.docx`](relatorio/Relatorio_Projeto_TG_Parte3.docx)
+  ([PDF](relatorio/Relatorio_Projeto_TG_Parte3.pdf))
+- **Relatório da Parte 2:** [`relatorio/Relatorio_Projeto_TG_Parte2.docx`](relatorio/Relatorio_Projeto_TG_Parte2.docx)
   ([PDF](relatorio/Relatorio_Projeto_TG_Parte2.pdf))
-- **Vídeo (YouTube):** será publicado no 2º bimestre.
+- **Vídeo (YouTube):** a publicar.
 
-## Próximas etapas
+## Trabalhos futuros
 
-Para o próximo bimestre, está prevista a implementação do algoritmo de **Dijkstra** sobre o grafo
-ponderado, para calcular a "trilha de descoberta" musical de menor custo entre dois vértices
-quaisquer (por exemplo, o caminho de menor custo de descoberta entre um gênero e um artista que
-ainda não tem nenhum álbum associado diretamente a ele).
+Ampliar a semente de artistas para testar a robustez dos gêneros-ponte e usar outras fontes de
+afinidade (por exemplo, colaborações entre artistas) para reduzir os empates de custo causados
+pela escassez de votos de gênero.
 
 ## Observações de ambiente
 

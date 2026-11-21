@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Projeto de Teoria dos Grafos - Parte 2
+Projeto de Teoria dos Grafos - Parte 3
 Descoberta Musical por Grafos: Álbuns, Artistas e Gêneros
 
 Integrante: Luis Felipe Santos do Nascimento - RA 10420572
@@ -44,9 +44,9 @@ class TestMontar(unittest.TestCase):
         self.assertNotIn("[GEN] rock", g.rotulos)
         self.assertIn("[GEN] samba", g.rotulos)
         a, x = g.rotulos.index("[ART] A"), g.rotulos.index("[ALB] X — A")
-        self.assertEqual(g.peso(a, x), 0.0)
+        self.assertEqual(g.peso(a, x), 0.10)  # autoria = CUSTO_MINIMO
         soul, b = g.rotulos.index("[GEN] soul"), g.rotulos.index("[ART] B")
-        self.assertEqual(g.peso(b, soul), 0.67)  # 1 - 1/3
+        self.assertEqual(g.peso(b, soul), 0.70)  # 0,10 + 0,90 x (1 - 1/3)
         for v in range(g.n):
             for w, _ in g.vizinhos(v):
                 self.assertNotEqual(g.tipoVertice(v), g.tipoVertice(w))
@@ -68,8 +68,8 @@ class TestMontar(unittest.TestCase):
         art = g.rotulos.index("[ART] Tim Maia")
         a1970 = g.rotulos.index("[ALB] Tim Maia (1970) — Tim Maia")
         a1973 = g.rotulos.index("[ALB] Tim Maia (1973) — Tim Maia")
-        self.assertEqual(g.peso(art, a1970), 0.0)
-        self.assertEqual(g.peso(art, a1973), 0.0)
+        self.assertEqual(g.peso(art, a1970), 0.10)
+        self.assertEqual(g.peso(art, a1973), 0.10)
         for v in range(g.n):
             self.assertGreater(g.grau(v), 0)  # nenhum vértice fantasma isolado
 
@@ -81,6 +81,23 @@ class TestGrafoReal(unittest.TestCase):
         g = ler(caminho)
         self.assertGreaterEqual(g.n, 80)
         self.assertGreaterEqual(g.m, 200)
+
+    def test_sem_custo_zero(self):
+        # parecer da Parte 2: nenhuma aresta pode ter custo 0, senão os
+        # álbuns ficam ligados por caminhos de custo zero
+        from arquivo_grafo import ler
+        caminho = os.path.join(os.path.dirname(__file__), "..", "dados", "grafo.txt")
+        g = ler(caminho)
+        for v in range(g.n):
+            for _, p in g.vizinhos(v):
+                self.assertGreaterEqual(p, 0.10)
+                self.assertLessEqual(p, 1.0)
+
+    def test_custo_genero(self):
+        from montar_grafo import afinidade_de_custo, custo_genero
+        self.assertEqual(custo_genero(1.0), 0.10)
+        self.assertEqual(custo_genero(0.5), 0.55)
+        self.assertEqual(afinidade_de_custo(0.55), 0.5)
 
 
 if __name__ == "__main__":

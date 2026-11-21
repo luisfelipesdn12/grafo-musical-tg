@@ -18,6 +18,20 @@
   "17_opcao_h_teste3.png": "Opção h) — teste 3: exibir o grafo sem antes carregá-lo (opção a) é bloqueado.",
   "18_opcao_i_teste1.png": "Opção i) — teste 1: o grafo real é CONEXO (1 componente com os 109 vértices).",
   "19_opcao_i_teste2.png": "Opção i) — teste 2: ao remover as 3 arestas do álbum \"[ALB] Ctrl — SZA\", isolando-o, o grafo passa a ser DESCONEXO (o álbum vira uma componente à parte).",
-  "20_opcao_j_teste1.png": "Opção j) — teste 1: a opção j encerra a aplicação imediatamente.",
-  "21_opcao_j_teste2.png": "Opção j) — teste 2: uma opção inválida (\"x\") é rejeitada antes de encerrar com j."
+  "20_opcao_j_teste1.png": "Opção j) — teste 1: trilha de descoberta de menor custo (Dijkstra) entre \"Blonde\" (Frank Ocean, buscado pelo nome) e \"Domingo\" (Caetano Veloso, índice 42), com o custo de cada passo e o acumulado.",
+  "21_opcao_j_teste2.png": "Opção j) — teste 2: um vértice isolado recém-inserido não é alcançável (sem caminho); nome ambíguo (\"Domingo\") lista as opções; índice inválido é rejeitado; Enter cancela.",
+  "22_opcao_k_teste1.png": "Opção k) — teste 1: os 5 álbuns de outros artistas mais próximos de \"Blonde\" (Frank Ocean) pelo custo de descoberta, com os vértices intermediários.",
+  "23_opcao_k_teste2.png": "Opção k) — teste 2: o índice de um artista (0) é recusado (a opção exige um álbum); nome inexistente é rejeitado; quantidade fora de 1 a 10 é recusada e a recomendação de 3 álbuns é feita para \"Fina estampa\" (Caetano Veloso).",
+  "24_opcao_l_teste1.png": "Opção l) — teste 1: graus dos vértices do grafo real (soma = 2m, mínimo, máximo e média por tipo e distribuição).",
+  "25_opcao_l_teste2.png": "Opção l) — teste 2: após inserir um gênero sem arestas, a opção l passa a acusar 1 vértice isolado (grau 0).",
+  "26_opcao_m_teste1.png": "Opção m) — teste 1: coloração por classe com rerotulação por grau: 3 cores, coloração válida e triângulo que prova que o número cromático é 3.",
+  "27_opcao_m_teste2.png": "Opção m) — teste 2: coloração sem grafo carregado é bloqueada.",
+  "28_opcao_n_teste1.png": "Opção n) — teste 1: o grafo real não é euleriano nem semieuleriano (52 vértices de grau ímpar).",
+  "29_opcao_n_teste2.png": "Opção n) — teste 2: com um vértice isolado, o grafo fica desconexo e a análise de Euler o indica.",
+  "30_opcao_o_teste1.png": "Opção o) — teste 1: Dirac e Ore não são satisfeitas e a parte dos álbuns (56 > 55 vértices independentes) impede ciclo e caminho hamiltonianos.",
+  "31_opcao_o_teste2.png": "Opção o) — teste 2: análise hamiltoniana sem grafo carregado é bloqueada.",
+  "32_opcao_p_teste1.png": "Opção p) — teste 1: o grafo não é bipartido (triângulo artista–álbum–gênero), é tripartido e não é planar (m = 349 > 3n − 6 = 321).",
+  "33_opcao_p_teste2.png": "Opção p) — teste 2: mesmo após remover o vértice \"[ART] Frank Ocean\", o grafo continua não bipartido e não planar.",
+  "34_opcao_q_teste1.png": "Opção q) — teste 1: a opção q encerra a aplicação imediatamente.",
+  "35_opcao_q_teste2.png": "Opção q) — teste 2: uma opção inválida (\"x\") é rejeitada antes de encerrar com q."
 }

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Projeto de Teoria dos Grafos - Parte 2
+Projeto de Teoria dos Grafos - Parte 3
 Descoberta Musical por Grafos: Álbuns, Artistas e Gêneros
 
 Integrante: Luis Felipe Santos do Nascimento - RA 10420572
@@ -13,6 +13,9 @@ para layout/exportação; nenhum algoritmo da aplicação depende dele.
 
 Histórico de alterações:
   28/09/2026 - Luis Felipe - criação
+  19/11/2026 - Luis Felipe - Parte 3: afinidade das arestas calculada pelo
+    novo modelo de custos (afinidade_de_custo) e rótulos maiores, para
+    melhorar a legibilidade da figura impressa (parecer da Parte 2)
 """
 import math
 import os
@@ -23,16 +26,18 @@ import plotly.graph_objects as go
 
 RAIZ = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 sys.path.insert(0, os.path.join(RAIZ, "src"))
+sys.path.insert(0, os.path.join(RAIZ, "coleta"))
 from arquivo_grafo import ler  # noqa: E402
+from montar_grafo import afinidade_de_custo  # noqa: E402
 
 CORES = {"ART": "#d1495b", "ALB": "#00798c", "GEN": "#edae49"}
 NOMES = {"ART": "Artista", "ALB": "Álbum", "GEN": "Gênero"}
 # marcadores maiores (proporcionais aos originais) para acompanhar a fonte maior dos rótulos
 TAMANHOS = {"ART": 34, "ALB": 17, "GEN": 25}
-FONTE_ROTULO = 22  # px na figura (width=1400, scale=2): 22px*2/444dpi*72pt ≈ 7,1pt impresso
+FONTE_ROTULO = 24  # px na figura (width=1400, scale=2): 24px*2/444dpi*72pt ≈ 7,8pt impresso
 # a 16 cm de largura no relatório (2800 px / (16 cm / 2,54) ≈ 444 dpi)
-GRAU_MINIMO_ROTULO_GEN = 5  # gêneros com grau abaixo disso ficam só no hover (reduz poluição)
-DIST_MINIMA_ROTULO = 0.09  # separação mínima forçada entre nós rotulados (ver
+GRAU_MINIMO_ROTULO_GEN = 8  # gêneros com grau abaixo disso ficam só no hover (reduz poluição)
+DIST_MINIMA_ROTULO = 0.16  # separação mínima forçada entre nós rotulados (ver
 # afastar_rotulos_proximos); sem isso, pares quase coincidentes (ex.: gêneros
 # "latin"/"mpb", que compartilham quase os mesmos álbuns) não cabem em nenhuma
 # das 8 direções de texto, por maior que seja o afastamento do rótulo
@@ -132,7 +137,7 @@ def para_networkx(g):
     for v in range(g.n):
         for w, p in g.vizinhos(v):
             if v < w:
-                G.add_edge(v, w, weight=round(1 - p, 2), custo=p)  # weight = afinidade
+                G.add_edge(v, w, weight=afinidade_de_custo(p), custo=p)  # weight = afinidade
     return G
 
 
@@ -211,7 +216,7 @@ def main():
     caminho = sys.argv[1] if len(sys.argv) > 1 else os.path.join(RAIZ, "dados", "grafo.txt")
     g = ler(caminho)
     G = para_networkx(g)
-    pos = nx.spring_layout(G, weight="weight", seed=42, k=0.35, iterations=200)
+    pos = nx.spring_layout(G, weight="weight", seed=42, k=0.6, iterations=300)
     # afasta minimamente pares de nós rotulados quase coincidentes (ex.: gêneros
     # que compartilham quase os mesmos álbuns), só o suficiente para o texto não
     # se sobrepor; usa a mesma posição ajustada na figura e no GEXF, então HTML,

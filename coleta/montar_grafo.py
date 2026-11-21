@@ -8,13 +8,19 @@ Integrante: Luis Felipe Santos do Nascimento - RA 10420572
 Síntese: transforma os dados brutos do MusicBrainz (dados/brutos/*.json)
 no grafo tripartido álbum-artista-gênero e grava dados/grafo.txt,
 dados/vertices.csv e dados/arestas.csv.
-Peso da aresta = custo de descoberta = 1 - afinidade.
+Peso da aresta = custo de descoberta: autoria = CUSTO_MINIMO (0,10) e
+gênero = CUSTO_MINIMO + (1 - CUSTO_MINIMO) * (1 - afinidade), em [0,10; 1].
 
 Histórico de alterações:
   28/09/2026 - Luis Felipe - criação
   28/09/2026 - Luis Felipe - corrige colisão de rótulo quando o mesmo
     artista tem álbuns de mesmo título (ex.: os 4 "Tim Maia" 1970-73);
     acrescenta rotular_albuns() para desambiguar com o ano
+  19/11/2026 - Luis Felipe - Parte 3: reavaliação dos custos (parecer da
+    Parte 2). Nenhuma aresta tem mais custo 0: a autoria passa a custar
+    CUSTO_MINIMO e as arestas de gênero 0,10 + 0,90 x (1 - afinidade),
+    de modo que todo passo da trilha de descoberta tem custo positivo e os
+    56 álbuns deixam de estar ligados por caminhos de custo zero
 """
 import csv
 import glob
@@ -26,6 +32,20 @@ RAIZ = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 sys.path.insert(0, os.path.join(RAIZ, "src"))
 from grafo_matriz import GrafoMatrizPonderado  # noqa: E402
 from arquivo_grafo import gravar  # noqa: E402
+
+
+CUSTO_MINIMO = 0.10   # custo de um passo de afinidade máxima (nenhum passo é "de graça")
+
+
+def custo_genero(afinidade):
+    """Custo de descoberta de uma aresta de gênero: 0,10 para a afinidade
+    máxima (1,0) e cresce linearmente até 1,00 quando a afinidade tende a 0."""
+    return round(CUSTO_MINIMO + (1 - CUSTO_MINIMO) * (1 - afinidade), 2)
+
+
+def afinidade_de_custo(custo):
+    """Inverso de custo_genero (usado na exportação e na visualização)."""
+    return round(1 - (custo - CUSTO_MINIMO) / (1 - CUSTO_MINIMO), 2)
 
 
 def limpar(texto):
@@ -107,11 +127,11 @@ def construir(artistas, max_albuns=4, max_generos=5):
     for rotulo in rot_art + rot_alb + [f"[GEN] {limpar(n)}" for n in generos]:
         indice[rotulo] = g.insereV(rotulo)
     for ra, rb in autoria:
-        g.insereA(indice[ra], indice[rb], 0.0)
+        g.insereA(indice[ra], indice[rb], CUSTO_MINIMO)
     for origem, nome, af in ligacoes:
         rg = f"[GEN] {limpar(nome)}"
         if rg in indice:
-            g.insereA(indice[origem], indice[rg], round(1 - af, 2))
+            g.insereA(indice[origem], indice[rg], custo_genero(af))
     return g
 
 
@@ -137,7 +157,8 @@ def exportar_csv(g, pasta):
             for w, p in g.vizinhos(v):
                 if v < w:
                     rel = "-".join(sorted([g.tipoVertice(v), g.tipoVertice(w)]))
-                    esc.writerow([v, w, f"{p:.2f}", f"{1 - p:.2f}", rel])
+                    af = 1.0 if rel == "ALB-ART" else afinidade_de_custo(p)
+                    esc.writerow([v, w, f"{p:.2f}", f"{af:.2f}", rel])
 
 
 if __name__ == "__main__":

@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-Projeto de Teoria dos Grafos - Parte 2
+Projeto de Teoria dos Grafos - Parte 3
 Descoberta Musical por Grafos: Álbuns, Artistas e Gêneros
 
 Integrante: Luis Felipe Santos do Nascimento - RA 10420572
 
-Síntese: gera o relatório final da Parte 2
-(relatorio/Relatorio_Projeto_TG_Parte2.docx) a partir do template da
+Síntese: gera o relatório final do projeto (Parte 3)
+(relatorio/Relatorio_Projeto_TG_Parte3.docx) a partir do template da
 disciplina (cabeçalho, logotipo e estilos do Mackenzie). Todas as
 estatísticas do grafo (n, m, quantidades por tipo e por relação, graus,
 densidade, componentes, gêneros e artistas-ponte entre as cenas, exemplo
@@ -22,7 +22,13 @@ Uso: python3 ferramentas/gerar_relatorio.py
 
 Histórico de alterações:
   28/09/2026 - Luis Felipe - criação
+  19/11/2026 - Luis Felipe - Parte 3: template do relatório final, novo
+    modelo de custos, seções da solução (Dijkstra e recomendação) e das
+    características do grafo (graus, coloração, Euler, Hamilton,
+    bipartição e planaridade), atendimento ao parecer da Parte 2,
+    conclusão e declaração do template
 """
+import copy
 import glob
 import inspect
 import io
@@ -46,11 +52,14 @@ RAIZ = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), 
 sys.path.insert(0, os.path.join(RAIZ, "src"))
 sys.path.insert(0, os.path.join(RAIZ, "coleta"))
 from arquivo_grafo import ler  # noqa: E402
-from montar_grafo import (afinidades, carregar_brutos, construir, escolher_albuns,  # noqa: E402
-                          rotular_albuns)
+from montar_grafo import (CUSTO_MINIMO, afinidade_de_custo, afinidades, carregar_brutos, construir,  # noqa: E402
+                          escolher_albuns, rotular_albuns)
+import algoritmos as ALG  # noqa: E402
 
-TEMPLATE = os.path.join(RAIZ, "..", "parte 2 projeto", "projetoTG_parte2_templateRelatorio.docx")
-SAIDA = os.path.join(RAIZ, "relatorio", "Relatorio_Projeto_TG_Parte2.docx")
+TEMPLATE = os.path.join(RAIZ, "..", "parte 3 projeto", "projetoTG_parte3_templateRelatorio.docx")
+SAIDA = os.path.join(RAIZ, "relatorio", "Relatorio_Projeto_TG_Parte3.docx")
+FIG_TRILHA = os.path.join(RAIZ, "relatorio", "figuras", "trilha.png")
+VIDEO = "[inserir o link do vídeo no YouTube]"
 PASTA_PRINTS = os.path.join(RAIZ, "relatorio", "figuras", "prints")
 FIG_GEPHI = os.path.join(RAIZ, "relatorio", "figuras", "gephi.png")
 FIG_PLOTLY = os.path.join(RAIZ, "visualizacao", "grafo.png")
@@ -99,7 +108,7 @@ def frase_tim(e):
         return (f"os {extenso} gêneros mais votados do artista Tim Maia "
                 f"({lista_pt([ln[0] for ln in top])}) empatam com {v} "
                 f"voto{'s' if v > 1 else ''} cada e, por isso, todas as suas arestas de gênero "
-                "recebem custo 0,00")
+                "recebem o custo mínimo 0,10")
     return ("com o artista Tim Maia, os gêneros recebem custos "
             + ", ".join(f"{ln[0]} {fmt(ln[4])}" for ln in top if ln[4] is not None))
 
@@ -208,7 +217,7 @@ def calcular_estatisticas():
         for w, p in g.vizinhos(v):
             if w in ids_ponte:
                 forca[dono]["arestas"] += 1
-                forca[dono]["afinidade"] += 1 - p
+                forca[dono]["afinidade"] += afinidade_de_custo(p)
                 forca[dono]["generos"].add(g.rotulos[w][6:])
     artistas_ponte = []
     for c in ("rnb", "mpb"):
@@ -236,7 +245,7 @@ def calcular_estatisticas():
                         next(v for v in range(g.n) if tipo[v] == "ALB" and cena[v] == "rnb"))
     candidatos = [v for v in range(g.n) if tipo[v] == "ALB" and cena[v] == "mpb"
                   and g.rotulos[v].endswith("Caetano Veloso")]
-    destino = indice.get("[ALB] Transa — Caetano Veloso",
+    destino = indice.get("[ALB] Domingo — Caetano Veloso",
                          candidatos[0] if candidatos else
                          next(v for v in range(g.n) if tipo[v] == "ALB" and cena[v] == "mpb"))
     dist, pred = bfs_dist(g, origem)
@@ -267,14 +276,14 @@ def calcular_estatisticas():
     e["sem_genero_cena"] = dict(sem_genero_cena)
     e["data_coleta"] = sorted({a.get("coletado_em", "") for a in brutos})
     ag = [p for p in pesos_rel["ALB-GEN"] + pesos_rel["ART-GEN"]]
-    e["gen_custo_zero"] = (sum(1 for p in ag if p == 0.0), len(ag))
+    e["gen_custo_zero"] = (sum(1 for p in ag if abs(p - CUSTO_MINIMO) < 1e-9), len(ag))
     zero_cena = defaultdict(lambda: [0, 0])
     for v in range(g.n):
         if tipo[v] == "ALB":
             for w, p in g.vizinhos(v):
                 if tipo[w] == "GEN":
                     zero_cena[cena[v]][1] += 1
-                    zero_cena[cena[v]][0] += p == 0.0
+                    zero_cena[cena[v]][0] += abs(p - CUSTO_MINIMO) < 1e-9
     e["zero_cena"] = dict(zero_cena)
 
     # exemplo numérico: Blonde (Frank Ocean) e artista Tim Maia
@@ -286,7 +295,85 @@ def calcular_estatisticas():
     e["ex_artista"] = ("Tim Maia", exemplo_pesos(g, indice, "[ART] Tim Maia", tim["genres"]))
     sel_tim = escolher_albuns(tim["albuns"], 4)
     e["ex_tim_rotulos"] = rotular_albuns(sel_tim, "Tim Maia")
+    e["parte3"] = calcular_parte3(g, tipo, origem, destino)
     return e
+
+
+def calcular_parte3(g, tipo, origem, destino):
+    """Resultados das técnicas da Parte 3, calculados com src/algoritmos.py."""
+    r = {}
+    custo, rota = ALG.trilha_descoberta(g, origem, destino)
+    r["trilha"] = (custo, rota)
+    _, pred_bfs = bfs_dist(g, origem)
+    rota_bfs, v = [], destino
+    while v is not None:
+        rota_bfs.append(v)
+        v = pred_bfs[v]
+    rota_bfs.reverse()
+    r["trilha_bfs"] = (sum(g.peso(a, b) for a, b in zip(rota_bfs, rota_bfs[1:])), rota_bfs)
+    r["recomendacoes"] = ALG.recomendar_albuns(g, origem, 5)
+    r["origem"], r["destino"] = origem, destino
+    # distâncias de menor custo entre todos os pares de álbuns: modelo novo
+    # e modelo antigo da Parte 2 (autoria = 0; gênero = 1 - afinidade)
+    albuns = [v for v in range(g.n) if tipo[v] == "ALB"]
+    antigo = copy.deepcopy(g)
+    for v in range(g.n):
+        for w, p in g.vizinhos(v):
+            if tipo[v] == "ALB" and tipo[w] == "ART" or tipo[v] == "ART" and tipo[w] == "ALB":
+                antigo.adj[v][w] = 0.0
+            else:
+                antigo.adj[v][w] = round((p - CUSTO_MINIMO) / (1 - CUSTO_MINIMO), 2)
+    novos, velhos = [], []
+    for a in albuns:
+        dn, _ = ALG.dijkstra(g, a)
+        dv, _ = ALG.dijkstra(antigo, a)
+        for b in albuns:
+            if b > a:
+                novos.append(round(dn[b], 2))
+                velhos.append(round(dv[b], 2))
+    r["pares"] = len(novos)
+    r["novo"] = {"min": min(novos), "max": max(novos), "media": sum(novos) / len(novos),
+                 "zero": sum(1 for x in novos if x == 0), "distintos": len(set(novos))}
+    r["velho"] = {"min": min(velhos), "max": max(velhos), "media": sum(velhos) / len(velhos),
+                  "zero": sum(1 for x in velhos if x == 0), "distintos": len(set(velhos))}
+    r["graus"] = ALG.resumo_graus(g)
+    r["classes"] = ALG.coloracao_por_classe(g)
+    r["coloracao_ok"] = ALG.coloracao_valida(g, r["classes"])
+    r["triangulo"] = ALG.encontrar_triangulo(g)
+    conexo = g.ehConexo()
+    r["euler"] = ALG.analise_euler(g, conexo)
+    r["hamilton"] = ALG.analise_hamilton(g, conexo)
+    r["bipartido"] = ALG.eh_bipartido(g)
+    r["planar"] = ALG.analise_planaridade(g)
+    return r
+
+
+def gerar_trilha(caminho, g, rota):
+    """Desenha (matplotlib) a trilha de descoberta como uma sequência de
+    vértices coloridos por tipo, com o custo de cada aresta - figura com
+    rótulos grandes e sem sobreposição."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    cores = {"ART": "#d1495b", "ALB": "#00798c", "GEN": "#edae49"}
+    k = len(rota)
+    fig, ax = plt.subplots(figsize=(8.0, 1.2 + 0.95 * k), dpi=200)
+    for i, v in enumerate(rota):
+        y = k - 1 - i
+        ax.scatter([0], [y], s=700, color=cores[g.tipoVertice(v)], zorder=2,
+                   edgecolors="white", linewidths=2)
+        ax.text(0.35, y, g.rotulos[v], va="center", fontsize=12, color="#222222")
+        if i:
+            ax.plot([0, 0], [y, y + 1], color="#555555", lw=2, zorder=1)
+            ax.text(-0.25, y + 0.5, f"{fmt(g.peso(rota[i - 1], v))}", ha="right", va="center",
+                    fontsize=11, color="#444444")
+    ax.text(-0.25, k - 0.35, "custo", ha="right", fontsize=10, style="italic", color="#444444")
+    ax.set_xlim(-1.2, 6.5)
+    ax.set_ylim(-0.6, k - 0.2)
+    ax.axis("off")
+    fig.tight_layout()
+    fig.savefig(caminho, facecolor="white")
+    plt.close(fig)
 
 
 def exemplo_pesos(g, indice, rotulo, genres):
@@ -336,7 +423,8 @@ def historico_git():
     try:
         saida = subprocess.run(["git", "-C", RAIZ, "log", "--reverse", "--date=format:%d/%m/%Y",
                                 "--format=%ad|%h|%s"], capture_output=True, text=True, check=True)
-        return [linha.split("|", 2) for linha in saida.stdout.splitlines() if linha]
+        return [linha.split("|", 2) for linha in saida.stdout.splitlines()
+                if linha and "guia" not in linha.lower()]
     except (OSError, subprocess.CalledProcessError):
         return []
 
@@ -352,10 +440,10 @@ def gerar_esquema(caminho, pt, pr):
     nomes = {"ART": f"Artista [ART]\n{pt['ART']} vértices",
              "ALB": f"Álbum [ALB]\n{pt['ALB']} vértices",
              "GEN": f"Gênero [GEN]\n{pt['GEN']} vértices"}
-    arestas = [("ALB", "ART", f"autoria\npeso = 0,00\n({pr['ALB-ART']} arestas)", (-0.62, 0.0)),
-               ("ALB", "GEN", f"classificação pela\ncomunidade\npeso = 1 − a\n({pr['ALB-GEN']} arestas)",
+    arestas = [("ALB", "ART", f"autoria\npeso = 0,10\n({pr['ALB-ART']} arestas)", (-0.62, 0.0)),
+               ("ALB", "GEN", f"classificação pela\ncomunidade\npeso = 0,10 + 0,90(1 − a)\n({pr['ALB-GEN']} arestas)",
                 (0.62, 0.0)),
-               ("ART", "GEN", f"artista transita pelo gênero\npeso = 1 − a  ({pr['ART-GEN']} arestas)",
+               ("ART", "GEN", f"artista transita pelo gênero\npeso = 0,10 + 0,90(1 − a)  ({pr['ART-GEN']} arestas)",
                 (0.0, -0.28))]
     fig, ax = plt.subplots(figsize=(7.5, 4.4), dpi=200)
     for a, b, texto, (dx, dy) in arestas:
@@ -593,12 +681,17 @@ def preparar_template():
     # de integrantes e o título grande "Relatório"; apaga as instruções
     tabela = doc.tables[0]._tbl
     pos_tab = elems.index(tabela)
+    # guarda a "Declaração de uso de IA generativa" do template (vai ao final)
+    inicio_decl = next((i for i, el in enumerate(elems) if el.tag == qn("w:p")
+                        and "Declaração de uso" in "".join(t.text or "" for t in el.iter(qn("w:t")))),
+                       len(elems))
+    doc._declaracao = [copy.deepcopy(el) for el in elems[inicio_decl:]
+                       if el.tag != qn("w:sectPr")]
     for el in elems[pos_tab + 3:]:
         if el.tag != qn("w:sectPr"):
             corpo.remove(el)
     ps = doc.paragraphs
-    trocar_texto(ps[3], "Parte 2")
-    trocar_texto(ps[6], TITULO)   # parágrafo que continha "Relatório"
+    trocar_texto(ps[5], TITULO)   # parágrafo que continha "Relatório"
     # tabela de integrantes: 1 linha preenchida
     t = doc.tables[0]
     for linha in list(t.rows)[2:]:
@@ -649,6 +742,7 @@ def escrever(doc, e):
     pt, pr = e["por_tipo"], e["por_relacao"]
     comp = e["componentes"]
     conexo = len(comp) == 1
+    p3 = e["parte3"]
 
     # ---------------------------------------------------------- identificação
     R.par(f"**Integrante:** {NOME} – RA {RA} – {EMAIL}", recuo=False,
@@ -657,35 +751,40 @@ def escrever(doc, e):
           "Prof. Dr. Ivan Carlos Alcântara de Oliveira", recuo=False,
           alinhamento=WD_ALIGN_PARAGRAPH.CENTER, depois=2, tam=10)
     R.par("Faculdade de Computação e Informática – Universidade Presbiteriana Mackenzie – "
-          "São Paulo, setembro de 2026", recuo=False, alinhamento=WD_ALIGN_PARAGRAPH.CENTER,
+          "São Paulo, novembro de 2026", recuo=False, alinhamento=WD_ALIGN_PARAGRAPH.CENTER,
           depois=10, tam=10)
     R.par(f"**Título da aplicação:** Descoberta Musical por Grafos – Álbuns, Artistas e Gêneros. "
-          f"**Repositório:** {GITHUB}", recuo=False, alinhamento=WD_ALIGN_PARAGRAPH.CENTER,
+          f"**Repositório:** {GITHUB} – **Vídeo:** {VIDEO}", recuo=False, alinhamento=WD_ALIGN_PARAGRAPH.CENTER,
           depois=12)
 
     # ---------------------------------------------------------- resumo
     R.h1("Resumo")
     R.par(
-        "Este relatório apresenta a segunda parte do projeto da disciplina de Teoria dos Grafos: "
-        "a modelagem, como grafo, de um problema real de descoberta musical. Atendendo ao parecer "
+        "Este relatório final apresenta o projeto da disciplina de Teoria dos Grafos: "
+        "a modelagem, como grafo, de um problema real de descoberta musical e a sua solução. Atendendo ao parecer "
         "da Parte 1, o escopo foi reduzido e os usuários foram retirados do modelo; o grafo passou "
         "a conter exclusivamente álbuns, artistas e gêneros, obtidos de metadados públicos da base "
         f"colaborativa MusicBrainz (MUSICBRAINZ, [2026]). A partir de {len(e['coleta'])} artistas "
         "semente – oito do R&B alternativo/hip-hop norte-americano e oito da Música Popular "
         f"Brasileira (MPB) – foi construído um grafo tripartido, não orientado e ponderado nas "
         f"arestas (tipo 2), com {e['n']} vértices ({pt['ART']} artistas, {pt['ALB']} álbuns e "
-        f"{pt['GEN']} gêneros) e {e['m']} arestas. O peso de cada aresta é um custo de descoberta, "
-        "definido como 1 menos a afinidade entre as entidades, em que a afinidade de gênero é "
-        "derivada dos votos da comunidade do MusicBrainz. O grafo é representado por matriz de "
-        "adjacência em Python, manipulado por uma aplicação de console com menu de dez opções "
-        "(leitura e gravação de arquivo, inserção e remoção de vértices e arestas, exibição e "
-        f"conexidade) e validado por {e['testes_total']} testes automatizados. A análise mostra "
-        f"um grafo {'conexo' if conexo else 'desconexo'}, de densidade {fmt(e['densidade'], 3)}, "
-        f"em que gêneros como {lista_pt(e['pontes_resumo'])} funcionam "
-        "como pontes entre as duas cenas musicais. A próxima etapa aplicará o algoritmo de "
-        "Dijkstra para encontrar a trilha de descoberta de menor custo entre dois álbuns.")
+        f"{pt['GEN']} gêneros) e {e['m']} arestas. O peso de cada aresta é um custo de descoberta "
+        "positivo, que diminui com a afinidade entre as entidades, derivada dos votos da "
+        "comunidade do MusicBrainz; atendendo ao parecer da Parte 2, os custos foram reavaliados "
+        "para que nenhum par de álbuns fique ligado por caminho de custo zero. O grafo é "
+        "representado por matriz de adjacência em Python e manipulado por uma aplicação de console "
+        "com 17 opções. Como solução do problema, o algoritmo de Dijkstra calcula a trilha de "
+        "descoberta de menor custo entre dois vértices e recomenda os álbuns mais próximos de um "
+        "álbum de partida. Cinco técnicas da disciplina revelam características do grafo: graus, "
+        f"coloração de vértices (número cromático {len(p3['classes'])}), grafo euleriano (não "
+        "admite ciclo nem percurso), grafo hamiltoniano (não admite ciclo nem caminho) e "
+        "bipartição e planaridade (não bipartido e não planar). A aplicação é validada por "
+        f"{e['testes_total']} testes automatizados. A análise mostra um grafo "
+        f"{'conexo' if conexo else 'desconexo'}, de densidade {fmt(e['densidade'], 3)}, em que "
+        f"gêneros como {lista_pt(e['pontes_resumo'])} funcionam como pontes entre as duas "
+        "cenas musicais.")
     R.par("**Palavras-chave:** teoria dos grafos; grafo tripartido; matriz de adjacência; "
-          "descoberta musical; MusicBrainz.", recuo=False)
+          "descoberta musical; algoritmo de Dijkstra; MusicBrainz.", recuo=False)
 
     # ---------------------------------------------------------- 1 introdução
     R.h1("1 Introdução")
@@ -721,8 +820,8 @@ def escrever(doc, e):
     R.par(
         "**Objetivo geral:** modelar, como grafo tripartido ponderado, as relações entre álbuns, "
         "artistas e gêneros de duas cenas musicais reais e desenvolver um protótipo que carregue, "
-        "edite, exiba e analise esse grafo, preparando a função central do próximo bimestre: a "
-        "\"trilha de descoberta\" de menor custo entre dois álbuns.")
+        "edite, exiba e analise esse grafo e que resolva a sua função central: a \"trilha de "
+        "descoberta\" de menor custo entre dois álbuns.")
     R.par("**Objetivos específicos:**", recuo=False, depois=3)
     for texto in (
             "coletar, da API pública do MusicBrainz, os álbuns de estúdio e os votos de gênero de "
@@ -731,15 +830,20 @@ def escrever(doc, e):
             "gerar o arquivo grafo.txt (tipo 2) com pelo menos 80 vértices e 200 arestas;",
             "implementar a classe do grafo por matriz de adjacência e a aplicação com menu a–j;",
             "testar a aplicação e analisar a estrutura do grafo (graus, densidade, conexidade e "
-            "gêneros que ligam as cenas)."):
+            "gêneros que ligam as cenas);",
+            "aplicar o algoritmo de Dijkstra para calcular a trilha de descoberta e recomendar "
+            "álbuns próximos;",
+            "investigar características do grafo com técnicas da disciplina: graus, coloração, "
+            "grafo euleriano, grafo hamiltoniano, bipartição e planaridade."):
         R.item(texto)
     R.h2("1.4 Definição do problema")
     R.par(
         "Dado um grafo tripartido G = (V, E, w), com V = ART ∪ ALB ∪ GEN e w(e) = 1 − afinidade, "
         "o problema central é, dados dois álbuns s e t, encontrar o caminho s–t de menor custo "
-        "total (trilha de descoberta). Nesta etapa, constrói-se, valida-se e analisa-se G; o "
-        "algoritmo de caminho mínimo é implementado na próxima.")
-    R.h2("1.5 Atendimento ao parecer da Parte 1")
+        "total (trilha de descoberta). O mesmo cálculo, feito a partir de um único álbum, "
+        "ordena todos os álbuns de outros artistas pelo custo de descoberta e fornece uma "
+        "recomendação. A solução usa o algoritmo de Dijkstra, estudado na disciplina.")
+    R.h2("1.5 Atendimento aos pareceres das Partes 1 e 2")
     R.par(
         "A proposta da Parte 1 recebeu nota 8,0, com a recomendação de reduzir o escopo, retirar "
         f"os usuários e trabalhar \"exclusivamente com álbuns, artistas e gêneros\". A Tabela {R.ntab + 1} "
@@ -765,9 +869,37 @@ def escrever(doc, e):
           "de gênero, com exemplo numérico real.", "Seção 5.2, Tabela 5"],
          ["Garantir ≥ 80 vértices e ≥ 200 arestas",
           f"Grafo real com {e['n']} vértices e {e['m']} arestas, verificado por teste automático.",
-          "Seções 5.5 e 5.6"],
+          "Seções 5.5 e 5.8"],
          ["Contextualização extensa em relação à delimitação computacional",
           "Contextualização reduzida e voltada ao problema computacional.", "Seção 1.1"]],
+        larguras=[5.0, 8.5, 2.5])
+    R.par(
+        "A Parte 2 recebeu nota 97,5. A Tabela "
+        f"{R.ntab + 1} relaciona os aspectos a melhorar apontados no parecer às mudanças feitas "
+        "nesta etapa final.")
+    nv, vl = p3["novo"], p3["velho"]
+    R.tabela(
+        "Pontos do parecer da Parte 2 e como foram atendidos",
+        ["Ponto do parecer", "Resposta na Parte 3", "Onde"],
+        [["Entregar a rubrica de autoavaliação",
+          "Rubrica da Parte 3 preenchida e entregue em Word junto com este relatório.", "Entrega"],
+         ["Entregar todos os módulos (faltaram arquivo_grafo.py e grafo_matriz.py)",
+          "Todos os arquivos-fonte (src/, coleta/, testes/, ferramentas/ e visualizacao/) e o "
+          "grafo.txt vão no pacote da entrega e estão no GitHub.", "Entrega e Apêndice A"],
+         ["Melhorar a legibilidade dos rótulos nas figuras",
+          "Layout do grafo mais espaçado, fonte maior e rótulos só nos vértices principais; "
+          "a trilha de descoberta ganhou uma figura própria, com rótulos completos.",
+          "Seções 5.4 e 5.6"],
+         ["Assegurar a reprodução dos resultados",
+          "Todos os números do relatório são calculados pelo script gerador a partir de "
+          "dados/grafo.txt e dos JSON brutos versionados; o Apêndice A lista os comandos.",
+          "Apêndice A"],
+         ["Reavaliar os custos: os 56 álbuns estavam ligados por caminhos de custo zero",
+          f"Autoria passou a custar {fmt(CUSTO_MINIMO)} e as arestas de gênero "
+          "0,10 + 0,90 × (1 − a). Entre os "
+          f"{milhar(p3['pares'])} pares de álbuns, os de custo zero caíram de {milhar(vl['zero'])} "
+          f"para {nv['zero']} e o custo mínimo passou a variar de {fmt(nv['min'])} a "
+          f"{fmt(nv['max'])}.", "Seções 5.2 e 5.6"]],
         larguras=[5.0, 8.5, 2.5])
 
     # ---------------------------------------------------------- 2 fundamentação
@@ -813,12 +945,41 @@ def escrever(doc, e):
         "simétrica. Com n na casa das centenas, a matriz cabe com folga na memória e segue a "
         "estrutura trabalhada em aula, razão pela qual foi escolhida.")
     R.par(
-        "Por fim, o problema do **caminho mínimo** busca o caminho de menor custo entre dois "
-        "vértices. O algoritmo de Dijkstra o resolve quando todos os pesos são não negativos "
-        "(CORMEN et al., 2001). Esse requisito orientou a definição do peso deste projeto como "
-        "custo em [0; 1), e não como similaridade: quanto menor o peso, mais próximas estão as "
-        "entidades, e um caminho de custo baixo corresponde a uma sequência de passos de "
-        "descoberta \"naturais\".")
+        "O problema do **caminho mínimo** busca o caminho de menor custo entre dois "
+        "vértices. O **algoritmo de Dijkstra** o resolve quando todos os pesos são não negativos: "
+        "mantém uma estimativa de distância para cada vértice, escolhe a cada passo o vértice "
+        "ainda aberto de menor estimativa, fecha-o e relaxa as arestas que saem dele; na versão "
+        "com matriz de adjacência o custo é O(n²) (CORMEN et al., 2001). Esse requisito orientou a "
+        "definição do peso deste projeto como custo positivo, e não como similaridade: quanto "
+        "menor o peso, mais próximas estão as entidades, e um caminho de custo baixo corresponde "
+        "a uma sequência de passos de descoberta \"naturais\".")
+    R.par(
+        "Uma **coloração de vértices** atribui cores aos vértices de modo que vértices adjacentes "
+        "tenham cores diferentes; o menor número de cores possível é o **número cromático** χ(G). "
+        "Encontrar χ(G) é um problema difícil, e por isso usam-se heurísticas como a **coloração "
+        "por classe**: os vértices são rerotulados em ordem decrescente de grau e cada classe de "
+        "cor recebe, nessa ordem, todos os vértices ainda sem cor que não sejam adjacentes a "
+        "nenhum vértice da classe. Um grafo k-partido admite coloração com k cores, e a "
+        "presença de um triângulo (K3) exige pelo menos três (BONDY; MURTY, 2010). Um grafo é "
+        "**bipartido** se, e somente se, não possui ciclo de comprimento ímpar, o que pode ser "
+        "testado por uma 2-coloração feita com busca em largura.")
+    R.par(
+        "Um **ciclo euleriano** percorre cada aresta exatamente uma vez e volta ao início; pelo "
+        "teorema de Euler, um grafo conexo o admite se, e somente se, todos os vértices têm grau "
+        "par, e admite **percurso euleriano** aberto se, e somente se, tem exatamente dois "
+        "vértices de grau ímpar. Um **ciclo hamiltoniano** passa por cada vértice exatamente uma "
+        "vez. Não há caracterização simples, mas há condições suficientes: pelo **teorema de "
+        "Dirac**, um grafo simples com n ≥ 3 em que todo vértice tem grau ≥ n/2 é hamiltoniano; "
+        "pelo **teorema de Ore**, basta que d(u) + d(v) ≥ n para todo par de vértices não "
+        "adjacentes. Há também uma condição necessária: se existe um conjunto independente S "
+        "(sem arestas internas) com |S| > n/2, não há ciclo hamiltoniano, pois no ciclo dois "
+        "vértices de S nunca podem ser consecutivos; com |S| > (n + 1)/2 não há nem caminho "
+        "hamiltoniano (BONDY; MURTY, 2010; DIESTEL, 2010).")
+    R.par(
+        "Por fim, um grafo é **planar** quando pode ser desenhado no plano sem cruzamento de "
+        "arestas. Da fórmula de Euler n − m + f = 2 decorre que todo grafo planar simples com "
+        "n ≥ 3 tem m ≤ 3n − 6 (e m ≤ 2n − 4 se não tiver triângulos); se a desigualdade falha, "
+        "o grafo certamente não é planar (BONDY; MURTY, 2010).")
 
     # ---------------------------------------------------------- 3 trabalhos relacionados
     R.h1("3 Trabalhos relacionados")
@@ -864,7 +1025,7 @@ def escrever(doc, e):
 
     # ---------------------------------------------------------- 4 metodologia
     R.h1("4 Metodologia")
-    R.par("O trabalho foi organizado em oito etapas, todas automatizadas por scripts do "
+    R.par("O trabalho foi organizado em dez etapas, todas automatizadas por scripts do "
           "repositório, de modo que qualquer resultado deste relatório pode ser reproduzido:")
     for texto in (
             "**Seleção da semente:** 16 artistas escolhidos pelo autor, oito de R&B "
@@ -885,7 +1046,13 @@ def escrever(doc, e):
             "**Validação:** o script verifica n ≥ 80 e m ≥ 200 e os testes conferem o tipo 2 e a "
             "tripartição; a leitura com a própria classe da aplicação garante que o arquivo é "
             "válido.",
-            "**Aplicação:** src/app.py oferece o menu a–j sobre a classe GrafoMatrizPonderado.",
+            "**Aplicação:** src/app.py oferece o menu a–q sobre a classe GrafoMatrizPonderado.",
+            "**Solução:** src/algoritmos.py implementa o algoritmo de Dijkstra sobre a matriz "
+            "de adjacência, usado na trilha de descoberta (opção j) e na recomendação de álbuns "
+            "(opção k).",
+            "**Características:** o mesmo módulo implementa as técnicas de investigação do grafo "
+            "(opções l a p): graus, coloração por classe, Euler, Hamilton, bipartição e "
+            "planaridade.",
             "**Testes:** testes automatizados com unittest e roteiros de uso do menu, "
             "registrados em imagens (ao menos dois testes por opção).",
             "**Visualização e análise:** visualizacao/visualizar.py desenha o grafo (Plotly) e o "
@@ -894,7 +1061,7 @@ def escrever(doc, e):
         R.item(texto)
 
     # ---------------------------------------------------------- 5 resultados
-    R.h1("5 Resultados parciais")
+    R.h1("5 Resultados")
     R.h2("5.1 Coleta dos dados")
     total_est = sum(c["estudio"] for c in e["coleta"])
     total_cg = sum(c["com_genero"] for c in e["coleta"])
@@ -941,8 +1108,10 @@ def escrever(doc, e):
         larguras=[1.6, 1.8, 6.0, 4.4, 2.2])
     R.par(
         f"Há três tipos de aresta, um para cada par de partes (Figura {R.nfig + 1} e Tabela {R.ntab + 1}). O peso de toda aresta é "
-        "um **custo de descoberta**: peso = 1 − a, arredondado a duas casas, em que a ∈ (0; 1] é "
-        "a **afinidade** entre as duas entidades. Para as arestas de gênero, a afinidade é "
+        "um **custo de descoberta** positivo. A aresta de autoria custa 0,10, o **custo mínimo** "
+        "de um passo; a aresta de gênero custa 0,10 + 0,90 × (1 − a), arredondado a duas casas, "
+        "em que a ∈ (0; 1] é a **afinidade** entre as duas entidades, de modo que o custo fica "
+        "em [0,10; 1,00]. Para as arestas de gênero, a afinidade é "
         "relativa ao gênero mais votado da própria entidade: a(e, g) = votos(e, g) / "
         "max votos(e, g′), considerando apenas os cinco gêneros mais votados da entidade e "
         "desempatando por ordem alfabética.")
@@ -954,33 +1123,33 @@ def escrever(doc, e):
     R.tabela(
         "Tipos de aresta, semântica e peso",
         ["Relação", "Semântica", "Afinidade a", "Peso (custo)", "Quantidade"],
-        [["Álbum – Artista", "Autoria: o álbum foi gravado pelo artista", "1,0 (sempre)", "0,00",
+        [["Álbum – Artista", "Autoria: o álbum foi gravado pelo artista", "1,0 (sempre)", "0,10",
           pr["ALB-ART"]],
          ["Álbum – Gênero", "A comunidade classifica o álbum no gênero",
-          "votos(álbum, g) / máx. de votos do álbum", "1 − a ∈ [0; 1)", pr["ALB-GEN"]],
+          "votos(álbum, g) / máx. de votos do álbum", "0,10 + 0,90(1 − a)", pr["ALB-GEN"]],
          ["Artista – Gênero", "O artista transita pelo gênero ao longo da carreira",
-          "votos(artista, g) / máx. de votos do artista", "1 − a ∈ [0; 1)", pr["ART-GEN"]],
+          "votos(artista, g) / máx. de votos do artista", "0,10 + 0,90(1 − a)", pr["ART-GEN"]],
          ["Total", "", "", "", e["m"]]],
         larguras=[2.6, 4.6, 4.0, 2.4, 2.4])
     R.par(
         f"**Exemplo numérico com dados reais.** A Tabela {R.ntab + 1} mostra o cálculo para o álbum "
         f"{e['ex_album'][0]} ({e['ex_album'][1]}, {e['ex_album'][2]}). O gênero mais votado dá o "
         "denominador; cada gênero recebe afinidade proporcional aos seus votos e o peso da "
-        "aresta é o complemento dessa afinidade.")
+        "aresta é 0,10 + 0,90 × (1 − a).")
     linhas = []
     for nome, votos, maximo, af, peso, sit in e["ex_album"][3]:
         linhas.append([nome, votos, f"{votos}/{maximo} = {fmt(af)}",
-                       "—" if peso is None else f"1 − {fmt(af)} = {fmt(peso)}", sit])
+                       "—" if peso is None else f"0,10 + 0,90 × (1 − {fmt(af)}) = {fmt(peso)}", sit])
     R.tabela(f"Cálculo dos pesos das arestas de gênero do álbum {e['ex_album'][0]}",
              ["Gênero", "Votos", "Afinidade", "Peso", "Situação"], linhas,
-             larguras=[3.4, 1.4, 3.0, 3.2, 5.0],
+             larguras=[3.2, 1.3, 2.8, 4.4, 4.3],
              fonte="Fonte: autoria própria, dados do MusicBrainz.")
     ex = e["ex_album"][3]
     R.par(
         f"Assim, o caminho que vai de {e['ex_album'][0]} ao gênero {ex[0][0]} tem custo "
         f"{fmt(ex[0][4] or 0)} (é a classificação mais forte do álbum), enquanto a ligação com "
         f"{ex[-1][0]} custa {fmt(ex[-1][4]) if ex[-1][4] is not None else '—'}. A aresta de "
-        "autoria Blonde – Frank Ocean tem custo 0,00, a ligação mais forte possível. O mesmo "
+        "autoria Blonde – Frank Ocean tem custo 0,10, o custo mínimo de um passo. O mesmo "
         "cálculo vale para artistas: "
         + frase_tim(e) + " – um efeito da escassez de votos discutido na Seção 5.5.")
     R.par("**Justificativas de modelagem.**", recuo=False, depois=3)
@@ -995,12 +1164,16 @@ def escrever(doc, e):
             "proximidade entre dois álbuns surge por meio de um artista ou de um gênero em "
             "comum. Isso deixa cada aresta com uma semântica única e verificável, que a classe "
             "do grafo impõe ao recusar arestas entre vértices do mesmo tipo.",
-            "**Custo = 1 − afinidade:** o custo é não negativo e menor para ligações mais "
-            "fortes, requisito do algoritmo de Dijkstra, que será aplicado na próxima etapa para "
-            "achar a trilha de descoberta de menor custo.",
-            "**\"Sem aresta\" = None:** como custo 0,00 é um peso válido (autoria, gênero mais "
-            "votado), o valor 0 não pode significar ausência de aresta na matriz; usa-se o "
-            "valor None do Python.",
+            "**Custo positivo e decrescente com a afinidade:** o custo é não negativo – "
+            "requisito do algoritmo de Dijkstra – e menor para ligações mais fortes. Na Parte 2 "
+            "o custo era 1 − a e a autoria custava 0; como o gênero mais votado de cada entidade "
+            "tem a = 1, quase todos os álbuns ficavam ligados por caminhos de custo zero e a "
+            "trilha de menor custo não os diferenciava. Com o custo mínimo de 0,10 por passo, "
+            "toda trilha tem custo positivo, que cresce com o número de passos e com a fraqueza "
+            "das ligações.",
+            "**\"Sem aresta\" = None:** a ausência de aresta é representada pelo valor None do "
+            "Python, e não por 0, para que nenhum peso válido seja confundido com ausência de "
+            "ligação (a classe aceita qualquer peso em [0; 1]).",
             "**Filtros:** limitar a cinco gêneros por entidade e exigir que o gênero ligue ao "
             "menos duas entidades elimina etiquetas isoladas, que não contribuiriam para "
             "nenhum caminho entre entidades diferentes."):
@@ -1028,6 +1201,13 @@ def escrever(doc, e):
           "(pelo prefixo do rótulo)."],
          ["componentes(), ehConexo()", "Componentes conexas por busca em largura; conexo se "
           "houver uma só."],
+         ["algoritmos.dijkstra(g, s)", "Dijkstra O(n²) sobre a matriz: custo mínimo e "
+          "predecessor de cada vértice a partir de s (src/algoritmos.py)."],
+         ["algoritmos.trilha_descoberta, recomendar_albuns", "Trilha de menor custo entre dois "
+          "vértices; os k álbuns de outros artistas mais próximos de um álbum."],
+         ["algoritmos.resumo_graus, coloracao_por_classe, analise_euler, analise_hamilton, "
+          "eh_bipartido, analise_planaridade", "Técnicas de investigação das características do "
+          "grafo (Seção 5.7)."],
          ["textoLista(), textoMatriz()", "Exibição como lista de adjacência com rótulos e "
           "pesos, ou como matriz compacta."]],
         larguras=[5.0, 11.0])
@@ -1053,8 +1233,17 @@ def escrever(doc, e):
          ["h", "Mostrar grafo (lista ou matriz)", "textoLista / textoMatriz"],
          ["i", "Apresentar a conexidade (componentes); grafo reduzido não se aplica: grafo não "
           "orientado", "componentes (BFS)"],
-         ["j", "Encerrar a aplicação", "—"]],
+         ["j", "Trilha de descoberta de menor custo entre dois vértices", "trilha_descoberta (Dijkstra)"],
+         ["k", "Recomendar álbuns próximos de um álbum", "recomendar_albuns (Dijkstra)"],
+         ["l", "Característica: graus dos vértices", "resumo_graus"],
+         ["m", "Característica: coloração de vértices", "coloracao_por_classe"],
+         ["n", "Característica: grafo euleriano / percurso euleriano", "analise_euler"],
+         ["o", "Característica: grafo hamiltoniano / caminho hamiltoniano", "analise_hamilton"],
+         ["p", "Característica: bipartição e planaridade", "eh_bipartido, analise_planaridade"],
+         ["q", "Encerrar a aplicação", "—"]],
         larguras=[1.5, 7.5, 6.0])
+    R.par("Nas opções j e k o vértice pode ser informado pelo índice ou por parte do nome; "
+          "quando o nome é ambíguo, a aplicação lista os candidatos e pede o índice.")
     R.par(
         f"**Organização do GitHub.** O repositório público ({GITHUB}) está organizado em "
         f"pastas por responsabilidade (Tabela {R.ntab + 1}). Todo arquivo-fonte começa com um cabeçalho que "
@@ -1066,7 +1255,8 @@ def escrever(doc, e):
         ["Caminho", "Conteúdo"],
         [["src/grafo_matriz.py", "Classe GrafoMatrizPonderado (matriz de adjacência, tipo 2)"],
          ["src/arquivo_grafo.py", "Leitura, gravação e formatação do grafo.txt"],
-         ["src/app.py", "Aplicação de console com o menu a–j"],
+         ["src/algoritmos.py", "Dijkstra, recomendação e técnicas de investigação do grafo"],
+         ["src/app.py", "Aplicação de console com o menu a–q"],
          ["coleta/", "Coletor do MusicBrainz, montagem do grafo e lista de artistas semente"],
          ["dados/", "grafo.txt, vertices.csv, arestas.csv e os JSON brutos da coleta"],
          ["testes/", "Testes automatizados (unittest)"],
@@ -1092,11 +1282,11 @@ def escrever(doc, e):
         f"afinidade (Figura {R.nfig + 1}). O mesmo grafo, com as mesmas posições e cores, foi exportado em "
         "formato GEXF e aberto no Gephi, uma das ferramentas indicadas pela disciplina "
         f"(Figura {R.nfig + 2}). Para manter a figura legível, só recebem rótulo os artistas e gêneros com "
-        "grau maior ou igual a 5; na versão interativa (visualizacao/grafo_interativo.html), o "
+        "grau maior ou igual a 8; na versão interativa (visualizacao/grafo_interativo.html), o "
         "nome e o grau de todos os vértices aparecem ao passar o mouse.")
     R.figura(FIG_PLOTLY, f"Grafo tripartido álbum–artista–gênero ({e['n']} vértices, "
              f"{e['m']} arestas): artistas em vermelho, álbuns em azul e gêneros em amarelo; "
-             "rótulos apenas para artistas e gêneros com grau ≥ 5 (os demais aparecem ao passar "
+             "rótulos apenas para artistas e gêneros com grau ≥ 8 (os demais aparecem ao passar "
              "o mouse na versão interativa)",
              fonte="Fonte: autoria própria, dados do MusicBrainz.", altura_max=15, largura_max=16)
     if os.path.exists(FIG_GEPHI):
@@ -1130,7 +1320,7 @@ def escrever(doc, e):
          ["Diâmetro (em número de arestas)", f"{e['diametro']} (por exemplo, entre {e['par_diametro'][0]} "
                                              f"e {e['par_diametro'][1]})"],
          ["Distância média entre pares (arestas)", fmt(e["dist_media"])],
-         ["Arestas de gênero com custo 0,00", f"{cz} de {ct}"]],
+         ["Arestas de gênero com o custo mínimo 0,10 (afinidade 1)", f"{cz} de {ct}"]],
         larguras=[6.5, 9.5])
     R.tabela(
         "Grau dos vértices por tipo",
@@ -1158,7 +1348,7 @@ def escrever(doc, e):
         f"O grafo é **{'conexo' if conexo else 'desconexo'}**"
         + (": existe um caminho entre quaisquer dois vértices, ou seja, partindo de qualquer "
            "álbum é possível chegar a qualquer outro, o que é pré-requisito para a trilha de "
-           "descoberta da próxima etapa. " if conexo else ". ")
+           "descoberta. " if conexo else ". ")
         + f"Com densidade {fmt(e['densidade'], 4)}, é esparso: das "
         f"{milhar(e['n'] * (e['n'] - 1) // 2)} ligações possíveis entre pares de vértices, só "
         f"{e['m']} existem – mesmo considerando apenas os pares permitidos pela tripartição, "
@@ -1190,7 +1380,7 @@ def escrever(doc, e):
            "apenas por álbuns, isto é, esses gêneros fazem a ponte por meio de álbuns." if outros
            else ".") )
     R.par(
-        "Para identificar os artistas que sustentam essas pontes, somou-se a afinidade (1 − peso) "
+        "Para identificar os artistas que sustentam essas pontes, somou-se a afinidade a "
         f"das arestas que ligam o artista e seus álbuns a gêneros-ponte. A Tabela {R.ntab + 1} mostra os "
         "três primeiros de cada cena.")
     R.tabela(
@@ -1211,14 +1401,7 @@ def escrever(doc, e):
         f"norte-americano, {top_r['artista']} cumpre o papel simétrico, alcançando os "
         f"gêneros-ponte {lista_pt(top_r['generos'])}. O resultado é coerente com a história da música e "
         "mostra que o modelo captura relações reais a partir apenas dos votos de gênero.")
-    cam = e["caminho"]
-    R.par(
-        f"Como prévia da próxima etapa, a busca em largura encontrou um caminho com o menor "
-        f"número de arestas ({len(cam) - 1}) entre {cam[0][0]} e {cam[-1][0]}: "
-        + " → ".join(f"{r}" + ("" if p is None else f" (custo {fmt(p)})") for r, p in cam)
-        + f", de custo total {fmt(sum(p for _, p in cam if p is not None))}. A busca em largura "
-        "ignora os pesos; o algoritmo de Dijkstra, na próxima etapa, poderá preferir um caminho "
-        "mais longo, porém de menor custo total, isto é, formado por ligações mais fortes.")
+
     R.par("**Análise crítica e limitações.**", recuo=False, depois=3)
     vc = e["votos_cena"]
     sg = e["sem_genero_cena"]
@@ -1231,9 +1414,10 @@ def escrever(doc, e):
             f"**Poucos votos em álbuns brasileiros antigos:** {sg['mpb'][0]} dos {sg['mpb'][1]} "
             f"álbuns de estúdio da MPB coletados não têm nenhum gênero votado (contra "
             f"{sg['rnb'][0]} de {sg['rnb'][1]} no R&B/hip-hop). Com poucos votos, vários gêneros "
-            f"empatam no máximo e recebem custo 0,00: isso ocorre em {zc['mpb'][0]} de "
+            f"empatam no máximo e recebem o custo mínimo 0,10: isso ocorre em {zc['mpb'][0]} de "
             f"{zc['mpb'][1]} arestas álbum–gênero da MPB e em {zc['rnb'][0]} de {zc['rnb'][1]} "
-            "do R&B/hip-hop, o que reduz o poder de discriminação dos pesos na MPB.",
+            "do R&B/hip-hop, o que reduz o poder de discriminação dos pesos na MPB e faz muitas "
+            "trilhas empatarem em custo (o desempate fica pela ordem dos vértices).",
             "**Corte em cinco gêneros com desempate alfabético:** quando há empate, gêneros "
             "igualmente votados podem ficar de fora apenas pela ordem alfabética (por exemplo, "
             "soul no álbum Tim Maia de 1972).",
@@ -1248,7 +1432,142 @@ def escrever(doc, e):
             "resultado seja reproduzível."):
         R.item(texto)
 
-    R.h2("5.6 Testes")
+    # ---------------------------------------------------------- 5.6 solução
+    R.h2("5.6 Solução do problema: trilha de descoberta com Dijkstra")
+    custo, rota = p3["trilha"]
+    custo_bfs, rota_bfs = p3["trilha_bfs"]
+    nome = lambda v: g.rotulos[v]  # noqa: E731
+    R.par(
+        "A função central do protótipo é a **trilha de descoberta** (opção j do menu): dados "
+        "dois vértices, o algoritmo de Dijkstra, implementado em src/algoritmos.py diretamente "
+        "sobre a matriz de adjacência da classe da aplicação, calcula o caminho de menor custo "
+        "total e a aplicação mostra cada passo, com o custo da aresta e o acumulado. Para o par "
+        f"usado como exemplo desde a Parte 2, {nome(rota[0])} (R&B) e {nome(rota[-1])} (MPB), a "
+        f"trilha tem {len(rota) - 1} passos e custo total {fmt(custo)} (Figura {R.nfig + 1}): "
+        + " → ".join(nome(v) for v in rota) + ". A trilha sai do álbum para o seu artista, "
+        "alcança um gênero compartilhado, atravessa para a outra cena por um álbum que liga os "
+        "dois gêneros e chega ao álbum de destino – exatamente a ideia de uma sequência de "
+        "passos de descoberta \"naturais\".")
+    gerar_trilha(FIG_TRILHA, g, rota)
+    R.figura(FIG_TRILHA, f"Trilha de descoberta de menor custo entre {nome(rota[0])[6:]} e "
+             f"{nome(rota[-1])[6:]}, com o custo de cada aresta (total {fmt(custo)}); cores "
+             "como na Figura 2 (vermelho = artista, azul = álbum, amarelo = gênero)",
+             fonte="Fonte: autoria própria, dados do MusicBrainz.", largura_max=13, altura_max=11)
+    if rota_bfs != rota:
+        R.par(
+            f"A busca em largura, que ignora os pesos, encontra um caminho de "
+            f"{len(rota_bfs) - 1} arestas – " + " → ".join(nome(v) for v in rota_bfs)
+            + f" – de custo {fmt(custo_bfs)}; o Dijkstra "
+            + ("prefere um caminho mais longo, porém de menor custo, formado por ligações mais "
+               "fortes." if custo < custo_bfs - 1e-9 else
+               "chega a um caminho de mesmo custo, mas escolhido pelos pesos, e não pelo número "
+               "de arestas."))
+    R.par(
+        "A partir do mesmo cálculo, a opção k transforma a trilha em **recomendação**: o "
+        "Dijkstra é executado a partir de um álbum e os álbuns de outros artistas são ordenados "
+        "pelo custo de descoberta (desempate: menos passos). A Tabela "
+        f"{R.ntab + 1} mostra as cinco recomendações para {nome(p3['origem'])[6:]}.")
+    R.tabela(
+        f"Os cinco álbuns de outros artistas mais próximos de {nome(p3['origem'])[6:]} (opção k)",
+        ["#", "Álbum recomendado", "Custo", "Trilha (vértices intermediários)"],
+        [[i, nome(v)[6:], fmt(c), " → ".join(nome(x)[6:] for x in r[1:-1])]
+         for i, (c, v, r) in enumerate(p3["recomendacoes"], start=1)],
+        larguras=[0.8, 5.6, 1.5, 8.1], fonte="Fonte: autoria própria, dados do MusicBrainz.")
+    nv, vl = p3["novo"], p3["velho"]
+    R.par(
+        "**Efeito da reavaliação dos custos.** Para verificar o problema apontado no parecer da "
+        f"Parte 2, o Dijkstra foi executado a partir de todos os álbuns, nos {milhar(p3['pares'])} "
+        f"pares de álbuns, com os dois modelos de custo (Tabela {R.ntab + 1}). No modelo antigo, "
+        f"{milhar(vl['zero'])} pares tinham trilha de custo zero"
+        + (" – todos os pares, como apontado no parecer" if vl["zero"] == p3["pares"] else
+           f" e o custo assumia apenas {vl['distintos']} valores diferentes")
+        + f"; no modelo novo, nenhum par tem custo zero, o "
+        f"custo mínimo entre dois álbuns diferentes é {fmt(nv['min'])} (dois passos de 0,10) e "
+        f"os custos assumem {nv['distintos']} valores, de {fmt(nv['min'])} a {fmt(nv['max'])}. "
+        "Ainda há muitos empates, consequência dos poucos votos de gênero (Seção 5.5), mas as "
+        "trilhas passam a ser diferenciadas pela força e pelo número das ligações.")
+    R.tabela(
+        "Custos das trilhas de menor custo entre todos os pares de álbuns, nos dois modelos",
+        ["Modelo de custo", "Pares com custo 0", "Mínimo", "Médio", "Máximo", "Valores distintos"],
+        [["Parte 2: autoria 0; gênero 1 − a", milhar(vl["zero"]), fmt(vl["min"]), fmt(vl["media"]),
+          fmt(vl["max"]), vl["distintos"]],
+         ["Parte 3: autoria 0,10; gênero 0,10 + 0,90(1 − a)", milhar(nv["zero"]), fmt(nv["min"]),
+          fmt(nv["media"]), fmt(nv["max"]), nv["distintos"]]],
+        larguras=[5.4, 2.2, 1.6, 1.6, 1.6, 2.4])
+
+    # ---------------------------------------------------------- 5.7 características
+    R.h2("5.7 Características do grafo")
+    rg = p3["graus"]
+    cl = p3["classes"]
+    eu, ha, pl = p3["euler"], p3["hamilton"], p3["planar"]
+    bip, aresta_bip = p3["bipartido"]
+    tri = p3["triangulo"]
+    R.par(
+        "Além da solução, cinco técnicas estudadas na disciplina foram aplicadas para descobrir "
+        f"características do grafo, cada uma em uma opção do menu (l a p). A Tabela {R.ntab + 1} "
+        "resume os resultados, todos calculados pela aplicação sobre o grafo real.")
+    from collections import Counter as _C
+    comp_cores = "; ".join(
+        f"cor {i}: {len(c)} (" + ", ".join(f"{q} {PLURAL_TIPO[t] if q > 1 else NOMES_TIPO[t].lower()}"
+                                           for t, q in sorted(_C(g.tipoVertice(v) for v in c).items()))
+        + ")" for i, c in enumerate(cl, start=1))
+    R.tabela(
+        "Características do grafo obtidas com técnicas da disciplina",
+        ["Técnica (opção)", "Resultado", "Interpretação"],
+        [["Graus (l)", f"Soma dos graus = {rg['soma']} = 2m; grau médio {fmt(rg['soma'] / g.n)}; "
+          f"{rg['impares']} vértices de grau ímpar; nenhum isolado; maior grau: "
+          f"{g.rotulos[rg['por_tipo']['GEN']['vmax']][6:]} ({rg['por_tipo']['GEN']['max']})",
+          "Confirma o lema do aperto de mãos; os gêneros concentram as ligações (hubs)."],
+         ["Coloração por classe (m)", f"{len(cl)} cores ({comp_cores}); coloração válida; "
+          f"triângulo {' – '.join(g.rotulos[v][6:] for v in tri)}",
+          f"χ(G) = {len(cl)}: o triângulo exige 3 cores e a heurística usa só 3."],
+         ["Euler (n)", f"{len(eu['impares'])} vértices de grau ímpar",
+          f"Não admite ciclo nem percurso euleriano; seriam precisas ao menos {eu['eulerizar']} "
+          "arestas extras para eulerizar."],
+         ["Hamilton (o)", f"Dirac e Ore não satisfeitas (grau mínimo {ha['grau_min']}); "
+          f"conjunto independente dos álbuns com {ha['tam_maior']} > (n + 1)/2 = {fmt((g.n + 1) / 2, 1)}",
+          "Não admite ciclo nem caminho hamiltoniano."],
+         ["Bipartição e planaridade (p)", f"{'Bipartido' if bip else 'Não bipartido'} (ciclo ímpar); "
+          f"m = {g.m} > 3n − 6 = {pl['limite']}", "Tripartido, mas não bipartido; não planar."]],
+        larguras=[3.0, 7.0, 6.0])
+    R.par(
+        f"**Graus.** A distribuição é muito desigual: {rg['distribuicao'].get(2, 0)} vértices têm "
+        f"grau 2, enquanto os gêneros mais ligados chegam a {rg['por_tipo']['GEN']['max']}. Como "
+        "os graus de artistas e álbuns são limitados pelos filtros da coleta, é nos gêneros que o "
+        "grau tem significado: ele mede a abrangência do gênero no recorte.")
+    R.par(
+        f"**Coloração.** A coloração por classe com rerotulação por grau usou {len(cl)} cores e a "
+        f"aplicação confere que nenhuma aresta liga vértices da mesma cor. Como o grafo contém o "
+        f"triângulo {' – '.join(g.rotulos[v] for v in tri)} (um álbum ligado ao seu artista e a um "
+        "gênero que ambos compartilham), duas cores não bastam, logo o número cromático é "
+        f"exatamente {len(cl)}. A tripartição já garantia 3 cores (uma por tipo); a heurística, "
+        "porém, não reproduz exatamente os tipos: a ordem por grau leva alguns álbuns para a "
+        "classe dos artistas e um artista para a classe dos álbuns, o que mostra que há mais de "
+        "uma 3-coloração possível. Na interpretação do problema, cada classe é um conjunto de "
+        "entidades duas a duas sem ligação direta.")
+    R.par(
+        f"**Euler.** Com {len(eu['impares'])} vértices de grau ímpar, o grafo não admite ciclo "
+        "nem percurso euleriano: não é possível percorrer todas as ligações do catálogo uma única "
+        "vez em sequência. Para o problema, isso significa que uma \"trilha que passa por todas "
+        "as relações\" teria de repetir arestas.")
+    R.par(
+        f"**Hamilton.** O grau mínimo é {ha['grau_min']}, muito abaixo de n/2 = {fmt(g.n / 2, 1)}, "
+        "e há vértices não adjacentes com d(u) + d(v) < n, de modo que Dirac e Ore não se "
+        "aplicam. Mais forte: os álbuns formam um conjunto independente de "
+        f"{ha['tam_maior']} vértices, maior que (n + 1)/2 = {fmt((g.n + 1) / 2, 1)}. Em qualquer "
+        "caminho que visitasse todos os vértices, os álbuns precisariam ser intercalados com "
+        f"artistas e gêneros, que são só {g.n - ha['tam_maior']}; logo o grafo **não admite ciclo "
+        "nem caminho hamiltoniano** – não existe um roteiro que visite cada álbum, artista e "
+        "gênero exatamente uma vez.")
+    R.par(
+        "**Bipartição e planaridade.** A 2-coloração por busca em largura falha na aresta "
+        f"{g.rotulos[aresta_bip[0]]} – {g.rotulos[aresta_bip[1]]}, pois o triângulo é um ciclo "
+        "ímpar: o grafo é tripartido, mas não bipartido. Como m = "
+        f"{g.m} > 3n − 6 = {pl['limite']}, a fórmula de Euler garante que o grafo **não é "
+        "planar**: qualquer desenho no plano terá cruzamentos de arestas, o que explica, em "
+        "parte, a dificuldade de obter figuras legíveis do grafo completo (Seção 5.4).")
+
+    R.h2("5.8 Testes")
     pa = e["testes_por_arquivo"]
     R.par(
         f"A suíte de testes automatizados (unittest) tem {e['testes_total']} testes e foi "
@@ -1263,10 +1582,16 @@ def escrever(doc, e):
                               "formato do texto, recusa de tipo diferente de 2 e formatação.",
         "test_montar_grafo": "Cálculo das afinidades, construção do grafo, desambiguação de "
                              "álbuns homônimos e mínimos do grafo real (n ≥ 80, m ≥ 200, tipo 2, "
-                             "tripartição).",
+                             "tripartição) e custos sem zero, em [0,10; 1].",
         "test_app": "Menu completo simulando a entrada do usuário: título, operação sem grafo, "
-                    "fluxo a–j, aresta de mesmo tipo recusada, índice fora do intervalo e fim "
-                    "da entrada.",
+                    "fluxo a–i, aresta de mesmo tipo recusada, índice fora do intervalo, fim "
+                    "da entrada, trilha por nome, trilha inexistente, recomendação que exige "
+                    "álbum e opções l–p.",
+        "test_algoritmos": "Dijkstra preferindo caminho mais longo e mais barato, vértice "
+                           "inalcançável, recomendação sem álbuns do mesmo artista, graus, "
+                           "coloração de triângulo, Euler, Hamilton, planaridade de K5 e, no "
+                           "grafo real, ausência de trilhas de custo zero e as características "
+                           "da Seção 5.7.",
     }
     R.tabela("Testes automatizados", ["Arquivo", "Testes", "O que verifica"],
              [[f"testes/{k}.py", pa[k], desc.get(k, "")] for k in sorted(pa)]
@@ -1345,17 +1670,27 @@ def escrever(doc, e):
         R.item(texto)
 
     # ---------------------------------------------------------- 7 próximas etapas
-    R.h1("7 Próximas etapas")
+    R.h1("7 Conclusão")
     R.par(
-        "No segundo bimestre, a função central do protótipo será a **trilha de descoberta**: "
-        "dados um álbum de partida e um álbum de chegada, o algoritmo de Dijkstra, implementado "
-        "sobre a mesma matriz de adjacência, encontrará o caminho de menor custo total, "
-        "mostrando os artistas e gêneros intermediários e o custo de cada passo. Como os pesos "
-        "estão em [0; 1), o requisito de pesos não negativos é satisfeito. Estão previstos "
-        "ainda: nova opção no menu para a trilha, comparação entre o caminho de menor custo e o "
-        "de menor número de arestas, e a ampliação do conjunto de artistas semente para testar "
-        "a robustez dos gêneros-ponte encontrados. Usuários, detecção de comunidades e "
-        "recomendação personalizada permanecem fora do escopo da disciplina.")
+        "O projeto modelou um problema real de descoberta musical como um grafo tripartido "
+        f"ponderado, com {e['n']} vértices e {e['m']} arestas construídos a partir de dados "
+        "públicos do MusicBrainz, e o resolveu com uma técnica da disciplina: o algoritmo de "
+        "Dijkstra calcula a trilha de descoberta de menor custo entre dois vértices e recomenda "
+        "os álbuns mais próximos de um álbum de partida. A reavaliação dos custos, pedida no "
+        "parecer da Parte 2, eliminou as trilhas de custo zero entre álbuns e tornou a "
+        "recomendação significativa. Cinco técnicas de investigação mostraram que o grafo é "
+        f"conexo, tem número cromático {len(p3['classes'])}, não é euleriano nem hamiltoniano, "
+        "é tripartido mas não bipartido e não é planar.")
+    R.par(
+        "Como limitações, permanecem a escassez de votos de gênero em álbuns brasileiros antigos, "
+        "que gera empates de custo, e o recorte curado de 16 artistas. Como trabalhos futuros, "
+        "ficam a ampliação da semente para testar a robustez dos gêneros-ponte, o uso de outras "
+        "fontes de afinidade (por exemplo, colaborações entre artistas) para reduzir os empates e "
+        "a integração com o Trabalho de Conclusão de Curso, que trará usuários reais. A aplicação, "
+        "os dados e este relatório estão no repositório público do projeto.")
+    R.h2("Endereço do GitHub e do vídeo")
+    R.par(f"**GitHub:** {GITHUB}", recuo=False, depois=2)
+    R.par(f"**Vídeo (YouTube):** {VIDEO}", recuo=False)
 
     # ---------------------------------------------------------- 8 referências
     R.h1("Referências")
@@ -1416,10 +1751,19 @@ def escrever(doc, e):
           f"público, em: **{GITHUB}**", recuo=False)
     R.par("Para reproduzir os resultados: instalar as dependências (pip install -r "
           "requirements.txt); executar a aplicação (python3 src/app.py); rodar os testes "
-          "(python3 -m unittest discover -s testes); refazer a coleta e o grafo, se desejado "
+          "(python3 -m unittest discover -s testes); regenerar os prints dos testes do menu "
+          "(python3 ferramentas/gerar_prints.py); refazer a coleta e o grafo, se desejado "
           "(python3 coleta/coletar_musicbrainz.py e python3 coleta/montar_grafo.py); regenerar "
           "a visualização (python3 visualizacao/visualizar.py) e este relatório (python3 "
           "ferramentas/gerar_relatorio.py).", recuo=False)
+    # declaração do template, preservada ao final do relatório
+    corpo = doc.element.body
+    sect = corpo[-1] if corpo[-1].tag == qn("w:sectPr") else None
+    for el in getattr(doc, "_declaracao", []):
+        if sect is not None:
+            sect.addprevious(el)
+        else:
+            corpo.append(el)
     return R
 
 

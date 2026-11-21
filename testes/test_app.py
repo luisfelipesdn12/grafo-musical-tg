@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Projeto de Teoria dos Grafos - Parte 2
+Projeto de Teoria dos Grafos - Parte 3
 Descoberta Musical por Grafos: Álbuns, Artistas e Gêneros
 
 Integrante: Luis Felipe Santos do Nascimento - RA 10420572
@@ -14,6 +14,8 @@ Histórico de alterações:
   28/09/2026 - Luis Felipe - insere o diretório do teste no sys.path
     para que "python -m unittest" a partir da raiz também encontre
     test_grafo_matriz
+  19/11/2026 - Luis Felipe - Parte 3: encerrar passa a ser a opção q;
+    testes das opções j-p
 """
 import sys, os, io, unittest, tempfile, shutil
 from contextlib import redirect_stdout
@@ -42,17 +44,17 @@ class TestApp(unittest.TestCase):
         shutil.rmtree(self.diretorio, ignore_errors=True)
 
     def test_titulo_e_sair(self):
-        self.assertIn(app.TITULO, rodar(["j"], self.caminho))
+        self.assertIn(app.TITULO, rodar(["q"], self.caminho))
 
     def test_sem_grafo(self):
-        self.assertIn("Nenhum grafo carregado", rodar(["h", "j"], self.caminho))
+        self.assertIn("Nenhum grafo carregado", rodar(["h", "q"], self.caminho))
 
     def test_fluxo_completo(self):
         # c: insere [GEN] rock (indice 5); d: 5-1 com peso "abc" (invalido,
         # pede de novo) e depois 0.3 -> GEN-ALB aceita; f: remove A-X;
         # e: remove A (ja sem arestas); b: grava; i: samba isolado -> DESCONEXO
         saida = rodar(["a", "", "c", "3", "rock", "d", "5", "1", "abc", "0.3",
-                       "f", "0", "1", "e", "0", "b", "", "i", "j"], self.caminho)
+                       "f", "0", "1", "e", "0", "b", "", "i", "q"], self.caminho)
         self.assertIn("inválida", saida)
         g = ler(self.caminho)
         self.assertEqual((g.n, g.m), (5, 3))
@@ -61,12 +63,35 @@ class TestApp(unittest.TestCase):
         self.assertIn("DESCONEXO", saida)
 
     def test_aresta_mesmo_tipo_recusada(self):
-        saida = rodar(["a", "", "d", "0", "3", "0.1", "j"], self.caminho)
+        saida = rodar(["a", "", "d", "0", "3", "0.1", "q"], self.caminho)
         self.assertIn("não inserida", saida)
 
     def test_indice_fora(self):
-        saida = rodar(["a", "", "e", "99", "", "j"], self.caminho)
+        saida = rodar(["a", "", "e", "99", "", "q"], self.caminho)
         self.assertIn("fora do intervalo", saida)
+
+    def test_trilha_por_nome(self):
+        # A (0) -> X (1) -> soul (2) -> B (3): custo 0,0 + 0,25 + 0,5
+        saida = rodar(["a", "", "j", "[ART] A", "[ART] B", "q"], self.caminho)
+        self.assertIn("custo total 0.75", saida)
+        self.assertIn("[GEN] soul", saida)
+
+    def test_trilha_inexistente(self):
+        saida = rodar(["a", "", "j", "0", "samba", "q"], self.caminho)
+        self.assertIn("Não existe caminho", saida)
+
+    def test_recomendar_exige_album(self):
+        saida = rodar(["a", "", "k", "0", "1", "", "q"], self.caminho)
+        self.assertIn("deve ser um vértice [ALB]", saida)
+        self.assertIn("Nenhum álbum de outro artista", saida)
+
+    def test_caracteristicas(self):
+        saida = rodar(["a", "", "l", "m", "n", "o", "p", "q"], self.caminho)
+        self.assertIn("Soma dos graus = 6 = 2 x m = 2 x 3", saida)
+        self.assertIn("Cores usadas: 2", saida)
+        self.assertIn("não euleriano (grafo desconexo)", saida)
+        self.assertIn("NÃO HAMILTONIANO (grafo desconexo)", saida)
+        self.assertIn("Bipartido: SIM", saida)
 
     def test_eof_encerra_sem_erro(self):
         # entrada esgota (sem "j") e levanta EOFError, simulando Ctrl+D:
