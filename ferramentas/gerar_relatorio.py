@@ -59,7 +59,7 @@ import algoritmos as ALG  # noqa: E402
 TEMPLATE = os.path.join(RAIZ, "..", "parte 3 projeto", "projetoTG_parte3_templateRelatorio.docx")
 SAIDA = os.path.join(RAIZ, "relatorio", "Relatorio_Projeto_TG_Parte3.docx")
 FIG_TRILHA = os.path.join(RAIZ, "relatorio", "figuras", "trilha.png")
-VIDEO = "[inserir o link do vídeo no YouTube]"
+VIDEO = "https://youtu.be/2W8r_3Ep2zg"
 PASTA_PRINTS = os.path.join(RAIZ, "relatorio", "figuras", "prints")
 FIG_GEPHI = os.path.join(RAIZ, "relatorio", "figuras", "gephi.png")
 FIG_PLOTLY = os.path.join(RAIZ, "visualizacao", "grafo.png")

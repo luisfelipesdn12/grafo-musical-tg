@@ -186,7 +186,7 @@ o campo `coletado_em` de cada arquivo em `dados/brutos/*.json`.
   ([PDF](relatorio/Relatorio_Projeto_TG_Parte3.pdf))
 - **Relatório da Parte 2:** [`relatorio/Relatorio_Projeto_TG_Parte2.docx`](relatorio/Relatorio_Projeto_TG_Parte2.docx)
   ([PDF](relatorio/Relatorio_Projeto_TG_Parte2.pdf))
-- **Vídeo (YouTube):** a publicar.
+- **Vídeo (YouTube):** https://youtu.be/2W8r_3Ep2zg
 
 ## Trabalhos futuros
 
