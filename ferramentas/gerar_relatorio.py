@@ -1764,7 +1764,26 @@ def escrever(doc, e):
             sect.addprevious(el)
         else:
             corpo.append(el)
+    preencher_declaracao(doc)
     return R
+
+
+def preencher_declaracao(doc):
+    """Marca as opções da declaração de uso de IA generativa do template."""
+    marcas = {
+        "Foi utilizada, conforme abaixo": "( X ) Foi utilizada, conforme abaixo.",
+        "Compreender enunciado": "( X )  Compreender enunciado, conceito ou material da disciplina",
+        "Diagnosticar erro": "( X )  Diagnosticar erro em algo que já havia produzido",
+    }
+    ferramenta_feita = False
+    for p in doc.paragraphs:
+        texto = p.text
+        for chave, novo in marcas.items():
+            if chave in texto and p.runs:
+                trocar_texto(p, novo)
+        if not ferramenta_feita and texto.strip().startswith("____") and p.runs:
+            trocar_texto(p, "Claude")
+            ferramenta_feita = True
 
 
 def main():
